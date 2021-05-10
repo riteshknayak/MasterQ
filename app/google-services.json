@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "409121955177",
+    "project_id": "masterq-a6c5d",
+    "storage_bucket": "masterq-a6c5d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:409121955177:android:509968f0b21a0204ea71f8",
+        "android_client_info": {
+          "package_name": "com.riteshknayak.masterq"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "409121955177-3b86dpi3qbg2fjrhsdrno8fpv6khct0v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYkFRJwPuhTI-vxnGsACQWAamnfwu9qRk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "409121955177-3b86dpi3qbg2fjrhsdrno8fpv6khct0v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
