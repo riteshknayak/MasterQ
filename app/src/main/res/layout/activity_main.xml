@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:layout_gravity="center_vertical"
-    android:background="#31147A">
+    android:background="@color/primary_background">
 
 
 
@@ -312,6 +312,7 @@
         android:padding="10dp"
         android:textSize="20sp"
         />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
