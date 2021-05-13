@@ -13,5 +13,6 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="already_have_account">Already have account</string>
-    <string name="login_with_your_accont">Login with your accont</string>
+    <string name="login_with_your_account">Login with your account</string>
+    <string name="signup">Signup</string>
 </resources>

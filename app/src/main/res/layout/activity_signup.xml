@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/primary_background"
     tools:context=".SignupActivity">
 
@@ -12,93 +12,94 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/parent_view_background"
+        android:background="@color/purple_700"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:padding="30dp"
-        android:orientation="vertical"
-        android:gravity="center_horizontal">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/purple_200"
+            android:fontFamily="@font/nunito_bold"
             android:text="@string/create_a_new_account"
             android:textColor="@color/white"
-            android:textSize="30sp"
-            android:fontFamily="@font/nunito_bold" />
+            android:textSize="30sp" />
 
         <EditText
             android:id="@+id/nameBox"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:autofillHints="Name"
-            android:background="@drawable/edittext_background"
+            android:background="@color/purple_200"
+            android:drawableStart="@drawable/ic_user"
+            android:drawablePadding="6dp"
             android:fontFamily="@font/nunito_bold"
+            android:hint="@string/name"
             android:inputType="textPersonName"
             android:padding="8dp"
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            android:hint="@string/name"
-            android:drawableStart="@drawable/ic_user"
-            android:drawablePadding="6dp"
-            android:layout_margin="5dp" />
+            android:textColor="@color/white"
+            android:textSize="30sp" />
 
         <EditText
-            android:id="@+id/emailBox"
+            android:id="@+id/emailBtn"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:autofillHints="Email"
-            android:background="@drawable/edittext_background"
-            android:fontFamily="@font/nunito_bold"
-            android:inputType="textEmailAddress"
-            android:padding="8dp"
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            android:hint="@string/email"
+            android:background="@color/purple_200"
             android:drawableStart="@drawable/ic_user"
             android:drawablePadding="6dp"
-            android:layout_margin="5dp"/>
+            android:fontFamily="@font/nunito_bold"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:padding="8dp"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
 
         <EditText
             android:id="@+id/passwordBox"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:autofillHints="Name"
-            android:background="@drawable/edittext_background"
-            android:fontFamily="@font/nunito_bold"
-            android:inputType="textPassword"
-            android:padding="8dp"
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            android:hint="@string/password"
+            android:background="@color/purple_200"
             android:drawableStart="@drawable/ic_user"
             android:drawablePadding="6dp"
-            android:layout_margin="5dp"
-            android:elevation="10dp"/>
+            android:elevation="10dp"
+            android:fontFamily="@font/nunito_bold"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:padding="8dp"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
 
         <Button
             android:id="@+id/signupBtn"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:background="#31147A"
-            android:text="Signup"
-            android:textSize="30sp"
-            android:textAllCaps="false"
+            android:layout_marginTop="20dp"
+            android:background="@color/purple_200"
             android:fontFamily="@font/nunito_bold"
-            android:layout_marginTop="20dp"/>
+            android:text="@string/signup"
+            android:textAllCaps="false"
+            android:textSize="30sp" />
 
         <Button
-            android:id="@+id/loginBtn"
+            android:id="@+id/signinBtn"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:background="#31147A"
-            android:text="@string/already_have_account"
-            android:textSize="25sp"
-            android:textAllCaps="false"
+            android:layout_marginTop="25dp"
+            android:background="@color/purple_200"
             android:fontFamily="@font/nunito_bold"
-            android:layout_marginTop="25dp"/>
+            android:text="@string/already_have_account"
+            android:textAllCaps="false"
+            android:textSize="25sp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

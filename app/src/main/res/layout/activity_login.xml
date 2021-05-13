@@ -1,88 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/primary_background"
+    android:layout_gravity="center"
+    android:background="@color/primary_dark"
+    android:clipToPadding="false"
+    android:padding="5dp"
+    android:paddingStart="40dp"
+    android:paddingEnd="40dp"
     tools:context=".LoginActivity">
 
-    <!--    xmlns:tools="http://schemas.android.com/tools"-->
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/parent_view_background"
+    <EditText
+        android:id="@+id/emailBox"
+        android:layout_width="340dp"
+        android:layout_height="130dp"
+        android:width="270dp"
+        android:autofillHints="Email"
+        android:background="@drawable/edittext_background"
+        android:drawableStart="@drawable/custom_ic_mail"
+        android:drawablePadding="10dp"
+        android:elevation="15dp"
+        android:ems="10"
+        android:fontFamily="@font/nunito_bold"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:paddingStart="50dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/dark_grey"
+        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:padding="30dp"
+        app:layout_constraintTop_toTopOf="@+id/relativeLayout"
+        app:layout_constraintVertical_bias="0.25" />
+
+    <EditText
+        android:id="@+id/passwordBox"
+        android:layout_width="340dp"
+        android:layout_height="130dp"
+        android:width="270dp"
+        android:autofillHints="Password"
+        android:background="@drawable/edittext_background"
+        android:drawableStart="@drawable/custom_password_icon"
+        android:drawablePadding="10dp"
+        android:elevation="15dp"
+        android:ems="10"
+        android:fontFamily="@font/nunito_bold"
+        android:gravity="center_vertical"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:paddingStart="50dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/dark_grey"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/relativeLayout"
+        tools:ignore="RtlSymmetry" />
+
+    <Button
+        android:id="@+id/emailBtn"
+        android:layout_width="328dp"
+        android:layout_height="127dp"
+        android:background="@drawable/btn_background"
+        android:fontFamily="@font/nunito_bold"
+        android:gravity="center"
+        android:paddingBottom="23dp"
+        android:text="@string/common_signin_button_text"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/emailBox"
+        app:layout_constraintVertical_bias="0.6" />
+
+    <Button
+        android:id="@+id/createBtn"
+        android:layout_width="328dp"
+        android:layout_height="127dp"
+        android:background="@drawable/btn_background"
+        android:fontFamily="@font/nunito_bold"
+        android:gravity="center"
+        android:paddingBottom="23dp"
+        android:text="@string/create_a_new_account"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/emailBtn"
+        app:layout_constraintVertical_bias="0.63" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="421dp"
+        android:layout_height="523dp"
+        android:background="@drawable/parent_view_background"
+        android:clipToPadding="false"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:gravity="center_horizontal">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.54"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.69">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/login_with_your_accont"
+            android:id="@+id/textView4"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="13dp"
+            android:width="270dp"
+            android:fontFamily="@font/nunito_bold"
+            android:gravity="center"
+            android:shadowColor="#8B000000"
+            android:shadowDx="5"
+            android:shadowDy="7"
+            android:shadowRadius="3"
+            android:text="@string/login_with_your_account"
             android:textColor="@color/white"
-            android:textSize="30sp"
-            android:fontFamily="@font/nunito_bold" />
-
-        <EditText
-            android:id="@+id/emailBox"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:autofillHints="Email"
-            android:background="@drawable/edittext_background"
-            android:fontFamily="@font/nunito_bold"
-            android:inputType="textEmailAddress"
-            android:padding="8dp"
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            android:hint="@string/email"
-            android:drawableStart="@drawable/ic_user"
-            android:drawablePadding="6dp"
-            android:layout_margin="5dp"/>
-
-        <EditText
-            android:id="@+id/passwordBox"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:autofillHints="Name"
-            android:background="@drawable/edittext_background"
-            android:fontFamily="@font/nunito_bold"
-            android:inputType="textPassword"
-            android:padding="8dp"
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            android:hint="@string/password"
-            android:drawableStart="@drawable/ic_user"
-            android:drawablePadding="6dp"
-            android:layout_margin="5dp"
-            android:elevation="10dp"/>
-
-        <Button
-            android:id="@+id/loginBtn"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:background="#31147A"
-            android:text="login"
-            android:textSize="30sp"
-            android:textAllCaps="false"
-            android:fontFamily="@font/nunito_bold"
-            android:layout_marginTop="20dp"/>
-
-        <Button
-            android:id="@+id/createBtn"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:background="#31147A"
-            android:text="@string/create_a_new_account"
-            android:textSize="25sp"
-            android:textAllCaps="false"
-            android:fontFamily="@font/nunito_bold"
-            android:layout_marginTop="25dp"/>
-    </LinearLayout>
+            android:textSize="25sp" />
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

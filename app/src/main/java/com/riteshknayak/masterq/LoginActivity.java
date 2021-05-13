@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         }
 
-        binding.loginBtn.setOnClickListener(v -> {
+        binding.emailBtn.setOnClickListener(v -> {
             String email, pass;
             email = binding.emailBox.getText().toString();
             pass = binding.passwordBox.getText().toString();

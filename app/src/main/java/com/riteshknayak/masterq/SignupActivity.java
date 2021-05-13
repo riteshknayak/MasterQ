@@ -39,7 +39,7 @@ public class SignupActivity extends AppCompatActivity {
         binding.signupBtn.setOnClickListener(v -> {
             String email, pass, name;
 
-            email = binding.emailBox.getText().toString();
+            email = binding.emailBtn.getText().toString();
             pass = binding.passwordBox.getText().toString();
             name = binding.nameBox.getText().toString();
 
@@ -70,7 +70,7 @@ public class SignupActivity extends AppCompatActivity {
                 }
             });
         });
-        binding.loginBtn.setOnClickListener(v -> startActivity(new Intent(SignupActivity.this, LoginActivity.class)));
+        binding.signinBtn.setOnClickListener(v -> startActivity(new Intent(SignupActivity.this, LoginActivity.class)));
 
     }
 }
