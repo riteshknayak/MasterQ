@@ -214,7 +214,7 @@
                 android:layout_width="272dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito_bold"
-                android:text="Rosy Nayak"
+                tools:text="Rosy Nayak"
                 android:textColor="@color/white"
                 android:textSize="15sp" />
 

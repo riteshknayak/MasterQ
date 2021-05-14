@@ -29,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish();
         }
+        //TODO app crashing when  clicking the sign in button when edittext is empty
 
         binding.emailBtn.setOnClickListener(v -> {
             String email, pass;

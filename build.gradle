@@ -17,6 +17,7 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        jcenter()
 //        jcenter() // Warning: this repository is going to shut down soon
     }
 }
@@ -24,3 +25,16 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+buildscript{
+    repositories {
+        maven {
+            url  "https://dl.bintray.com/subsub/maven"
+        }
+    }
+}
+repositories {
+    maven {
+        url 'https://dl.bintray.com/spark/maven'
+    }
+}
+

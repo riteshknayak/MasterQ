@@ -37,8 +37,9 @@
         android:hint="@string/name"
         android:inputType="textPersonName"
         android:paddingStart="50dp"
-        android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/dark_grey"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,8 +59,9 @@
         android:hint="@string/email"
         android:inputType="textEmailAddress"
         android:paddingStart="50dp"
-        android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/dark_grey"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,8 +81,9 @@
         android:hint="@string/password"
         android:inputType="textPassword"
         android:paddingStart="50dp"
-        android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/dark_grey"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -96,6 +99,7 @@
         android:paddingBottom="23dp"
         android:text="@string/signup"
         android:textAllCaps="false"
+        android:textColor="@color/white"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -103,6 +107,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linearLayout3"
         app:layout_constraintVertical_bias="0.67" />
+
 
     <Button
         android:id="@+id/signinBtn"
@@ -113,6 +118,7 @@
         android:paddingBottom="23dp"
         android:text="@string/common_signin_button_text"
         android:textAllCaps="false"
+        android:textColor="@color/white"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -135,5 +141,21 @@
         app:layout_constraintTop_toTopOf="parent">
 
     </RelativeLayout>
+
+
+    <!--    TODO  use this button instead   http
+    s://github.com/SparkYuan/SubmitButton-->
+<!--    <com.spark.submitbutton.SubmitButton-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:text="    Submit     "-->
+<!--        android:textColor="@color/gray"-->
+<!--        app:sub_btn_background="@color/white"-->
+<!--        app:sub_btn_duration="2000"-->
+<!--        app:sub_btn_line_color="#8BC34A"-->
+<!--        app:sub_btn_ripple_color="#8BC34A"-->
+<!--        app:sub_btn_tick_color="@color/white" />-->
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

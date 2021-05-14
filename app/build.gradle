@@ -45,6 +45,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.firebase:firebase-firestore'
-
+    implementation 'com.royrodriguez:transitionbutton:0.2.0'  // TODO use these libraries to add animation for button
+    implementation 'com.sdsmdg.harjot:materialshadows:1.2.5' // TODO use these libraries to add shadows
+    implementation 'com.airbnb.android:lottie:3.7.0'   // TODO use these libraries to add animations
+    // TODO open your bookmarks bar -> "open these"  folder ->than "4" folder and open those github links
+    implementation 'me.spark:submitbutton:1.0.1'
 
 }
+
