@@ -39,36 +39,44 @@ public class SignupActivity extends AppCompatActivity {
         binding.signupBtn.setOnClickListener(v -> {
             String email, pass, name;
 
-            email = binding.emailBtn.getText().toString();
-            pass = binding.passwordBox.getText().toString();
-            name = binding.nameBox.getText().toString();
+            if(binding.emailBtn.getText() == null || binding.passwordBox.getText() ==null || binding.nameBox.getText() == null) {
+                Toast.makeText(SignupActivity.this, "Please provide the required data", Toast.LENGTH_SHORT).show();
+            }else{
+
+                Toast.makeText(SignupActivity.this,binding.emailBtn.getText().toString() , Toast.LENGTH_SHORT).show();
 
 
-            final User user = new User(name, email, pass);
+                email = binding.emailBtn.getText().toString();
+                pass = binding.passwordBox.getText().toString();
+                name = binding.nameBox.getText().toString();
 
-            auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(task -> {
+
+                final User user = new User(name, email, pass);
+
+                auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(task -> {
 
 
-                if (task.isSuccessful()) {
-                    Toast.makeText(SignupActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                    if (task.isSuccessful()) {
+                        Toast.makeText(SignupActivity.this, "Success", Toast.LENGTH_SHORT).show();
 
-                    String uid = Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getUid();
+                        String uid = Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getUid();
 
-                    database
-                            .collection("users")
-                            .document(uid)
-                            .set(user).addOnCompleteListener(task1 -> {
-                                if(task1.isSuccessful()) {
-                                    startActivity(new Intent(SignupActivity.this, MainActivity.class));
-                                    finish();
-                                } else {
-                                    Toast.makeText(SignupActivity.this, Objects.requireNonNull(task1.getException()).getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                } else {
-                    Toast.makeText(SignupActivity.this, Objects.requireNonNull(task.getException()).getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
+                        database
+                                .collection("users")
+                                .document(uid)
+                                .set(user).addOnCompleteListener(task1 -> {
+                                    if(task1.isSuccessful()) {
+                                        startActivity(new Intent(SignupActivity.this, MainActivity.class));
+                                        finish();
+                                    } else {
+                                        Toast.makeText(SignupActivity.this, Objects.requireNonNull(task1.getException()).getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    } else {
+                        Toast.makeText(SignupActivity.this, Objects.requireNonNull(task.getException()).getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
         });
         binding.signinBtn.setOnClickListener(v -> startActivity(new Intent(SignupActivity.this, LoginActivity.class)));
 
