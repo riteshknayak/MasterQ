@@ -7,7 +7,8 @@
     android:background="@color/primary_background"
     tools:context=".SignupActivity">
 
-    <!--    xmlns:tools="http://schemas.android.com/tools"-->
+
+
 
     <TextView
         android:id="@+id/textView6"
