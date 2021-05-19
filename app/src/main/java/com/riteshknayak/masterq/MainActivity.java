@@ -9,7 +9,6 @@ import android.os.Bundle;
 import com.riteshknayak.masterq.databinding.ActivityMainBinding;
 
 
-import me.ibrahimsn.lib.OnItemSelectedListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,26 +26,23 @@ public class MainActivity extends AppCompatActivity {
         transaction.replace(R.id.content, new HomeFragment());
         transaction.commit();
 
-        binding.bottomBar.setOnItemSelectedListener(new OnItemSelectedListener() {
-            @Override
-            public boolean onItemSelect(int i) {
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                switch (i) {
-                    case 0:
-                        transaction.replace(R.id.content, new HomeFragment());
-                        transaction.commit();
-                        break;
-                    case 1:
-                        transaction.replace(R.id.content, new LeaderboardFragment());
-                        transaction.commit();
-                        break;
-                    case 2:
-                        transaction.replace(R.id.content, new ProfileFragment());
-                        transaction.commit();
-                        break;
-                }
-                return false;
+        binding.bottomBar.setOnItemSelectedListener(i -> {
+            FragmentTransaction transaction1 = getSupportFragmentManager().beginTransaction();
+            switch (i) {
+                case 0:
+                    transaction1.replace(R.id.content, new HomeFragment());
+                    transaction1.commit();
+                    break;
+                case 1:
+                    transaction1.replace(R.id.content, new LeaderboardFragment());
+                    transaction1.commit();
+                    break;
+                case 2:
+                    transaction1.replace(R.id.content, new ProfileFragment());
+                    transaction1.commit();
+                    break;
             }
+            return false;
         });
 
     }
