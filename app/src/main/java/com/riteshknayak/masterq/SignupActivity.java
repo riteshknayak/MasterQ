@@ -29,8 +29,7 @@ public class SignupActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         database = FirebaseFirestore.getInstance();
 
-        //TODO app crashing when  clicking the signup button when edittext is empty
-
+        //TODO app crashing when  clicking the signup button when edittext is empty. use try-catch to solve the error
         if(auth.getCurrentUser() != null) {
             startActivity(new Intent(SignupActivity.this, MainActivity.class));
             finish();
