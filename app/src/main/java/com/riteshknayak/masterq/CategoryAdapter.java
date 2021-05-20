@@ -1,6 +1,7 @@
 package com.riteshknayak.masterq;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,14 +44,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                 .into(holder.imageView);
 
         //TODO  below onClickListener for opening quizActivity
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(context, QuizActivity.class);
-//                intent.putExtra("catId", model.getCategoryId());
-//                context.startActivity(intent);
-//            }
-//        });
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, QuizActivity.class);
+            intent.putExtra("catId", model.getCategoryId());
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -58,7 +56,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         return categoryModels.size();
     }
 
-    public class CategoryViewHolder extends RecyclerView.ViewHolder {
+    public static class CategoryViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
         TextView textView;
 

@@ -30,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         }
         //TODO app crashing when  clicking the sign in button when edittext is empty . use try-catch to solve the error
+        //TODO Check weather the quizme app also crash when empty edittext is clicked
 
         binding.emailBtn.setOnClickListener(v -> {
             String email, pass;

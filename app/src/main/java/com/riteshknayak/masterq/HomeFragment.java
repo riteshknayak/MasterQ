@@ -30,7 +30,6 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
     }
-
     FragmentHomeBinding binding;
     FirebaseFirestore database;
 
@@ -60,12 +59,8 @@ public class HomeFragment extends Fragment {
                     adapter.notifyDataSetChanged();
                 });
 
-
         binding.categoryList.setLayoutManager(new GridLayoutManager(getContext(),2));
         binding.categoryList.setAdapter(adapter);
-
-
-
 
         // Inflate the layout for this fragment
         return binding.getRoot();

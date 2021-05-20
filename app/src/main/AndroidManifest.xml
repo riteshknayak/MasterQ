@@ -24,6 +24,9 @@
         <activity android:name=".LoginActivity">
 
         </activity>
+        <activity android:name=".QuizActivity">
+
+        </activity>
     </application>
 
 </manifest>

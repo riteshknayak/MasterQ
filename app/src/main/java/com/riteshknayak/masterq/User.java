@@ -3,6 +3,8 @@ package com.riteshknayak.masterq;
 public class User {
     private String name, email, pass;
 
+
+    //completedTopics, startedCategories
     public User() {
     }
 
