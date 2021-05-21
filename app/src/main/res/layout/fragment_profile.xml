@@ -11,4 +11,12 @@
         android:layout_height="match_parent"
         android:text="@string/hello_blank_fragment" />
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="750dp"
+        android:onClick="Userdata.getName"
+        android:text="Button" />
+
+
 </FrameLayout>

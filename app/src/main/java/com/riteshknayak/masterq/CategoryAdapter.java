@@ -2,21 +2,32 @@ package com.riteshknayak.masterq;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
+    FirebaseFirestore database = FirebaseFirestore.getInstance();
+
 
     Context context;
     ArrayList<CategoryModel> categoryModels;
@@ -43,11 +54,31 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                 .load(model.getCategoryImage())
                 .into(holder.imageView);
 
+
         //TODO  below onClickListener for opening quizActivity
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, QuizActivity.class);
             intent.putExtra("catId", model.getCategoryId());
             context.startActivity(intent);
+            Map<String, Boolean> data = new HashMap<>();
+            data.put(model.getCategoryId(), true);
+            database.collection("users")
+                    .document(FirebaseAuth.getInstance().getUid())
+                    .collection("userData")
+                    .document("categories")
+                    .set(data)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d(null, "DocumentSnapshot successfully written!");
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w(null, "Error writing document", e);
+                        }
+                    });
         });
     }
 

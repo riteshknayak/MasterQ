@@ -52,6 +52,7 @@ public class SignupActivity extends AppCompatActivity {
 
 
                 final User user = new User(name, email, pass);
+                user.seDefault();
 
                 auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(task -> {
 
@@ -60,7 +61,7 @@ public class SignupActivity extends AppCompatActivity {
                         Toast.makeText(SignupActivity.this, "Success", Toast.LENGTH_SHORT).show();
 
                         String uid = Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getUid();
-
+                        user.setUidObject(uid);
                         database
                                 .collection("users")
                                 .document(uid)
@@ -72,6 +73,7 @@ public class SignupActivity extends AppCompatActivity {
                                         Toast.makeText(SignupActivity.this, Objects.requireNonNull(task1.getException()).getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 });
+
                     } else {
                         Toast.makeText(SignupActivity.this, Objects.requireNonNull(task.getException()).getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                     }
