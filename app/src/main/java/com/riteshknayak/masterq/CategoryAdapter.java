@@ -7,21 +7,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
@@ -57,46 +53,65 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         //TODO  below onClickListener for opening quizActivity
         holder.itemView.setOnClickListener(v -> {
 
-            //below code to check if  category is unlocked
-            final boolean[] val = new boolean[1];
-            database.collection("users")
-                    .document(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
-                    .collection("userData")
-                    .document("categories")
-                    .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    val[0] = documentSnapshot.getBoolean(model.getCategoryId());
-                }
-            });
-            if(val[0]){
-                Intent intent = new Intent(context, QuizActivity.class);
-                intent.putExtra("catId", model.getCategoryId());
+            Intent intent = new Intent(context, TopicActivity.class);
+//                intent.putExtra("catId", model.getCategoryId());
                 context.startActivity(intent);
-                Map<String, Boolean> data = new HashMap<>();
-                data.put(model.getCategoryId(), true);
-            }else{
-                Toast toast = Toast.makeText(context, "Access Denied", Toast.LENGTH_LONG);
-                toast.show();
-            }
-//             add category true or false
+//            Map<String, Boolean> data = new HashMap<>();
+//            data.put("unlocked", true);
 //            database.collection("users")
 //                    .document(FirebaseAuth.getInstance().getUid())
+//                    .collection(model.getCategoryId())
+//                    .document("1")
+//                    .set(data);
+//            database.collection("users")
+//                    .document(FirebaseAuth.getInstance().getUid())
+//                    .collection(model.getCategoryId())
+//                    .document("2")
+//                    .set(data);
+//            database.collection("users")
+//                    .document(FirebaseAuth.getInstance().getUid())
+//                    .collection(model.getCategoryId())
+//                    .document("3")
+//                    .set(data);
+//            database.collection("users")
+//                    .document(FirebaseAuth.getInstance().getUid())
+//                    .collection(model.getCategoryId())
+//                    .document("4")
+//                    .set(data);
+//            database.collection("users")
+//                    .document(FirebaseAuth.getInstance().getUid())
+//                    .collection(model.getCategoryId())
+//                    .document("5")
+//                    .set(data);
+//            database.collection("users")
+//                    .document(FirebaseAuth.getInstance().getUid())
+//                    .collection(model.getCategoryId())
+//                    .document("6")
+//                    .set(data);
+
+            //below code to check if  category is unlocked
+//            final boolean[] val = new boolean[1];
+//            database.collection("users")
+//                    .document(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
 //                    .collection("userData")
 //                    .document("categories")
-//                    .set(data)
-//                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                        @Override
-//                        public void onSuccess(Void aVoid) {
-//                            Log.d(null, "DocumentSnapshot successfully written!");
-//                        }
-//                    })
-//                    .addOnFailureListener(new OnFailureListener() {
-//                        @Override
-//                        public void onFailure(@NonNull Exception e) {
-//                            Log.w(null, "Error writing document", e);
-//                        }
-//                    });
+//                    .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//                @Override
+//                public void onSuccess(DocumentSnapshot documentSnapshot) {
+//                    val[0] = documentSnapshot.getBoolean(model.getCategoryId());
+//                }
+//            });
+//            if(val[0]){
+//                Intent intent = new Intent(context, QuizActivity.class);
+//                intent.putExtra("catId", model.getCategoryId());
+//                context.startActivity(intent);
+//                Map<String, Boolean> data = new HashMap<>();
+//                data.put(model.getCategoryId(), true);
+//            }else{
+//                Toast toast = Toast.makeText(context, "Access Denied", Toast.LENGTH_LONG);
+//                toast.show();
+//            }
+//            below code to add category data
         });
     }
 
