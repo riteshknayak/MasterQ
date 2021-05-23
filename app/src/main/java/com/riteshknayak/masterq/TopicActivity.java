@@ -36,8 +36,10 @@ public class TopicActivity extends AppCompatActivity {
             Topics.clear();
             for (DocumentSnapshot snapshot : value.getDocuments()) {
                 TopicModel model = snapshot.toObject(TopicModel.class);
-                model.setTopicId(snapshot.getId());
-                Topics.add(model);
+                if(model.isVisibility()) {
+                    model.setTopicId(snapshot.getId());
+                    Topics.add(model);
+                }
             }
             adapter.notifyDataSetChanged();
         });

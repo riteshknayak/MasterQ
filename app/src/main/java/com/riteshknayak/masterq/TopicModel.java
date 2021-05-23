@@ -2,11 +2,18 @@ package com.riteshknayak.masterq;
 
 public class TopicModel {
     private String topicId, topicImage, topicName;
+    private boolean visibility;
 
     public TopicModel(String topicId, String topicImage, String topicName) {
         this.topicId = topicId;
         this.topicImage = topicImage;
         this.topicName = topicName;
+    }
+    public TopicModel(String topicId, String topicImage, String topicName, boolean visibility) {
+        this.topicId = topicId;
+        this.topicImage = topicImage;
+        this.topicName = topicName;
+        this.visibility = visibility;
     }
 
     public  TopicModel(){};
@@ -34,5 +41,13 @@ public class TopicModel {
 
     public void setTopicName(String topicName) {
         this.topicName = topicName;
+    }
+
+    public boolean isVisibility() {
+        return visibility;
+    }
+
+    public void setVisibility(boolean visibility) {
+        this.visibility = visibility;
     }
 }
