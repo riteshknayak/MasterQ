@@ -1,4 +1,4 @@
-package com.riteshknayak.masterq;
+package com.riteshknayak.masterq.category;
 
 public class CategoryModel {
     private String categoryId, categoryName, categoryImage;

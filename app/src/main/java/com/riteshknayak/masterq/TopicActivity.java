@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.riteshknayak.masterq.databinding.ActivityTopicBinding;
+import com.riteshknayak.masterq.topics.TopicAdapter;
+import com.riteshknayak.masterq.topics.Topic;
 
 import java.util.ArrayList;
 
@@ -26,7 +28,7 @@ public class TopicActivity extends AppCompatActivity {
         String catId = getIntent().getStringExtra("catId");
 
         recyclerView = findViewById(R.id.topicList);
-        final ArrayList<TopicModel> Topics = new ArrayList<>();
+        final ArrayList<Topic> Topics = new ArrayList<>();
         final TopicAdapter adapter = new TopicAdapter(this, Topics);
 
         database.collection("categories")
@@ -35,8 +37,8 @@ public class TopicActivity extends AppCompatActivity {
         .addSnapshotListener((value, error) -> {
             Topics.clear();
             for (DocumentSnapshot snapshot : value.getDocuments()) {
-                TopicModel model = snapshot.toObject(TopicModel.class);
-                if(model.isVisibility()) {
+                Topic model = snapshot.toObject(Topic.class);
+                if(model.isVisible()) {
                     model.setTopicId(snapshot.getId());
                     Topics.add(model);
                 }

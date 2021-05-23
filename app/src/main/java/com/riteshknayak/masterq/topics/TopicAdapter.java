@@ -1,4 +1,4 @@
-package com.riteshknayak.masterq;
+package com.riteshknayak.masterq.topics;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,17 +11,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.riteshknayak.masterq.R;
 
 import java.util.ArrayList;
 
 public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicViewHolder> {
 
     Context context;
-    ArrayList<TopicModel> topicModels;
+    ArrayList<Topic> topics;
 
-    public TopicAdapter(Context context, ArrayList<TopicModel> models) {
+    public TopicAdapter(Context context, ArrayList<Topic> models) {
         this.context = context;
-        this.topicModels = models;
+        this.topics = models;
     }
 
     @NonNull
@@ -33,7 +34,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicViewHol
 
     @Override
     public void onBindViewHolder(@NonNull TopicViewHolder holder, int position) {
-        final TopicModel model = topicModels.get(position);
+        final Topic model = topics.get(position);
 
         holder.textView.setText(model.getTopicName());
         Glide.with(context)
@@ -43,7 +44,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicViewHol
 
     @Override
     public int getItemCount() {
-        return topicModels.size();
+        return topics.size();
     }
 
     public static class TopicViewHolder extends RecyclerView.ViewHolder {

@@ -1,4 +1,4 @@
-package com.riteshknayak.masterq;
+package com.riteshknayak.masterq.category;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,12 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.riteshknayak.masterq.R;
+import com.riteshknayak.masterq.TopicActivity;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {

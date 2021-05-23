@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.riteshknayak.masterq.category.CategoryAdapter;
+import com.riteshknayak.masterq.category.CategoryModel;
 import com.riteshknayak.masterq.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
