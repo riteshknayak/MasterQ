@@ -53,7 +53,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         holder.itemView.setOnClickListener(v -> {
 
             Intent intent = new Intent(context, TopicActivity.class);
-//                intent.putExtra("catId", model.getCategoryId());
+                intent.putExtra("catId", model.getCategoryId());
                 context.startActivity(intent);
 //            Map<String, Boolean> data = new HashMap<>();
 //            data.put("unlocked", true);

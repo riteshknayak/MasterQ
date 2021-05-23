@@ -18,19 +18,19 @@ public class TopicActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     FirebaseFirestore database = FirebaseFirestore.getInstance();
 
-//    final String catId = getIntent().getStringExtra("catId");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_topic);
+        String catId = getIntent().getStringExtra("catId");
 
         recyclerView = findViewById(R.id.topicList);
         final ArrayList<TopicModel> Topics = new ArrayList<>();
         final TopicAdapter adapter = new TopicAdapter(this, Topics);
 
         database.collection("categories")
-        .document("CmYfZdAGsDpA2Vupktb4")
+        .document(catId)
         .collection("Topics")
         .addSnapshotListener((value, error) -> {
             Topics.clear();
