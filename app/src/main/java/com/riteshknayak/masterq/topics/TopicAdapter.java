@@ -1,6 +1,7 @@
 package com.riteshknayak.masterq.topics;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.riteshknayak.masterq.QuizActivity;
 import com.riteshknayak.masterq.R;
+import com.riteshknayak.masterq.TopicActivity;
 
 import java.util.ArrayList;
 
@@ -40,6 +43,14 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicViewHol
         Glide.with(context)
                 .load(model.getTopicImage())
                 .into(holder.imageView);
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, QuizActivity.class);
+            intent.putExtra("topicId", model.getTopicId());
+            context.startActivity(intent);
+        });
+  
+
     }
 
     @Override

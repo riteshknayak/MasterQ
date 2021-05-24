@@ -43,7 +43,7 @@ public class Topic {
         this.topicName = topicName;
     }
 
-    public boolean isVisible() {
+    public boolean isVisibility() {
         return visibility;
     }
 

@@ -1,5 +1,6 @@
 package com.riteshknayak.masterq;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -14,6 +15,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.riteshknayak.masterq.databinding.ActivityQuizBinding;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class QuizActivity extends AppCompatActivity {
@@ -36,30 +39,22 @@ public class QuizActivity extends AppCompatActivity {
         questions = new ArrayList<>();
         database = FirebaseFirestore.getInstance();
 
-        final String catId = getIntent().getStringExtra("catId");
+        SharedPreferences getShared = getSharedPreferences("app", MODE_PRIVATE);
+        String catId = getShared.getString("catId","CmYfZdAGsDpA2Vupktb4");
+        final String topicId = getIntent().getStringExtra("topicId");
 
         Random random = new Random();
-        final int rand = random.nextInt(12);
-
+        final int rand = 1;
         database.collection("categories")
                 .document(catId)
-                .collection("questions")
-                .whereGreaterThanOrEqualTo("index", rand)
-                .orderBy("index")
-                .limit(5).get().addOnSuccessListener(queryDocumentSnapshots -> {
-                    if(queryDocumentSnapshots.getDocuments().size() < 10) {
-                        database.collection("categories")
-                                .document(catId)
-                                .collection("questions")
-                                .whereLessThanOrEqualTo("index", rand)
-                                .orderBy("index")
-                                .limit(10).get().addOnSuccessListener(queryDocumentSnapshots1 -> {
-                                        for(DocumentSnapshot snapshot : queryDocumentSnapshots1) {
-                                            Question question = snapshot.toObject(Question.class);
-                                            questions.add(question);
-                                        }
-                                    setNextQuestion();
-                                });
+                .collection(topicId)
+                .get().addOnSuccessListener(queryDocumentSnapshots -> {
+                    if(queryDocumentSnapshots.getDocuments().size() < 5) {
+                        for(DocumentSnapshot snapshot : queryDocumentSnapshots) {
+                            Question question = snapshot.toObject(Question.class);
+                            questions.add(question);
+                            setNextQuestion();
+                                }
                     } else {
                         for(DocumentSnapshot snapshot : queryDocumentSnapshots) {
                             Question question = snapshot.toObject(Question.class);
@@ -99,7 +94,7 @@ public class QuizActivity extends AppCompatActivity {
         if(timer != null)
             timer.cancel();
         timer.start();
-        if(index < questions.size()) {
+        if(index > questions.size()) {
             binding.questionCounter.setText(String.format("%d/%d", (index+1), questions.size()));
             question = questions.get(index);
             binding.question.setText(question.getQuestion());
@@ -107,6 +102,11 @@ public class QuizActivity extends AppCompatActivity {
             binding.option2.setText(question.getOption2());
             binding.option3.setText(question.getOption3());
             binding.option4.setText(question.getOption4());
+            Map<String, Integer> data = new HashMap<>();
+            data.put("unlocked", questions.size());
+            database.collection("categories")
+                    .document("CmYfZdAGsDpA2Vupktb4")
+                    .set(data);
         }
     }
 

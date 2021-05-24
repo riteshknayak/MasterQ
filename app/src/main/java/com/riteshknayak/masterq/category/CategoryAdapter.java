@@ -2,6 +2,7 @@ package com.riteshknayak.masterq.category;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.riteshknayak.masterq.R;
 import com.riteshknayak.masterq.TopicActivity;
 
@@ -20,13 +20,14 @@ import java.util.ArrayList;
 
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
-    FirebaseFirestore database = FirebaseFirestore.getInstance();
+//    FirebaseFirestore database = FirebaseFirestore.getInstance();
 
 
     Context context;
-    ArrayList<CategoryModel> categoryModels;
+    ArrayList<Category> categoryModels;
 
-    public CategoryAdapter(Context context, ArrayList<CategoryModel> categoryModels) {
+
+    public CategoryAdapter(Context context, ArrayList<Category> categoryModels) {
         this.context = context;
         this.categoryModels = categoryModels;
     }
@@ -34,13 +35,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     @NonNull
     @Override
     public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_category,null);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_category,parent,false);
         return new CategoryViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
-        final CategoryModel model = categoryModels.get(position);
+        final Category model = categoryModels.get(position);
 
         holder.textView.setText(model.getCategoryName());
         Glide.with(context)
@@ -54,6 +55,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             Intent intent = new Intent(context, TopicActivity.class);
                 intent.putExtra("catId", model.getCategoryId());
                 context.startActivity(intent);
+
+            SharedPreferences shared = context.getSharedPreferences("app", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = shared.edit();
+            editor.putString("catId", model.getCategoryId());
+            editor.apply();
+
+            //TODO  database work down below
 //            Map<String, Boolean> data = new HashMap<>();
 //            data.put("unlocked", true);
 //            database.collection("users")

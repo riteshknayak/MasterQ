@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.riteshknayak.masterq.category.CategoryAdapter;
-import com.riteshknayak.masterq.category.CategoryModel;
+import com.riteshknayak.masterq.category.Category;
 import com.riteshknayak.masterq.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
@@ -44,7 +44,7 @@ public class HomeFragment extends Fragment {
 
         database = FirebaseFirestore.getInstance();
 
-        final ArrayList<CategoryModel> categories = new ArrayList<>();
+        final ArrayList<Category> categories = new ArrayList<>();
 
         final CategoryAdapter adapter = new CategoryAdapter(getContext(), categories);
 
@@ -53,7 +53,7 @@ public class HomeFragment extends Fragment {
                     categories.clear();
                     assert value != null;  //TODO may change
                     for (DocumentSnapshot snapshot : value.getDocuments()) {
-                        CategoryModel model = snapshot.toObject(CategoryModel.class);
+                        Category model = snapshot.toObject(Category.class);
                         assert model != null; //TODO may change
                         model.setCategoryId(snapshot.getId());
                         categories.add(model);

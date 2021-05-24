@@ -1,15 +1,15 @@
 package com.riteshknayak.masterq.category;
 
-public class CategoryModel {
+public class Category {
     private String categoryId, categoryName, categoryImage;
 
-    public CategoryModel(String categoryId, String categoryName, String categoryImage) {
+    public Category(String categoryId, String categoryName, String categoryImage) {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
         this.categoryImage = categoryImage;
     }
 
-    public CategoryModel() {}
+    public Category() {}
 
     public String getCategoryId() {
         return categoryId;
