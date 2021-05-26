@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.riteshknayak.masterq.databinding.ActivitySignupBinding;
+import com.riteshknayak.masterq.objects.User;
 
 import java.util.Objects;
 

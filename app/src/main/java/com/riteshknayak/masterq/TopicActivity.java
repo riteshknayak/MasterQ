@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.riteshknayak.masterq.databinding.ActivityTopicBinding;
-import com.riteshknayak.masterq.topics.TopicAdapter;
-import com.riteshknayak.masterq.topics.Topic;
+import com.riteshknayak.masterq.adapters.TopicAdapter;
+import com.riteshknayak.masterq.objects.Topic;
 
 import java.util.ArrayList;
 
@@ -45,8 +45,6 @@ public class TopicActivity extends AppCompatActivity {
             }
             adapter.notifyDataSetChanged();
         });
-
-
         recyclerView.setLayoutManager(new GridLayoutManager(this,2));
         recyclerView.setAdapter(adapter);
     }

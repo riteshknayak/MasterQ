@@ -48,7 +48,7 @@
         android:fontFamily="@font/nunito_black"
         android:gravity="center"
         android:text="Who invented android studio?"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

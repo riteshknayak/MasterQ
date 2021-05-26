@@ -1,12 +1,12 @@
-package com.riteshknayak.masterq;
+package com.riteshknayak.masterq.objects;
 
 public class Question {
     private String question, option1, option2, option3, option4, answer;
 
-    public Question() {
-    }
+//    public Question() {
+//    }
 
-    public Question(String question, String option1, String option2, String option3, String option4, String answer) {
+    public Question(String question, String option1, String option2, String option3, String option4, String answer ) {
         this.question = question;
         this.option1 = option1;
         this.option2 = option2;
@@ -62,4 +62,4 @@ public class Question {
     public void setAnswer(String answer) {
         this.answer = answer;
     }
-}
+    }

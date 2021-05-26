@@ -1,4 +1,4 @@
-package com.riteshknayak.masterq.topics;
+package com.riteshknayak.masterq.objects;
 
 public class Topic {
     private String topicId, topicImage, topicName;

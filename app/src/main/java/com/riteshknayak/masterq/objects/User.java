@@ -1,4 +1,4 @@
-package com.riteshknayak.masterq;
+package com.riteshknayak.masterq.objects;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 

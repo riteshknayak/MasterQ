@@ -1,4 +1,4 @@
-package com.riteshknayak.masterq.category;
+package com.riteshknayak.masterq.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.riteshknayak.masterq.R;
 import com.riteshknayak.masterq.TopicActivity;
+import com.riteshknayak.masterq.objects.Category;
 
 import java.util.ArrayList;
 

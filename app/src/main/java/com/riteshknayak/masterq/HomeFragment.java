@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.riteshknayak.masterq.category.CategoryAdapter;
-import com.riteshknayak.masterq.category.Category;
+import com.riteshknayak.masterq.adapters.CategoryAdapter;
+import com.riteshknayak.masterq.objects.Category;
 import com.riteshknayak.masterq.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
@@ -22,10 +22,8 @@ public class HomeFragment extends Fragment {
 
 
     public HomeFragment() {
-        // Required empty public constructor
+        // Required empty public constructor for Firebase
     }
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,22 +39,20 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-
         database = FirebaseFirestore.getInstance();
 
         final ArrayList<Category> categories = new ArrayList<>();
-
         final CategoryAdapter adapter = new CategoryAdapter(getContext(), categories);
 
         database.collection("categories")
                 .addSnapshotListener((value, error) -> {
                     categories.clear();
-                    assert value != null;  //TODO may change
                     for (DocumentSnapshot snapshot : value.getDocuments()) {
                         Category model = snapshot.toObject(Category.class);
-                        assert model != null; //TODO may change
-                        model.setCategoryId(snapshot.getId());
-                        categories.add(model);
+                        if(model.isVisibility()) {
+                            model.setCategoryId(snapshot.getId());
+                            categories.add(model);
+                        }
                     }
                     adapter.notifyDataSetChanged();
                 });

@@ -1,7 +1,8 @@
-package com.riteshknayak.masterq.category;
+package com.riteshknayak.masterq.objects;
 
 public class Category {
     private String categoryId, categoryName, categoryImage;
+    private boolean visibility;
 
     public Category(String categoryId, String categoryName, String categoryImage) {
         this.categoryId = categoryId;
@@ -34,6 +35,12 @@ public class Category {
     public void setCategoryImage(String categoryImage) {
         this.categoryImage = categoryImage;
     }
-}
 
-//TODO add Topics inside categories
+    public boolean isVisibility() {
+        return visibility;
+    }
+
+    public void setVisibility(boolean visibility) {
+        this.visibility = visibility;
+    }
+}
