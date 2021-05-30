@@ -37,19 +37,15 @@ public class QuizActivity extends AppCompatActivity {
         final String topicId = getIntent().getStringExtra("topicId");
 
         database.collection("categories")
-                .document(catId)
-                .collection(topicId)
-                .orderBy("index")
-                .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                .document("CmYfZdAGsDpA2Vupktb4")
+                .collection("JrKw4Ca01HHYWG1OodHm")
+                .document("OE7P9iv6B7FFDHzRaLH1")
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                for(DocumentSnapshot snapshot : queryDocumentSnapshots) {
-                    Question question = snapshot.toObject(Question.class);
-                    questions.add(question);
-                }
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                binding.question.setText(documentSnapshot.getString("question"));
             }
         });
-        setNextQuestion();
     }
 
     void setNextQuestion() {
