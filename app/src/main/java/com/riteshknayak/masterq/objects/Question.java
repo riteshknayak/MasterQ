@@ -3,8 +3,8 @@ package com.riteshknayak.masterq.objects;
 public class Question {
     private String question, option1, option2, option3, option4, answer;
 
-//    public Question() {
-//    }
+    public Question() {
+    }
 
     public Question(String question, String option1, String option2, String option3, String option4, String answer ) {
         this.question = question;
