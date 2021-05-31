@@ -2,20 +2,18 @@ package com.riteshknayak.masterq.objects;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.ArrayList;
-
 public class User {
     FirebaseFirestore db;
 
     private String name, email, pass, uid;
-    private ArrayList<String> unlockedCategories = new ArrayList<>();
+//    private ArrayList<String> unlockedCategories = new ArrayList<>();
     //completedTopics, startedCategories
-    public  void  seDefault(){
-        //TODO add function for default categories
-        unlockedCategories.add("CmYfZdAGsDpA2Vupktb4");
-        unlockedCategories.add("gzkAZfEGotIKDQxcXSFV");
-        unlockedCategories.add("gzkAZfEGotIKDQxcXSFV");
-    }
+//    public  void  seDefault(){
+//        //TODO add function for default categories
+//        unlockedCategories.add("CmYfZdAGsDpA2Vupktb4");
+//        unlockedCategories.add("gzkAZfEGotIKDQxcXSFV");
+//        unlockedCategories.add("gzkAZfEGotIKDQxcXSFV");
+//    }
 
     public User() {
     }
@@ -27,15 +25,15 @@ public class User {
         this.pass = pass;
     }
 
-    public String getNameObject() {
+    public String getName() {
         return name;
     }
 
-    public void setNameObject(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getEmailObject() {
+    public String getEmail() {
         return email;
     }
 
@@ -43,19 +41,19 @@ public class User {
         this.email = email;
     }
 
-    public String getPassObject() {
+    public String getPass() {
         return pass;
     }
 
-    public void setPassObject(String pass) {
+    public void setPass(String pass) {
         this.pass = pass;
     }
 
-    public String getUidObject() {
+    public String getUid() {
         return uid;
     }
 
-    public void setUidObject(String uid) {
+    public void setUid(String uid) {
         this.uid = uid;
     }
 

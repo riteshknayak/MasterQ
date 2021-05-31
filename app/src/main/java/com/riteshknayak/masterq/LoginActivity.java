@@ -24,11 +24,6 @@ public class LoginActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
-
-        if(auth.getCurrentUser() != null) {
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            finish();
-        }
         //TODO app crashing when  clicking the sign in button when edittext is empty . use try-catch to solve the error
         //TODO Check weather the quizme app also crash when empty edittext is clicked
 
