@@ -1,7 +1,8 @@
 package com.riteshknayak.masterq.objects;
 
 public class Question {
-    private String question, option1, option2, option3, option4, answer;
+    private String question, option1, option2, option3, option4, answer, UId;
+    private Integer index;
 
     public Question() {
     }
@@ -62,4 +63,20 @@ public class Question {
     public void setAnswer(String answer) {
         this.answer = answer;
     }
+
+    public String getUId() {
+        return UId;
     }
+
+    public void setUId(String UId) {
+        this.UId = UId;
+    }
+
+    public Integer getIndex() {
+        return index;
+    }
+
+    public void setIndex(Integer index) {
+        this.index = index;
+    }
+}
