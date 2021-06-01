@@ -114,7 +114,6 @@
 
     <Button
         android:id="@+id/quitBtn"
-        android:id="@+id/nextBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"

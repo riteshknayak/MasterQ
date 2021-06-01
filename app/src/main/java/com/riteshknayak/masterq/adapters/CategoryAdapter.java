@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.riteshknayak.masterq.R;
-import com.riteshknayak.masterq.TopicActivity;
+import com.riteshknayak.masterq.TopicsActivity;
 import com.riteshknayak.masterq.objects.Category;
 
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     @NonNull
     @Override
     public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_category,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_category, parent, false);
         return new CategoryViewHolder(view);
     }
 
@@ -53,9 +53,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         //TODO  below onClickListener for opening quizActivity
         holder.itemView.setOnClickListener(v -> {
 
-            Intent intent = new Intent(context, TopicActivity.class);
-                intent.putExtra("catId", model.getCategoryId());
-                context.startActivity(intent);
+            Intent intent = new Intent(context, TopicsActivity.class);
+            context.startActivity(intent);
 
             SharedPreferences shared = context.getSharedPreferences("app", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = shared.edit();

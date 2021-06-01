@@ -27,6 +27,7 @@ public class QuizActivity extends AppCompatActivity {
     FirebaseFirestore database;
     Question question;
     String catId;
+    String topicId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +39,12 @@ public class QuizActivity extends AppCompatActivity {
 
         SharedPreferences getShared = getSharedPreferences("app", MODE_PRIVATE);
         catId = getShared.getString("catId", "CmYfZdAGsDpA2Vupktb4");
-        final String topicId = getIntent().getStringExtra("topicId");
+        topicId = getShared.getString("topicId", "CmYfZdAGsDpA2Vupktb4");
 
         database.collection("categories")
                 .document(catId)
                 .collection(topicId)
-                .orderBy("index", Query.Direction.ASCENDING)
+                .orderBy("index", Query.Direction.DESCENDING)
                 .get().addOnSuccessListener(queryDocumentSnapshots -> {
             for (DocumentSnapshot snapshot : queryDocumentSnapshots) {
                 Question question = snapshot.toObject(Question.class);
@@ -74,12 +75,15 @@ public class QuizActivity extends AppCompatActivity {
         } else {
         }
     }
+
     void reset() {
-        binding.option1.setBackground(ContextCompat.getDrawable(this,R.drawable.option_unselected));
-        binding.option2.setBackground(ContextCompat.getDrawable(this,R.drawable.option_unselected));
-        binding.option3.setBackground(ContextCompat.getDrawable(this,R.drawable.option_unselected));
-        binding.option4.setBackground(ContextCompat.getDrawable(this,R.drawable.option_unselected));
-    }    @SuppressLint("NonConstantResourceId")
+        binding.option1.setBackground(ContextCompat.getDrawable(this, R.drawable.option_unselected));
+        binding.option2.setBackground(ContextCompat.getDrawable(this, R.drawable.option_unselected));
+        binding.option3.setBackground(ContextCompat.getDrawable(this, R.drawable.option_unselected));
+        binding.option4.setBackground(ContextCompat.getDrawable(this, R.drawable.option_unselected));
+    }
+
+    @SuppressLint("NonConstantResourceId")
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.option_1:
@@ -111,7 +115,7 @@ public class QuizActivity extends AppCompatActivity {
 
                 break;
             case R.id.quitBtn:
-                Intent intent2 = new Intent(QuizActivity.this, TopicActivity.class);
+                Intent intent2 = new Intent(QuizActivity.this, TopicsActivity.class);
                 intent2.putExtra("catId", catId);
                 startActivity(intent2);
                 break;

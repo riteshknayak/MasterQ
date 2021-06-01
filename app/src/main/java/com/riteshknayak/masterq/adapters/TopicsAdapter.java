@@ -2,6 +2,7 @@ package com.riteshknayak.masterq.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,18 +13,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.riteshknayak.masterq.QuizActivity;
 import com.riteshknayak.masterq.R;
+import com.riteshknayak.masterq.TopicActivity;
 import com.riteshknayak.masterq.objects.Topic;
 
 import java.util.ArrayList;
 
-public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicViewHolder> {
+public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.TopicViewHolder> {
 
     Context context;
     ArrayList<Topic> topics;
 
-    public TopicAdapter(Context context, ArrayList<Topic> models) {
+    public TopicsAdapter(Context context, ArrayList<Topic> models) {
         this.context = context;
         this.topics = models;
     }
@@ -45,8 +46,11 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicViewHol
                 .into(holder.imageView);
 
         holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, QuizActivity.class);
-            intent.putExtra("topicId", model.getTopicId());
+            Intent intent = new Intent(context, TopicActivity.class);
+            SharedPreferences shared = context.getSharedPreferences("app", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = shared.edit();
+            editor.putString("topicId", model.getTopicId());
+            editor.apply();
             context.startActivity(intent);
         });
   
