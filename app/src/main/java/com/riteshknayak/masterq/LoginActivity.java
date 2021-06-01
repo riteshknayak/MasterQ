@@ -1,6 +1,8 @@
 package com.riteshknayak.masterq;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -37,6 +39,11 @@ public class LoginActivity extends AppCompatActivity {
                 if(task.isSuccessful()) {
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();
+                    SharedPreferences shared = getSharedPreferences("app", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = shared.edit();
+                    editor.putString("UId",auth.getCurrentUser().getUid() );
+                    editor.apply();
+
                 } else {
                     Toast.makeText(LoginActivity.this, Objects.requireNonNull(task.getException()).getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                 }

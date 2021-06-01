@@ -3,6 +3,7 @@ package com.riteshknayak.masterq.objects;
 public class Topic {
     private String topicId, topicImage, topicName;
     private boolean visibility;
+    private boolean free;
 
     public Topic(String topicId, String topicImage, String topicName) {
         this.topicId = topicId;
@@ -49,5 +50,13 @@ public class Topic {
 
     public void setVisibility(boolean visibility) {
         this.visibility = visibility;
+    }
+
+    public boolean isFree() {
+        return free;
+    }
+
+    public void setFree(boolean free) {
+        this.free = free;
     }
 }

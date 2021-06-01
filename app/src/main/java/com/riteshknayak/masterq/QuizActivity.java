@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,8 +31,11 @@ public class QuizActivity extends AppCompatActivity {
     FirebaseFirestore database;
     FirebaseAuth auth;
     Question question;
+    CountDownTimer timer;
     String catId;
     String topicId;
+    String UId;
+    Integer score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,61 +46,93 @@ public class QuizActivity extends AppCompatActivity {
         database = FirebaseFirestore.getInstance();
 
         SharedPreferences getShared = getSharedPreferences("app", MODE_PRIVATE);
-        catId = getShared.getString("catId", "CmYfZdAGsDpA2Vupktb4");
-        topicId = getShared.getString("topicId", "CmYfZdAGsDpA2Vupktb4");
+        catId = getShared.getString("catId", null);
+        topicId = getShared.getString("topicId", null);
 
-//        String userId = auth.getCurrentUser().getUid();
+        auth = FirebaseAuth.getInstance();
+        UId = auth.getCurrentUser().getUid();
 
-//        final Integer[] r = new Integer[1];
-//        database.collection("users")
-//                .document("0mu8LcLm8aREn14Qa13LvxTJv9D3")//TODO user hardcoded
-//                .collection(catId)
-//                .document(topicId)
-//                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-//            @Override
-//            public void onSuccess(DocumentSnapshot documentSnapshot) {
-////                r[0] = Integer.parseInt(documentSnapshot.getString("LastQuestion"));
-//                r[0]  = 1;
-//                int s = r[0] +1;
-//            }
-//        });
-//                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-//            @Override
-//            public void onSuccess(DocumentSnapshot documentSnapshot) {
-////                result[0] = Integer.parseInt(documentSnapshot.getString("LastQuestion"));
-//            }
-//        });
-
-
-//            @Override
-//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                if(task.isSuccessful()) {
-//                    result[0] = Integer.parseInt(task.getResult().getString("LastQuestion"));
-//                }
-////                if(task.getResult().exists()){
-////                    result[0] = 0;
-////                }else{
-////                    result[0] = (Integer)task.getResult().get("LastQuestion");
-////                }
-//            }
-//        });
-
-//        Integer s = r[0];
-        database.collection("categories")
-                .document(catId)
-                .collection(topicId)
-                .orderBy("index", Query.Direction.ASCENDING)
-//                .whereGreaterThan("index", s)
-                .get().addOnSuccessListener(queryDocumentSnapshots -> {
-            for (DocumentSnapshot snapshot : queryDocumentSnapshots) {
-                Question question = snapshot.toObject(Question.class);
-                question.setUId(snapshot.getId());
-                questions.add(question);
+        database.collection("users")
+                .document(UId)
+                .collection(catId)
+                .document(topicId)
+                .get().addOnSuccessListener(documentSnapshot -> {
+            int lastQuestion;
+            if (documentSnapshot.get("LastQuestion") == null) {
+                lastQuestion = 0;
+            } else {
+                lastQuestion = (int) (long) documentSnapshot.get("LastQuestion");
             }
-            setNextQuestion();
+
+            database.collection("categories")
+                    .document(catId)
+                    .collection(topicId)
+                    .orderBy("index", Query.Direction.ASCENDING)
+                    .whereGreaterThan("index", lastQuestion)
+                    .limit(15)
+                    .get().addOnSuccessListener(queryDocumentSnapshots -> {
+                for (DocumentSnapshot snapshot : queryDocumentSnapshots) {
+                    Question question = snapshot.toObject(Question.class);
+                    question.setUId(snapshot.getId());
+                    questions.add(question);
+                }
+                setNextQuestion();
+            });
         });
+
+        database.collection("users")
+                .document(UId)
+                .get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.get("score") == null) {
+                score = 0;
+            } else {
+                score = (int) (long) documentSnapshot.get("score");
+            }
+        });
+
     }
 
+    void resetTimer() {
+        timer = new CountDownTimer(21000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                binding.timer.setText(String.valueOf(millisUntilFinished / 1000));
+            }
+
+            @Override
+            public void onFinish() {
+                disableClick();
+
+                Map<String, Object> wrongAnswer = new HashMap<>();
+                wrongAnswer.put(question.getUId(), false);
+
+                database.collection("users")
+                        .document(UId)
+                        .collection(catId)
+                        .document(topicId)
+                        .update(wrongAnswer); //TODO not working
+
+                Toast.makeText(QuizActivity.this, "Time up", Toast.LENGTH_SHORT).show();
+
+                new java.util.Timer().schedule(
+                        new java.util.TimerTask() {
+                            @Override
+                            public void run() {
+                                runOnUiThread(() -> {
+                                    if (index + 1 < questions.size()) {
+                                        index++;
+                                        setNextQuestion();
+                                    } else {
+                                        Toast.makeText(QuizActivity.this, "Quiz Finished...", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        },
+                        1000
+                );
+            }
+        };
+    }
 
     public void setNextQuestion() {
         reset();
@@ -110,8 +146,9 @@ public class QuizActivity extends AppCompatActivity {
             binding.option4.setText(question.getOption4());
         }
         enableClick();
+        resetTimer();
         setContentView(binding.getRoot());
-
+        timer.start();
     }
 
     void checkAnswer(TextView textView) {
@@ -126,28 +163,40 @@ public class QuizActivity extends AppCompatActivity {
         Map<String, Object> wrongAnswer = new HashMap<>();
         wrongAnswer.put(question.getUId(), false);
         Map<String, Object> setLastQuestion = new HashMap<>();
-        wrongAnswer.put("LastQuestion", question.getIndex().toString());
+        wrongAnswer.put("LastQuestion", question.getIndex());
+        Map<String, Object> setScore = new HashMap<>();
+        wrongAnswer.put("score", score+10);
 
         if (selectedAnswer.equals(question.getAnswer())) {
             database.collection("users")
-                    .document(auth.getUid())
+                    .document(UId)
                     .collection(catId)
                     .document(topicId)
                     .update(rightAnswer);
+
+            database.collection("users")
+                    .document(UId)
+                    .collection(catId)
+                    .document(topicId)
+                    .update(setLastQuestion);
+
+            database.collection("users")
+                    .document(UId)
+                    .update(setScore); //TODO not working
+
         } else {
             database.collection("users")
-                    .document(auth.getUid())
+                    .document(UId)
                     .collection(catId)
                     .document(topicId)
                     .update(wrongAnswer);
+
+            database.collection("users")
+                    .document(UId)
+                    .collection(catId)
+                    .document(topicId)
+                    .update(setLastQuestion);
         }
-
-        database.collection("users")
-                .document(auth.getUid())
-                .collection(catId)
-                .document(topicId)
-                .update(setLastQuestion);
-
     }
 
     void enableClick() {
@@ -178,6 +227,8 @@ public class QuizActivity extends AppCompatActivity {
             case R.id.option_2:
             case R.id.option_3:
             case R.id.option_4:
+                if (timer != null)
+                    timer.cancel();
                 disableClick();
                 TextView selected = (TextView) view;
                 checkAnswer(selected);
@@ -200,11 +251,16 @@ public class QuizActivity extends AppCompatActivity {
 
                 break;
             case R.id.quitBtn:
+                timer.cancel();
                 Intent intent2 = new Intent(QuizActivity.this, TopicsActivity.class);
                 intent2.putExtra("catId", catId);
                 startActivity(intent2);
                 break;
         }
+    }
+    @Override
+    public void onBackPressed() {
+        timer.cancel();
     }
 }
 

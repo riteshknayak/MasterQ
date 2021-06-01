@@ -1,6 +1,8 @@
 package com.riteshknayak.masterq;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -31,7 +33,12 @@ public class SignupActivity extends AppCompatActivity {
         database = FirebaseFirestore.getInstance();
 
         //TODO app crashing when  clicking the signup button when edittext is empty. use try-catch to solve the error
-        if(auth.getCurrentUser() != null) {
+        if (auth.getCurrentUser() != null) {
+            String uid = auth.getCurrentUser().getUid();
+            SharedPreferences shared = getSharedPreferences("app", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = shared.edit();
+            editor.putString("UId", uid);
+            editor.apply();
             startActivity(new Intent(SignupActivity.this, MainActivity.class));
             finish();
         }
@@ -40,40 +47,43 @@ public class SignupActivity extends AppCompatActivity {
         binding.signupBtn.setOnClickListener(v -> {
             String email, pass, name;
 
-            if(binding.emailBtn.getText() == null || binding.passwordBox.getText() ==null || binding.nameBox.getText() == null) {
+            if (binding.emailBtn.getText() == null || binding.passwordBox.getText() == null || binding.nameBox.getText() == null) {
                 Toast.makeText(SignupActivity.this, "Please provide the required data", Toast.LENGTH_SHORT).show();
-            }else{
+            } else {
 
-                Toast.makeText(SignupActivity.this,binding.emailBtn.getText().toString() , Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(SignupActivity.this, binding.emailBtn.getText().toString(), Toast.LENGTH_SHORT).show();
 
                 email = binding.emailBtn.getText().toString();
                 pass = binding.passwordBox.getText().toString();
                 name = binding.nameBox.getText().toString();
-
 
                 final User user = new User(name, email, pass);
 //                user.seDefault();
 
                 auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(task -> {
 
-
                     if (task.isSuccessful()) {
                         Toast.makeText(SignupActivity.this, "Success", Toast.LENGTH_SHORT).show();
 
                         String uid = Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getUid();
+
+                        SharedPreferences shared = getSharedPreferences("app", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = shared.edit();
+                        editor.putString("UId", uid);
+                        editor.apply();
+
                         user.setUid(uid);
                         database
                                 .collection("users")
                                 .document(uid)
                                 .set(user).addOnCompleteListener(task1 -> {
-                                    if(task1.isSuccessful()) {
-                                        startActivity(new Intent(SignupActivity.this, MainActivity.class));
-                                        finish();
-                                    } else {
-                                        Toast.makeText( SignupActivity.this, Objects.requireNonNull(task1.getException()).getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+                            if (task1.isSuccessful()) {
+                                startActivity(new Intent(SignupActivity.this, MainActivity.class));
+                                finish();
+                            } else {
+                                Toast.makeText(SignupActivity.this, Objects.requireNonNull(task1.getException()).getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
 
                     } else {
                         Toast.makeText(SignupActivity.this, Objects.requireNonNull(task.getException()).getLocalizedMessage(), Toast.LENGTH_SHORT).show();

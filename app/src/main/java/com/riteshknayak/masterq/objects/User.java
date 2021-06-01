@@ -6,6 +6,7 @@ public class User {
     FirebaseFirestore db;
 
     private String name, email, pass, uid;
+    private Integer score;
 //    private ArrayList<String> unlockedCategories = new ArrayList<>();
     //completedTopics, startedCategories
 //    public  void  seDefault(){
@@ -57,4 +58,11 @@ public class User {
         this.uid = uid;
     }
 
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
 }
