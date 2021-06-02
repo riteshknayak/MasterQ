@@ -12,14 +12,16 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.riteshknayak.masterq.adapters.CategoryAdapter;
-import com.riteshknayak.masterq.objects.Category;
 import com.riteshknayak.masterq.databinding.FragmentHomeBinding;
+import com.riteshknayak.masterq.objects.Category;
 
 import java.util.ArrayList;
 
 
 public class HomeFragment extends Fragment {
-
+    public FragmentHomeBinding getBinding() {
+        return binding;
+    }
 
     public HomeFragment() {
         // Required empty public constructor for Firebase
