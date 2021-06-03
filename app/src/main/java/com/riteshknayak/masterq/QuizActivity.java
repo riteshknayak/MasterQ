@@ -37,7 +37,7 @@ public class QuizActivity extends AppCompatActivity {
     String catId;
     String topicId;
     String UId;
-    Integer score;
+    Integer mScore;
     CollectionReference topicReference; //TODO use this to shorten code
     DocumentReference userTopicReference; //TODO use this to shorten code
 
@@ -115,15 +115,26 @@ public class QuizActivity extends AppCompatActivity {
                 .document(UId)
                 .get().addOnSuccessListener(documentSnapshot -> {
             if (documentSnapshot.get("score") == null) {
-                score = 0;
+                mScore = 0;
             } else {
-                score = (int) (long) documentSnapshot.get("score");
+                mScore = (int) (long) documentSnapshot.get("score");
             }
         });
     }
 
     //TODO collect data about highest last Question reached by a player as if it reaches end of a topic you have to add new questions fast
 
+    void setScore(){
+        database.collection("users")
+                .document(UId)
+                .get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.get("score") == null) {
+                mScore = 0;
+            } else {
+                mScore = (int) (long) documentSnapshot.get("score");
+            }
+        });
+    }
     void resetTimer() {
         timer = new CountDownTimer(21000, 1000) {
             @Override
@@ -181,10 +192,9 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     void checkAnswer(TextView textView) {
+        setScore();
         auth = FirebaseAuth.getInstance();
-
         String selectedAnswer = textView.getText().toString();
-
         textView.setBackground(ContextCompat.getDrawable(this, R.drawable.option_selected));
 
         Map<String, Object> rightAnswer = new HashMap<>();
@@ -192,30 +202,28 @@ public class QuizActivity extends AppCompatActivity {
         Map<String, Object> wrongAnswer = new HashMap<>();
         wrongAnswer.put(question.getUId(), false);
         Map<String, Object> setLastQuestion = new HashMap<>();
-        wrongAnswer.put("LastQuestion", question.getIndex());
-        Map<String, Object> setScore = new HashMap<>();
-        wrongAnswer.put("score", score + 10);
+        setLastQuestion.put("LastQuestion", question.getIndex());
 
         if (selectedAnswer.equals(question.getAnswer())) {
             userTopicReference
                     .update(rightAnswer);
 
-           userTopicReference
-                    .update(setLastQuestion);
+            Map<String, Object> score = new HashMap<>();
+            score.put("score", mScore + 10);
 
             database.collection("users")
                     .document(UId)
-                    .update(setScore); //TODO not working
+                    .update(score);
+            setScore();
 
         } else {
             userTopicReference
                     .update(wrongAnswer);
-
-           userTopicReference
-                    .update(setLastQuestion);
         }
+        userTopicReference
+                .update(setLastQuestion);
     }
-
+    //TODO external topic score
     void enableClick() {
         binding.option1.setClickable(true);
         binding.option2.setClickable(true);
