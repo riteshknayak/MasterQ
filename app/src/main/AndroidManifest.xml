@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.riteshknayak.masterq">
+    package="com.riteshknayak.masterq"
+    android:versionCode="33"
+    android:versionName="0.1">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,8 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MasterQ"
         tools:ignore="AllowBackup">
-        <activity android:name=".TopicActivity"></activity>
-        <activity android:name=".TopicsActivity" />
+        <activity android:name=".TopicActivity" />
+        <activity android:name=".TopicsActivity"/>
         <activity android:name=".MainActivity" />
         <activity android:name=".SignupActivity">
             <intent-filter>

@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -36,6 +38,8 @@ public class QuizActivity extends AppCompatActivity {
     String topicId;
     String UId;
     Integer score;
+    CollectionReference topicReference; //TODO use this to shorten code
+    DocumentReference userTopicReference; //TODO use this to shorten code
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,10 @@ public class QuizActivity extends AppCompatActivity {
         catId = getShared.getString("catId", null);
         topicId = getShared.getString("topicId", null);
 
+        topicReference = database.collection("categories")
+                .document(catId)
+                .collection(topicId);
+
         auth = FirebaseAuth.getInstance();
         UId = auth.getCurrentUser().getUid();
 
@@ -57,18 +65,27 @@ public class QuizActivity extends AppCompatActivity {
                 .collection(catId)
                 .document(topicId)
                 .get().addOnSuccessListener(documentSnapshot -> {
-            int lastQuestion;
+            final int[] lastQuestion = new int[1];
             if (documentSnapshot.get("LastQuestion") == null) {
-                lastQuestion = 0;
+                lastQuestion[0] = 0;
             } else {
-                lastQuestion = (int) (long) documentSnapshot.get("LastQuestion");
+                lastQuestion[0] = (int) (long) documentSnapshot.get("LastQuestion");
+
+                database.collection("categories")
+                        .document(catId)
+                        .collection(topicId)
+                        .get().addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (lastQuestion[0] == queryDocumentSnapshots.size()) {
+                        lastQuestion[0] = 0;
+                    }
+                });
             }
 
             database.collection("categories")
                     .document(catId)
                     .collection(topicId)
                     .orderBy("index", Query.Direction.ASCENDING)
-                    .whereGreaterThan("index", lastQuestion)
+                    .whereGreaterThan("index", lastQuestion[0])
                     .limit(15)
                     .get().addOnSuccessListener(queryDocumentSnapshots -> {
                 for (DocumentSnapshot snapshot : queryDocumentSnapshots) {
@@ -76,7 +93,22 @@ public class QuizActivity extends AppCompatActivity {
                     question.setUId(snapshot.getId());
                     questions.add(question);
                 }
-                setNextQuestion();
+                if (queryDocumentSnapshots.size() < 15) {
+
+                    topicReference.orderBy("index", Query.Direction.ASCENDING)
+                            .whereGreaterThan("index", 0)
+                            .limit(15 - queryDocumentSnapshots.size())
+                            .get().addOnSuccessListener(queryDocumentSnapshots1 -> {
+                        for (DocumentSnapshot snapshot : queryDocumentSnapshots1) {
+                            Question question = snapshot.toObject(Question.class);
+                            question.setUId(snapshot.getId());
+                            questions.add(question);
+                        }
+                        setNextQuestion();
+                    });
+                } else {
+                    setNextQuestion();
+                }
             });
         });
 
@@ -89,8 +121,9 @@ public class QuizActivity extends AppCompatActivity {
                 score = (int) (long) documentSnapshot.get("score");
             }
         });
-
     }
+
+    //TODO collect data about highest last Question reached by a player as if it reaches end of a topic you have to add new questions fast
 
     void resetTimer() {
         timer = new CountDownTimer(21000, 1000) {
@@ -165,7 +198,7 @@ public class QuizActivity extends AppCompatActivity {
         Map<String, Object> setLastQuestion = new HashMap<>();
         wrongAnswer.put("LastQuestion", question.getIndex());
         Map<String, Object> setScore = new HashMap<>();
-        wrongAnswer.put("score", score+10);
+        wrongAnswer.put("score", score + 10);
 
         if (selectedAnswer.equals(question.getAnswer())) {
             database.collection("users")
@@ -258,6 +291,7 @@ public class QuizActivity extends AppCompatActivity {
                 break;
         }
     }
+
     @Override
     public void onBackPressed() {
         timer.cancel();
