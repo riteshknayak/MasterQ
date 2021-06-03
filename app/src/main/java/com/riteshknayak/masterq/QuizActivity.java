@@ -53,17 +53,19 @@ public class QuizActivity extends AppCompatActivity {
         catId = getShared.getString("catId", null);
         topicId = getShared.getString("topicId", null);
 
+        auth = FirebaseAuth.getInstance();
+        UId = auth.getCurrentUser().getUid();
+
         topicReference = database.collection("categories")
                 .document(catId)
                 .collection(topicId);
 
-        auth = FirebaseAuth.getInstance();
-        UId = auth.getCurrentUser().getUid();
-
-        database.collection("users")
+        userTopicReference = database.collection("users")
                 .document(UId)
                 .collection(catId)
-                .document(topicId)
+                .document(topicId);
+
+        userTopicReference
                 .get().addOnSuccessListener(documentSnapshot -> {
             final int[] lastQuestion = new int[1];
             if (documentSnapshot.get("LastQuestion") == null) {
@@ -71,9 +73,7 @@ public class QuizActivity extends AppCompatActivity {
             } else {
                 lastQuestion[0] = (int) (long) documentSnapshot.get("LastQuestion");
 
-                database.collection("categories")
-                        .document(catId)
-                        .collection(topicId)
+                topicReference
                         .get().addOnSuccessListener(queryDocumentSnapshots -> {
                     if (lastQuestion[0] == queryDocumentSnapshots.size()) {
                         lastQuestion[0] = 0;
@@ -81,9 +81,7 @@ public class QuizActivity extends AppCompatActivity {
                 });
             }
 
-            database.collection("categories")
-                    .document(catId)
-                    .collection(topicId)
+            topicReference
                     .orderBy("index", Query.Direction.ASCENDING)
                     .whereGreaterThan("index", lastQuestion[0])
                     .limit(15)
@@ -95,7 +93,8 @@ public class QuizActivity extends AppCompatActivity {
                 }
                 if (queryDocumentSnapshots.size() < 15) {
 
-                    topicReference.orderBy("index", Query.Direction.ASCENDING)
+                    topicReference
+                            .orderBy("index", Query.Direction.ASCENDING)
                             .whereGreaterThan("index", 0)
                             .limit(15 - queryDocumentSnapshots.size())
                             .get().addOnSuccessListener(queryDocumentSnapshots1 -> {
@@ -139,10 +138,7 @@ public class QuizActivity extends AppCompatActivity {
                 Map<String, Object> wrongAnswer = new HashMap<>();
                 wrongAnswer.put(question.getUId(), false);
 
-                database.collection("users")
-                        .document(UId)
-                        .collection(catId)
-                        .document(topicId)
+                userTopicReference
                         .update(wrongAnswer); //TODO not working
 
                 Toast.makeText(QuizActivity.this, "Time up", Toast.LENGTH_SHORT).show();
@@ -201,16 +197,10 @@ public class QuizActivity extends AppCompatActivity {
         wrongAnswer.put("score", score + 10);
 
         if (selectedAnswer.equals(question.getAnswer())) {
-            database.collection("users")
-                    .document(UId)
-                    .collection(catId)
-                    .document(topicId)
+            userTopicReference
                     .update(rightAnswer);
 
-            database.collection("users")
-                    .document(UId)
-                    .collection(catId)
-                    .document(topicId)
+           userTopicReference
                     .update(setLastQuestion);
 
             database.collection("users")
@@ -218,16 +208,10 @@ public class QuizActivity extends AppCompatActivity {
                     .update(setScore); //TODO not working
 
         } else {
-            database.collection("users")
-                    .document(UId)
-                    .collection(catId)
-                    .document(topicId)
+            userTopicReference
                     .update(wrongAnswer);
 
-            database.collection("users")
-                    .document(UId)
-                    .collection(catId)
-                    .document(topicId)
+           userTopicReference
                     .update(setLastQuestion);
         }
     }
