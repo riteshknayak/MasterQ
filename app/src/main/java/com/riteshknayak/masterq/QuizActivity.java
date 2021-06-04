@@ -271,6 +271,7 @@ public class QuizActivity extends AppCompatActivity {
         userTopicReference.update(setLastQuestion);
 
         selectedTextView = null;
+        selectedTextView = null;
 
 //        if (question.getIndex() > highestTopicQuestion){
 //            database.collection("categories")
