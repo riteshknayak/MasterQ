@@ -20,6 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.riteshknayak.masterq.databinding.ActivityQuizBinding;
 import com.riteshknayak.masterq.objects.Question;
+import com.riteshknayak.masterq.objects.Result;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,7 +29,8 @@ import java.util.Map;
 public class QuizActivity extends AppCompatActivity {
 
     ActivityQuizBinding binding;
-    ArrayList<Question> questions;
+    ArrayList<Question> questions = new ArrayList<>();
+    ArrayList<Result> Results = new ArrayList<>();
     int index = 0;
     FirebaseFirestore database;
     FirebaseAuth auth;
@@ -38,8 +40,13 @@ public class QuizActivity extends AppCompatActivity {
     String topicId;
     String UId;
     Integer mScore;
-    CollectionReference topicReference; //TODO use this to shorten code
-    DocumentReference userTopicReference; //TODO use this to shorten code
+    CollectionReference topicReference;
+    DocumentReference userTopicReference;
+    int highestTopicQuestion; //TODO remove this in your modified app for developer
+    TextView selectedTextView;
+
+
+    //TODO ADD COMMENTS SHOW THAT OTHER DEVELOPERS CAN READ
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +63,9 @@ public class QuizActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         UId = auth.getCurrentUser().getUid();
 
+        setScore();
+        setHighestTopicQuestion();
+
         topicReference = database.collection("categories")
                 .document(catId)
                 .collection(topicId);
@@ -65,16 +75,14 @@ public class QuizActivity extends AppCompatActivity {
                 .collection(catId)
                 .document(topicId);
 
-        userTopicReference
-                .get().addOnSuccessListener(documentSnapshot -> {
+        userTopicReference.get().addOnSuccessListener(documentSnapshot -> {
             final int[] lastQuestion = new int[1];
             if (documentSnapshot.get("LastQuestion") == null) {
                 lastQuestion[0] = 0;
             } else {
                 lastQuestion[0] = (int) (long) documentSnapshot.get("LastQuestion");
 
-                topicReference
-                        .get().addOnSuccessListener(queryDocumentSnapshots -> {
+                topicReference.get().addOnSuccessListener(queryDocumentSnapshots -> {
                     if (lastQuestion[0] == queryDocumentSnapshots.size()) {
                         lastQuestion[0] = 0;
                     }
@@ -84,19 +92,19 @@ public class QuizActivity extends AppCompatActivity {
             topicReference
                     .orderBy("index", Query.Direction.ASCENDING)
                     .whereGreaterThan("index", lastQuestion[0])
-                    .limit(15)
+                    .limit(10)
                     .get().addOnSuccessListener(queryDocumentSnapshots -> {
                 for (DocumentSnapshot snapshot : queryDocumentSnapshots) {
                     Question question = snapshot.toObject(Question.class);
                     question.setUId(snapshot.getId());
                     questions.add(question);
                 }
-                if (queryDocumentSnapshots.size() < 15) {
+                if (queryDocumentSnapshots.size() < 10) {
 
                     topicReference
                             .orderBy("index", Query.Direction.ASCENDING)
                             .whereGreaterThan("index", 0)
-                            .limit(15 - queryDocumentSnapshots.size())
+                            .limit(10 - queryDocumentSnapshots.size())
                             .get().addOnSuccessListener(queryDocumentSnapshots1 -> {
                         for (DocumentSnapshot snapshot : queryDocumentSnapshots1) {
                             Question question = snapshot.toObject(Question.class);
@@ -111,6 +119,36 @@ public class QuizActivity extends AppCompatActivity {
             });
         });
 
+        binding.NextBtn.setOnClickListener(v -> {
+            if (timer != null)
+                timer.cancel();
+            if (selectedTextView != null) {
+                checkAnswer(selectedTextView);
+            }else{
+                Results.add(new Result(question.getQuestion(),index+1,false,question.getUId()));
+            }
+            index++;
+            setNextQuestion();
+        });
+    }
+
+    void setHighestTopicQuestion() {
+        database.collection("categories")
+                .document(catId)
+                .collection("Topics")
+                .document(topicId)
+                .get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.get(topicId.concat("HighestIndex")) != null) {
+                highestTopicQuestion = (int) (long) documentSnapshot.get(topicId.concat("HighestIndex"));
+            } else {
+                highestTopicQuestion = 0;
+            }
+        });
+        //TODO collect data about highest last Question reached by a player as if it reaches end of a topic you have to add new questions fast
+    }
+
+
+    void setScore() {
         database.collection("users")
                 .document(UId)
                 .get().addOnSuccessListener(documentSnapshot -> {
@@ -122,19 +160,6 @@ public class QuizActivity extends AppCompatActivity {
         });
     }
 
-    //TODO collect data about highest last Question reached by a player as if it reaches end of a topic you have to add new questions fast
-
-    void setScore(){
-        database.collection("users")
-                .document(UId)
-                .get().addOnSuccessListener(documentSnapshot -> {
-            if (documentSnapshot.get("score") == null) {
-                mScore = 0;
-            } else {
-                mScore = (int) (long) documentSnapshot.get("score");
-            }
-        });
-    }
     void resetTimer() {
         timer = new CountDownTimer(21000, 1000) {
             @Override
@@ -148,9 +173,7 @@ public class QuizActivity extends AppCompatActivity {
 
                 Map<String, Object> wrongAnswer = new HashMap<>();
                 wrongAnswer.put(question.getUId(), false);
-
-                userTopicReference
-                        .update(wrongAnswer); //TODO not working
+                userTopicReference.update(wrongAnswer);
 
                 Toast.makeText(QuizActivity.this, "Time up", Toast.LENGTH_SHORT).show();
 
@@ -159,12 +182,9 @@ public class QuizActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 runOnUiThread(() -> {
-                                    if (index + 1 < questions.size()) {
-                                        index++;
-                                        setNextQuestion();
-                                    } else {
-                                        Toast.makeText(QuizActivity.this, "Quiz Finished...", Toast.LENGTH_SHORT).show();
-                                    }
+                                    Results.add(new Result(question.getQuestion(), index + 1, false,question.getUId()));
+                                    index++;
+                                    setNextQuestion();
                                 });
                             }
                         },
@@ -175,8 +195,11 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     public void setNextQuestion() {
-        reset();
+        if (timer != null){
+            timer.cancel();
+        }
         if (index < questions.size()) {
+            resetBackground();
             binding.questionCounter.setText(String.format("%d/%d", (index + 1), questions.size()));
             question = questions.get(index);
             binding.question.setText(question.getQuestion());
@@ -184,18 +207,40 @@ public class QuizActivity extends AppCompatActivity {
             binding.option2.setText(question.getOption2());
             binding.option3.setText(question.getOption3());
             binding.option4.setText(question.getOption4());
+            enableClick();
+            resetTimer();
+            setContentView(binding.getRoot());
+            timer.start();
+            if (index + 1 >= questions.size()) {
+                binding.NextBtn.setText("See Result");
+                binding.NextBtn.setOnClickListener(v -> {
+                    if (selectedTextView != null) {
+                        checkAnswer(selectedTextView);
+                    }else {
+                        Results.add(new Result(question.getQuestion(), index + 1, false,question.getUId()));
+                    }
+                    if (timer != null){
+                        timer.cancel();
+                    }
+                    Intent intent = new Intent(QuizActivity.this, ResultActivity.class);
+                    intent.putExtra("Results",Results);
+                    startActivity(intent);
+                });
+            }
+        }else{
+            if (timer != null){
+                timer.cancel();
+            }
+            Intent intent = new Intent(QuizActivity.this, ResultActivity.class);
+            intent.putExtra("Results",Results);
+            startActivity(intent);
         }
-        enableClick();
-        resetTimer();
-        setContentView(binding.getRoot());
-        timer.start();
     }
 
     void checkAnswer(TextView textView) {
         setScore();
         auth = FirebaseAuth.getInstance();
         String selectedAnswer = textView.getText().toString();
-        textView.setBackground(ContextCompat.getDrawable(this, R.drawable.option_selected));
 
         Map<String, Object> rightAnswer = new HashMap<>();
         rightAnswer.put(question.getUId(), true);
@@ -205,8 +250,7 @@ public class QuizActivity extends AppCompatActivity {
         setLastQuestion.put("LastQuestion", question.getIndex());
 
         if (selectedAnswer.equals(question.getAnswer())) {
-            userTopicReference
-                    .update(rightAnswer);
+            userTopicReference.update(rightAnswer);
 
             Map<String, Object> score = new HashMap<>();
             score.put("score", mScore + 10);
@@ -216,14 +260,53 @@ public class QuizActivity extends AppCompatActivity {
                     .update(score);
             setScore();
 
+            Results.add(new Result(question.getQuestion(), index+1,true,question.getUId()));
+
         } else {
-            userTopicReference
-                    .update(wrongAnswer);
+            userTopicReference.update(wrongAnswer);
+
+            Results.add(new Result(question.getQuestion(),index+1,false,question.getUId()));
         }
-        userTopicReference
-                .update(setLastQuestion);
+
+        userTopicReference.update(setLastQuestion);
+
+        selectedTextView = null;
+
+//        if (question.getIndex() > highestTopicQuestion){
+//            database.collection("categories")
+//                    .document(catId)
+//                    .collection("Topics")
+//                    .document(topicId)
+//                    .get().addOnSuccessListener(documentSnapshot -> {
+//                if (documentSnapshot.get(topicId.concat("HighestIndex")) != null) {
+//                    highestTopicQuestion = (int) (long) documentSnapshot.get(topicId.concat("HighestIndex"));
+//                } else {
+//                    highestTopicQuestion = 0;
+//                }
+//                Map<String, Object> highestIndex = new HashMap<>();
+//                highestIndex.put(topicId.concat("HighestIndex"), question.getIndex());
+//
+//                database.collection("categories")
+//                        .document(catId)
+//                        .collection("Topics")
+//                        .document(topicId)
+//                        .update(highestIndex);
+//            });
+//        }
+//        setHighestTopicQuestion();
+//        if (question.getIndex() > highestTopicQuestion) {
+//            Map<String, Object> data = new HashMap<>();
+//            data.put(topicId.concat("HighestIndex"), question.getIndex());
+//
+//            database.collection("MasterQ")
+//                    .document("Statistics")
+//                    .collection("categories")
+//                    .document(topicId)
+//                    .update(data);
+//        }
     }
-    //TODO external topic score
+
+    //TODO *topic score. add this in future update as you don't have enough user
     void enableClick() {
         binding.option1.setClickable(true);
         binding.option2.setClickable(true);
@@ -238,13 +321,20 @@ public class QuizActivity extends AppCompatActivity {
         binding.option4.setClickable(false);
     }
 
-    void reset() {
+    void resetBackground() {
         binding.option1.setBackground(ContextCompat.getDrawable(this, R.drawable.option_unselected));
         binding.option2.setBackground(ContextCompat.getDrawable(this, R.drawable.option_unselected));
         binding.option3.setBackground(ContextCompat.getDrawable(this, R.drawable.option_unselected));
         binding.option4.setBackground(ContextCompat.getDrawable(this, R.drawable.option_unselected));
     }
 
+    void setSelectedBackground(TextView selectedTextView) {
+        resetBackground();
+        selectedTextView.setBackground(ContextCompat.getDrawable(this, R.drawable.option_selected));
+        this.selectedTextView = selectedTextView;
+    }
+
+    //TODO use OnclickListener Instead of switch statement
     @SuppressLint("NonConstantResourceId")
     public void onClick(View view) {
         switch (view.getId()) {
@@ -252,42 +342,41 @@ public class QuizActivity extends AppCompatActivity {
             case R.id.option_2:
             case R.id.option_3:
             case R.id.option_4:
-                if (timer != null)
-                    timer.cancel();
-                disableClick();
                 TextView selected = (TextView) view;
-                checkAnswer(selected);
-                new java.util.Timer().schedule(
-                        new java.util.TimerTask() {
-                            @Override
-                            public void run() {
-                                runOnUiThread(() -> {
-                                    if (index + 1 < questions.size()) {
-                                        index++;
-                                        setNextQuestion();
-                                    } else {
-                                        Toast.makeText(QuizActivity.this, "Quiz Finished...", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
-                        },
-                        700
-                );
-
+                setSelectedBackground(selected);
                 break;
             case R.id.quitBtn:
                 timer.cancel();
-                Intent intent2 = new Intent(QuizActivity.this, TopicsActivity.class);
-                intent2.putExtra("catId", catId);
-                startActivity(intent2);
+                Intent intent = new Intent(QuizActivity.this, TopicsActivity.class);
+                intent.putExtra("catId", catId);
+                startActivity(intent);
                 break;
         }
     }
 
+
     @Override
     public void onBackPressed() {
         timer.cancel();
+        //TODO update this show that it will show a dialog for conformation exit
     }
+
+    //TODO "*" Means require High number of users
+    //TODO specify back button for every other activity
+    //TODO show dialog to the user if there is and update in app
+
+    //TODO *add a feature show that any one can contribute question to the topic which will be verified before adding into MasterQ
+    //TODO *add a shout section showing users with highest score in this week, day, ,month, year, all time
+
+
+    //TODO Reward free topics to users who shares the app with whatsapp-3 Topics, Facebook- 10 Topics, Twitter- 5 topics. Verify weather the user is really shareing or not
+
+    //TODO *Make its on social media profiles like Twitter, Facebook, Instagram.  shutout in social media to highest contributing users of each month
+    //TODO *Make this app monthly subscription based
+    //TODO add share button in your app
+    //TODO use multithreading to make your app fast check the app performance in profiler
+    //TODO *affiliate marketing in android app
+    //TODO add splash screen
 }
 
 

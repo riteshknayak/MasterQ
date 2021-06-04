@@ -18,10 +18,10 @@
         android:text="20"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:drawableLeftCompat="@drawable/ic_timer"
-        app:drawableTint="@color/black" />
+        app:drawableTint="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/questionCounter"
@@ -63,7 +63,7 @@
         android:background="@drawable/option_unselected"
         android:onClick="onClick"
         android:padding="15dp"
-        android:text="TextView"
+        android:text="Option1"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -78,7 +78,7 @@
         android:background="@drawable/option_unselected"
         android:onClick="onClick"
         android:padding="15dp"
-        android:text="TextView"
+        android:text="option2"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/option_1"
         app:layout_constraintStart_toStartOf="@+id/option_1"
@@ -92,8 +92,8 @@
         android:background="@drawable/option_unselected"
         android:onClick="onClick"
         android:padding="15dp"
+        android:text="option3"
         android:textColor="@color/black"
-        android:text="TextView"
         app:layout_constraintEnd_toEndOf="@+id/option_2"
         app:layout_constraintStart_toStartOf="@+id/option_2"
         app:layout_constraintTop_toBottomOf="@+id/option_2" />
@@ -102,28 +102,44 @@
         android:id="@+id/option_4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
         android:layout_marginTop="10dp"
         android:background="@drawable/option_unselected"
         android:onClick="onClick"
         android:padding="15dp"
-        android:text="TextView"
+        android:text="option4"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/option_3"
         app:layout_constraintStart_toStartOf="@+id/option_3"
         app:layout_constraintTop_toBottomOf="@+id/option_3" />
 
     <Button
         android:id="@+id/quitBtn"
-        android:layout_width="0dp"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="72dp"
         android:background="@drawable/button_1"
         android:onClick="onClick"
         android:text="Quit"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.89"
         app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/option_4" />
+
+    <Button
+        android:id="@+id/NextBtn"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/button_1"
+        android:fontFamily="@font/nunito_bold"
+        android:text="Next Button"
+        android:textColor="@color/color_white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.11"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/option_4" />
 </androidx.constraintlayout.widget.ConstraintLayout>

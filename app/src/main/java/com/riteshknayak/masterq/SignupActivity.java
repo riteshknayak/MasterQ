@@ -36,7 +36,7 @@ public class SignupActivity extends AppCompatActivity {
         FirebaseAppCheck firebaseAppCheck = FirebaseAppCheck.getInstance();
         firebaseAppCheck.installAppCheckProviderFactory(SafetyNetAppCheckProviderFactory.getInstance());
 
-
+        //TODO add signup with google
         auth = FirebaseAuth.getInstance();
         database = FirebaseFirestore.getInstance();
 

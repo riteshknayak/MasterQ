@@ -10,14 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.riteshknayak.masterq.adapters.TopicsAdapter;
-import com.riteshknayak.masterq.databinding.ActivityTopicBinding;
 import com.riteshknayak.masterq.objects.Topic;
 
 import java.util.ArrayList;
 
 public class TopicsActivity extends AppCompatActivity {
 
-    ActivityTopicBinding binding;
     RecyclerView recyclerView;
     FirebaseFirestore database = FirebaseFirestore.getInstance();
 

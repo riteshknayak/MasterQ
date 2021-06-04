@@ -49,8 +49,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                 .load(model.getCategoryImage())
                 .into(holder.imageView);
 
-
-        //TODO  below onClickListener for opening quizActivity
         holder.itemView.setOnClickListener(v -> {
 
             Intent intent = new Intent(context, TopicsActivity.class);

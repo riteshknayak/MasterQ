@@ -14,8 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MasterQ"
         tools:ignore="AllowBackup">
+        <activity android:name=".ResultActivity"></activity>
         <activity android:name=".TopicActivity" />
-        <activity android:name=".TopicsActivity"/>
+        <activity android:name=".TopicsActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".SignupActivity">
             <intent-filter>
