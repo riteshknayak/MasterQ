@@ -5,12 +5,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class User {
     FirebaseFirestore db;
 
-    private String name, email, pass, uid;
+    private String name, email, pass, uid, publicNAme,imageUrl;
     private Integer score;
 //    private ArrayList<String> unlockedCategories = new ArrayList<>();
     //completedTopics, startedCategories
 //    public  void  seDefault(){
-//        //TODO add function for default categories
+//        //TODO add function for free categories
 //        unlockedCategories.add("CmYfZdAGsDpA2Vupktb4");
 //        unlockedCategories.add("gzkAZfEGotIKDQxcXSFV");
 //        unlockedCategories.add("gzkAZfEGotIKDQxcXSFV");

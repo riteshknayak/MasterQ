@@ -49,9 +49,10 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:28.0.1')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-auth'
-    implementation 'com.google.firebase:firebase-firestore'
+    implementation 'com.google.firebase:firebase-firestore' //TODO set rules in firebase
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-perf'
+    implementation 'com.google.firebase:firebase-storage' // TODO Firebasestorage rules is changed.set rules before production
 
     implementation 'com.royrodriguez:transitionbutton:0.2.0'
     // TODO use these 👆 libraries to add animation for button
@@ -66,4 +67,5 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
     implementation 'com.google.firebase:firebase-appcheck-safetynet:16.0.0-beta01'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 }

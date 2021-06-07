@@ -6,6 +6,7 @@
     android:versionName="0.1">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:required="false"/>
 
     <application
         android:icon="@mipmap/ic_launcher"
@@ -14,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MasterQ"
         tools:ignore="AllowBackup">
-        <activity android:name=".ResultActivity"></activity>
+        <activity android:name=".ResultActivity"/>
         <activity android:name=".TopicActivity" />
         <activity android:name=".TopicsActivity" />
         <activity android:name=".MainActivity" />

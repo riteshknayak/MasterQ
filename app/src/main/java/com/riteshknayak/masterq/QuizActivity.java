@@ -64,7 +64,6 @@ public class QuizActivity extends AppCompatActivity {
         UId = auth.getCurrentUser().getUid();
 
         setScore();
-        setHighestTopicQuestion();
 
         topicReference = database.collection("categories")
                 .document(catId)
@@ -124,29 +123,13 @@ public class QuizActivity extends AppCompatActivity {
                 timer.cancel();
             if (selectedTextView != null) {
                 checkAnswer(selectedTextView);
-            }else{
-                Results.add(new Result(question.getQuestion(),index+1,false,question.getUId()));
+            } else {
+                Results.add(new Result(question.getQuestion(), index + 1, false, question.getUId()));
             }
             index++;
             setNextQuestion();
         });
     }
-
-    void setHighestTopicQuestion() {
-        database.collection("categories")
-                .document(catId)
-                .collection("Topics")
-                .document(topicId)
-                .get().addOnSuccessListener(documentSnapshot -> {
-            if (documentSnapshot.get(topicId.concat("HighestIndex")) != null) {
-                highestTopicQuestion = (int) (long) documentSnapshot.get(topicId.concat("HighestIndex"));
-            } else {
-                highestTopicQuestion = 0;
-            }
-        });
-        //TODO collect data about highest last Question reached by a player as if it reaches end of a topic you have to add new questions fast
-    }
-
 
     void setScore() {
         database.collection("users")
@@ -182,7 +165,7 @@ public class QuizActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 runOnUiThread(() -> {
-                                    Results.add(new Result(question.getQuestion(), index + 1, false,question.getUId()));
+                                    Results.add(new Result(question.getQuestion(), index + 1, false, question.getUId()));
                                     index++;
                                     setNextQuestion();
                                 });
@@ -195,7 +178,7 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     public void setNextQuestion() {
-        if (timer != null){
+        if (timer != null) {
             timer.cancel();
         }
         if (index < questions.size()) {
@@ -216,23 +199,23 @@ public class QuizActivity extends AppCompatActivity {
                 binding.NextBtn.setOnClickListener(v -> {
                     if (selectedTextView != null) {
                         checkAnswer(selectedTextView);
-                    }else {
-                        Results.add(new Result(question.getQuestion(), index + 1, false,question.getUId()));
+                    } else {
+                        Results.add(new Result(question.getQuestion(), index + 1, false, question.getUId()));
                     }
-                    if (timer != null){
+                    if (timer != null) {
                         timer.cancel();
                     }
                     Intent intent = new Intent(QuizActivity.this, ResultActivity.class);
-                    intent.putExtra("Results",Results);
+                    intent.putExtra("Results", Results);
                     startActivity(intent);
                 });
             }
-        }else{
-            if (timer != null){
+        } else {
+            if (timer != null) {
                 timer.cancel();
             }
             Intent intent = new Intent(QuizActivity.this, ResultActivity.class);
-            intent.putExtra("Results",Results);
+            intent.putExtra("Results", Results);
             startActivity(intent);
         }
     }
@@ -260,51 +243,46 @@ public class QuizActivity extends AppCompatActivity {
                     .update(score);
             setScore();
 
-            Results.add(new Result(question.getQuestion(), index+1,true,question.getUId()));
+            Results.add(new Result(question.getQuestion(), index + 1, true, question.getUId()));
 
         } else {
             userTopicReference.update(wrongAnswer);
 
-            Results.add(new Result(question.getQuestion(),index+1,false,question.getUId()));
+            Results.add(new Result(question.getQuestion(), index + 1, false, question.getUId()));
         }
 
         userTopicReference.update(setLastQuestion);
 
         selectedTextView = null;
-        selectedTextView = null;
 
-//        if (question.getIndex() > highestTopicQuestion){
-//            database.collection("categories")
-//                    .document(catId)
-//                    .collection("Topics")
-//                    .document(topicId)
-//                    .get().addOnSuccessListener(documentSnapshot -> {
-//                if (documentSnapshot.get(topicId.concat("HighestIndex")) != null) {
-//                    highestTopicQuestion = (int) (long) documentSnapshot.get(topicId.concat("HighestIndex"));
-//                } else {
-//                    highestTopicQuestion = 0;
-//                }
-//                Map<String, Object> highestIndex = new HashMap<>();
-//                highestIndex.put(topicId.concat("HighestIndex"), question.getIndex());
-//
-//                database.collection("categories")
-//                        .document(catId)
-//                        .collection("Topics")
-//                        .document(topicId)
-//                        .update(highestIndex);
-//            });
-//        }
-//        setHighestTopicQuestion();
-//        if (question.getIndex() > highestTopicQuestion) {
-//            Map<String, Object> data = new HashMap<>();
-//            data.put(topicId.concat("HighestIndex"), question.getIndex());
-//
-//            database.collection("MasterQ")
-//                    .document("Statistics")
-//                    .collection("categories")
-//                    .document(topicId)
-//                    .update(data);
-//        }
+        database.collection("categories")
+                .document(catId)
+                .collection("Topics")
+                .document(topicId)
+                .get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.get(topicId.concat("HighestIndex")) != null) {
+                Long h = (long)documentSnapshot.get(topicId.concat("HighestIndex"));
+                highestTopicQuestion = h.intValue();
+            } else {
+                highestTopicQuestion = 0;
+            }
+            if (highestTopicQuestion < question.getIndex())
+                database.collection("categories")
+                        .document(catId)
+                        .collection("Topics")
+                        .document(topicId)
+                        .get().addOnSuccessListener(mDocumentSnapshot -> {
+
+                    Map<String, Object> highestIndex = new HashMap<>();
+                    highestIndex.put(topicId.concat("HighestIndex"), question.getIndex());
+
+                    database.collection("categories")
+                            .document(catId)
+                            .collection("Topics")
+                            .document(topicId)
+                            .update(highestIndex);
+                });
+        });
     }
 
     //TODO *topic score. add this in future update as you don't have enough user

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="top_score" type="id" />
+    <item name="top_score2" type="id" />
+    <item name="linearLayout5" type="id" />
+    <item name="name3" type="id" />
+    <item name="top_score3" type="id" />
+    <item name="linearLayout6" type="id" />
+    <item name="name4" type="id" />
+    <item name="top_score4" type="id" />
+    <item name="name5" type="id" />
+    <item name="top_score5" type="id" />
+</resources>
