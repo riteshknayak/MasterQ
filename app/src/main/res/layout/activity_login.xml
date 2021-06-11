@@ -15,7 +15,7 @@
     <EditText
         android:id="@+id/emailBox"
         android:layout_width="340dp"
-        android:layout_height="130dp"
+        android:layout_height="70dp"
         android:width="270dp"
         android:autofillHints="Email"
         android:background="@drawable/edittext_background"
@@ -40,7 +40,7 @@
     <EditText
         android:id="@+id/passwordBox"
         android:layout_width="340dp"
-        android:layout_height="130dp"
+        android:layout_height="70dp"
         android:width="270dp"
         android:autofillHints="Password"
         android:background="@drawable/edittext_background"
@@ -65,7 +65,7 @@
     <Button
         android:id="@+id/emailBtn"
         android:layout_width="328dp"
-        android:layout_height="127dp"
+        android:layout_height="70dp"
         android:background="@drawable/btn_background"
         android:fontFamily="@font/nunito_bold"
         android:gravity="center"
@@ -83,7 +83,7 @@
     <Button
         android:id="@+id/createBtn"
         android:layout_width="328dp"
-        android:layout_height="127dp"
+        android:layout_height="70dp"
         android:background="@drawable/btn_background"
         android:fontFamily="@font/nunito_bold"
         android:gravity="center"

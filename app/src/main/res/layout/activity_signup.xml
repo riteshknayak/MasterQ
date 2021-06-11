@@ -28,7 +28,7 @@
     <EditText
         android:id="@+id/nameBox"
         android:layout_width="330dp"
-        android:layout_height="130dp"
+        android:layout_height="70dp"
         android:autofillHints="Name"
         android:background="@drawable/edittext_background"
         android:drawableStart="@drawable/ic_user"
@@ -37,7 +37,7 @@
         android:fontFamily="@font/nunito_bold"
         android:hint="@string/name"
         android:inputType="textPersonName"
-        android:paddingStart="50dp"
+        android:paddingStart="20dp"
         android:textColor="@color/black"
         android:textColorHint="@color/dark_grey"
         android:textSize="20sp"
@@ -50,7 +50,7 @@
     <EditText
         android:id="@+id/emailBtn"
         android:layout_width="330dp"
-        android:layout_height="130dp"
+        android:layout_height="70dp"
         android:autofillHints="Email"
         android:background="@drawable/edittext_background"
         android:drawableStart="@drawable/ic_user"
@@ -59,7 +59,7 @@
         android:fontFamily="@font/nunito_bold"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
-        android:paddingStart="50dp"
+        android:paddingStart="20dp"
         android:textColor="@color/black"
         android:textColorHint="@color/dark_grey"
         android:textSize="20sp"
@@ -72,7 +72,7 @@
     <EditText
         android:id="@+id/passwordBox"
         android:layout_width="330dp"
-        android:layout_height="130dp"
+        android:layout_height="70dp"
         android:autofillHints="Name"
         android:background="@drawable/edittext_background"
         android:drawableStart="@drawable/ic_user"
@@ -81,7 +81,7 @@
         android:fontFamily="@font/nunito_bold"
         android:hint="@string/password"
         android:inputType="textPassword"
-        android:paddingStart="50dp"
+        android:paddingStart="20dp"
         android:textColor="@color/black"
         android:textColorHint="@color/dark_grey"
         android:textSize="20sp"
@@ -94,10 +94,9 @@
     <Button
         android:id="@+id/signupBtn"
         android:layout_width="328dp"
-        android:layout_height="127dp"
+        android:layout_height="70dp"
         android:background="@drawable/btn_background"
         android:fontFamily="@font/nunito_bold"
-        android:paddingBottom="23dp"
         android:text="@string/signup"
         android:textAllCaps="false"
         android:textColor="@color/white"
@@ -113,10 +112,9 @@
     <Button
         android:id="@+id/signinBtn"
         android:layout_width="328dp"
-        android:layout_height="127dp"
+        android:layout_height="70dp"
         android:background="@drawable/btn_background"
         android:fontFamily="@font/nunito_bold"
-        android:paddingBottom="23dp"
         android:text="@string/common_signin_button_text"
         android:textAllCaps="false"
         android:textColor="@color/white"
@@ -127,21 +125,22 @@
         app:layout_constraintTop_toTopOf="@+id/linearLayout3"
         app:layout_constraintVertical_bias="0.81" />
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="420dp"
+        android:layout_width="match_parent"
         android:layout_height="600dp"
         android:background="@drawable/parent_view_background"
         android:elevation="0dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:padding="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.496">
 
-    </RelativeLayout>
+    </LinearLayout>
 
 
     <!--    TODO  use this button instead   http

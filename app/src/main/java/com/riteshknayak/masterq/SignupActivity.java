@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,21 +42,21 @@ public class SignupActivity extends AppCompatActivity {
         database = FirebaseFirestore.getInstance();
 
         //TODO app crashing when  clicking the signup button when edittext is empty. use try-catch to solve the error
-        if (auth.getCurrentUser() != null) {
-            String uid = auth.getCurrentUser().getUid();
-            SharedPreferences shared = getSharedPreferences("app", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = shared.edit();
-            editor.putString("UId", uid);
-            editor.apply();
-            startActivity(new Intent(SignupActivity.this, MainActivity.class));
-            finish();
-        }
+//        if (auth.getCurrentUser() != null) {
+//            String uid = auth.getCurrentUser().getUid();
+//            SharedPreferences shared = getSharedPreferences("app", Context.MODE_PRIVATE);
+//            SharedPreferences.Editor editor = shared.edit();
+//            editor.putString("UId", uid);
+//            editor.apply();
+//            startActivity(new Intent(SignupActivity.this, MainActivity.class));
+//            finish();
+//        }
 
 
         binding.signupBtn.setOnClickListener(v -> {
             String email, pass, name;
 
-            if (binding.emailBtn.getText() == null || binding.passwordBox.getText() == null || binding.nameBox.getText() == null) {
+            if (isEmpty(binding.emailBtn) || isEmpty(binding.passwordBox) || isEmpty(binding.nameBox)) {
                 Toast.makeText(SignupActivity.this, "Please provide the required data", Toast.LENGTH_SHORT).show();
             } else {
 
@@ -101,5 +102,8 @@ public class SignupActivity extends AppCompatActivity {
         });
         binding.signinBtn.setOnClickListener(v -> startActivity(new Intent(SignupActivity.this, LoginActivity.class)));
 
+    }
+    private boolean isEmpty(EditText editText) {
+        return editText.getText().toString().trim().length() == 0;
     }
 }

@@ -6,18 +6,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center|center_vertical"
-    android:background="@color/white"
     tools:context=".MainActivity">
 
     <me.ibrahimsn.lib.SmoothBottomBar
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        app:backgroundColor="#31147A"
+        app:backgroundColor="@color/bg_color"
+        app:iconTint="@color/pink"
+        app:iconTintActive="@color/pink"
+        app:indicatorColor="@color/color_on_bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu" />
+        app:menu="@menu/menu"
+        app:itemFontFamily="@font/nunito_bold"/>
 
     <FrameLayout
         android:id="@+id/content"
@@ -27,7 +31,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
