@@ -4,135 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary_background"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
     tools:context=".SignupActivity">
-
-
-
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="5dp"
-        android:fontFamily="@font/nunito_black"
-        android:text="@string/create_a_new_account"
-        android:textColor="@color/white"
-        android:textSize="27sp"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.19999999" />
-
-    <EditText
-        android:id="@+id/nameBox"
-        android:layout_width="330dp"
-        android:layout_height="70dp"
-        android:autofillHints="Name"
-        android:background="@drawable/edittext_background"
-        android:drawableStart="@drawable/ic_user"
-        android:drawablePadding="6dp"
-        android:elevation="5dp"
-        android:fontFamily="@font/nunito_bold"
-        android:hint="@string/name"
-        android:inputType="textPersonName"
-        android:paddingStart="20dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/dark_grey"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.26999998" />
-
-    <EditText
-        android:id="@+id/emailBtn"
-        android:layout_width="330dp"
-        android:layout_height="70dp"
-        android:autofillHints="Email"
-        android:background="@drawable/edittext_background"
-        android:drawableStart="@drawable/ic_user"
-        android:drawablePadding="6dp"
-        android:elevation="5dp"
-        android:fontFamily="@font/nunito_bold"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress"
-        android:paddingStart="20dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/dark_grey"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout3"
-        app:layout_constraintVertical_bias="0.38" />
-
-    <EditText
-        android:id="@+id/passwordBox"
-        android:layout_width="330dp"
-        android:layout_height="70dp"
-        android:autofillHints="Name"
-        android:background="@drawable/edittext_background"
-        android:drawableStart="@drawable/ic_user"
-        android:drawablePadding="6dp"
-        android:elevation="10dp"
-        android:fontFamily="@font/nunito_bold"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        android:paddingStart="20dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/dark_grey"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.6" />
-
-    <Button
-        android:id="@+id/signupBtn"
-        android:layout_width="328dp"
-        android:layout_height="70dp"
-        android:background="@drawable/btn_background"
-        android:fontFamily="@font/nunito_bold"
-        android:text="@string/signup"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout3"
-        app:layout_constraintVertical_bias="0.67" />
-
-
-    <Button
-        android:id="@+id/signinBtn"
-        android:layout_width="328dp"
-        android:layout_height="70dp"
-        android:background="@drawable/btn_background"
-        android:fontFamily="@font/nunito_bold"
-        android:text="@string/common_signin_button_text"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout3"
-        app:layout_constraintVertical_bias="0.81" />
 
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@drawable/parent_view_background"
         android:elevation="0dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
+        android:paddingBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.555"
@@ -140,22 +24,117 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.496">
 
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:elevation="5dp"
+            android:fontFamily="@font/nunito_black"
+            android:text="@string/create_a_new_account"
+            android:textColor="@color/white"
+            android:textSize="27sp" />
+
+        <EditText
+            android:id="@+id/nameBox"
+            android:layout_width="280dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="10dp"
+            android:autofillHints="Name"
+            android:background="@drawable/edittext_background"
+            android:drawableStart="@drawable/ic_user"
+            android:drawablePadding="6dp"
+            android:elevation="5dp"
+            android:fontFamily="@font/nunito_bold"
+            android:hint="@string/name"
+            android:inputType="textPersonName"
+            android:paddingStart="20dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/dark_grey"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/emailBtn"
+            android:layout_width="280dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="10dp"
+            android:autofillHints="Email"
+            android:background="@drawable/edittext_background"
+            android:drawableStart="@drawable/ic_user"
+            android:drawablePadding="6dp"
+            android:elevation="5dp"
+            android:fontFamily="@font/nunito_bold"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:paddingStart="20dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/dark_grey"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/passwordBox"
+            android:layout_width="280dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="30dp"
+            android:autofillHints="Name"
+            android:background="@drawable/edittext_background"
+            android:drawableStart="@drawable/ic_user"
+            android:drawablePadding="6dp"
+            android:elevation="10dp"
+            android:fontFamily="@font/nunito_bold"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:paddingStart="20dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/dark_grey"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/signupBtn"
+            android:layout_width="280dp"
+            android:layout_height="60dp"
+            android:background="@drawable/btn_background"
+            android:text="@string/signup"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:layout_marginBottom="0dp"/>
+
+
+        <Button
+            android:id="@+id/signinBtn"
+            android:layout_width="280dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/btn_background"
+            android:text="@string/common_signin_button_text"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:layout_marginBottom="20dp"/>
+
+
     </LinearLayout>
 
 
     <!--    TODO  use this button instead   http
     s://github.com/SparkYuan/SubmitButton-->
-<!--    <com.spark.submitbutton.SubmitButton-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:text="    Submit     "-->
-<!--        android:textColor="@color/gray"-->
-<!--        app:sub_btn_background="@color/white"-->
-<!--        app:sub_btn_duration="2000"-->
-<!--        app:sub_btn_line_color="#8BC34A"-->
-<!--        app:sub_btn_ripple_color="#8BC34A"-->
-<!--        app:sub_btn_tick_color="@color/white" />-->
-
+    <!--    <com.spark.submitbutton.SubmitButton-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:text="    Submit     "-->
+    <!--        android:textColor="@color/gray"-->
+    <!--        app:sub_btn_background="@color/white"-->
+    <!--        app:sub_btn_duration="2000"-->
+    <!--        app:sub_btn_line_color="#8BC34A"-->
+    <!--        app:sub_btn_ripple_color="#8BC34A"-->
+    <!--        app:sub_btn_tick_color="@color/white" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
