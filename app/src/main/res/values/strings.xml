@@ -42,4 +42,6 @@
     <string name="r_e_s_u_l_t">R E S U L T</string>
     <string name="s_c_o_r_e">S C O R E</string>
     <string name="result">Result</string>
+    <string name="d">D</string>
+    <string name="b">B</string>
 </resources>

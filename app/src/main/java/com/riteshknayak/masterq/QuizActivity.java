@@ -128,7 +128,7 @@ public class QuizActivity extends AppCompatActivity {
                 checkAnswer(selectedTextView);
             } else {
                 resetCurrentQuestion(index);
-                Results.add(new Result(question.getQuestion(), index + 1, false, question.getUId()));
+                Results.add(new Result(question,"no" , false));
             }
             index++;
             setNextQuestion();
@@ -181,7 +181,7 @@ public class QuizActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 runOnUiThread(() -> {
-                                    Results.add(new Result(question.getQuestion(), index + 1, false, question.getUId()));
+                                    Results.add(new Result(question, "no", false));
                                     index++;
                                     setCurrentQuestion(index);
                                     setNextQuestion();
@@ -219,7 +219,7 @@ public class QuizActivity extends AppCompatActivity {
                     if (selectedTextView != null) {
                         checkAnswer(selectedTextView);
                     } else {
-                        Results.add(new Result(question.getQuestion(), index + 1, false, question.getUId()));
+                        Results.add(new Result(question, "no", false));
                     }
                     if (timer != null) {
                         timer.cancel();
@@ -262,12 +262,12 @@ public class QuizActivity extends AppCompatActivity {
                     .update(score);
             setScore();
 
-            Results.add(new Result(question.getQuestion(), index + 1, true, question.getUId()));
+            Results.add(new Result(question, selectedAnswer, true));
 
         } else {
             userTopicReference.update(wrongAnswer);
 
-            Results.add(new Result(question.getQuestion(), index + 1, false, question.getUId()));
+            Results.add(new Result(question, selectedAnswer, false));
         }
 
         userTopicReference.update(setLastQuestion);

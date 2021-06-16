@@ -19,6 +19,17 @@ public class Result implements Serializable {
         this.questionIndex = questionIndex;
         this.questionResult = questionResult;
     }
+    public Result( Question question, String givenAnswer, Boolean questionResult) {
+        this.question = question.getQuestion();
+        this.option1 = question.getOption1();
+        this.option2 = question.getOption2();
+        this.option3 = question.getOption3();
+        this.option4 = question.getOption4();
+        this.trueOption = question.getAnswer();
+        this.givenAnswer = givenAnswer;
+        this.questionIndex = question.getIndex();
+        this.questionResult = questionResult;
+    }
 
     public Result(String question, int questionIndex, Boolean questionResult, String questionUid) {
         this.question = question;
