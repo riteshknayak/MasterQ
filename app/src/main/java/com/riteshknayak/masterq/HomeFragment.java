@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.riteshknayak.masterq.adapters.CategoryAdapter;
 import com.riteshknayak.masterq.databinding.FragmentHomeBinding;
 import com.riteshknayak.masterq.objects.Category;
@@ -75,49 +74,14 @@ public class HomeFragment extends Fragment {
                 .document(UId)
                 .get().addOnSuccessListener(documentSnapshot -> {
             mUser = documentSnapshot.toObject(User.class);
+            assert mUser != null;
             binding.name.setText(mUser.getName());
-            binding.topScore.setText("Score- ".concat(mUser.getScore().toString()));
+            binding.topScore.setText(String.valueOf(mUser.getScore()));
         });
 
 
         binding.categoryList.setLayoutManager(new GridLayoutManager(getContext(), 2));
         binding.categoryList.setAdapter(adapter);
-
-        database.collection("users")
-                .orderBy("score", Query.Direction.DESCENDING)
-                .limit(5)
-                .get().addOnSuccessListener(queryDocumentSnapshots -> {
-                    for (DocumentSnapshot snapshot : queryDocumentSnapshots) {
-                        User user = snapshot.toObject(User.class);
-                        users.add(user);
-                    }
-
-                    if (1 <= users.size()) {
-                        binding.name1.setText(users.get(0).getName());
-                        binding.topScore1.setText(users.get(0).getScore().toString());
-                    }
-
-                    if (2 <= users.size()){
-                        binding.name1.setText(users.get(1).getName());
-                        binding.topScore1.setText(users.get(1).getScore().toString());
-                    }
-
-                    if (3 <= users.size()){
-                        binding.name1.setText(users.get(2).getName());
-                        binding.topScore1.setText(users.get(2).getScore().toString());
-                    }
-
-                    if (4 <= users.size()){
-                        binding.name1.setText(users.get(1).getName());
-                        binding.topScore1.setText(users.get(1).getScore().toString());
-                    }
-
-                    if (5 <= users.size()){
-                        binding.name1.setText(users.get(4).getName());
-                        binding.topScore1.setText(users.get(4).getScore().toString());
-                    }
-
-                });
 
         // Inflate the layout for this fragment
         return binding.getRoot();

@@ -95,7 +95,7 @@
             android:textColorHint="@color/dark_grey"
             android:textSize="20sp" />
 
-        <Button
+        <android.widget.Button
             android:id="@+id/signupBtn"
             android:layout_width="280dp"
             android:layout_height="60dp"
@@ -107,12 +107,12 @@
             android:layout_marginBottom="0dp"/>
 
 
-        <Button
+        <android.widget.Button
             android:id="@+id/signinBtn"
             android:layout_width="280dp"
             android:layout_height="60dp"
             android:layout_margin="10dp"
-            android:background="@drawable/btn_background"
+            android:background="@drawable/btn_background_unfocused"
             android:text="@string/common_signin_button_text"
             android:textAllCaps="false"
             android:textColor="@color/white"

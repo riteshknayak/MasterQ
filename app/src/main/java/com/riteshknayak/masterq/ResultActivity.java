@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.riteshknayak.masterq.adapters.ResultAdapter;
+import com.riteshknayak.masterq.databinding.ActivityResultBinding;
 import com.riteshknayak.masterq.objects.Result;
 
 import java.text.SimpleDateFormat;
@@ -22,6 +23,7 @@ import java.util.Locale;
 
 public class ResultActivity extends AppCompatActivity {
 
+    ActivityResultBinding binding;
     RecyclerView recyclerView;
     FirebaseFirestore database;
     FirebaseAuth auth;
@@ -57,7 +59,7 @@ public class ResultActivity extends AppCompatActivity {
         UId = auth.getCurrentUser().getUid();
         database = FirebaseFirestore.getInstance();
 
-        for (int index = 0;index < Results.size(); index++ ) {
+        for (int index = 0; index < Results.size(); index++) {
             Result result = Results.get(index);
             database.collection("users")
                     .document(UId)
@@ -68,6 +70,7 @@ public class ResultActivity extends AppCompatActivity {
                     .set(result);
         }
     }
+
 
     @Override
     public void onBackPressed() {

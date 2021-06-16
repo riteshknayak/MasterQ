@@ -57,6 +57,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             SharedPreferences shared = context.getSharedPreferences("app", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = shared.edit();
             editor.putString("catId", model.getCategoryId());
+            editor.putString("catName", model.getCategoryName());
             editor.apply();
 
             //TODO  database work down below

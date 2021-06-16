@@ -111,9 +111,11 @@ public class QuizActivity extends AppCompatActivity {
                             questions.add(question);
                         }
                         setNextQuestion();
+                        setCurrentQuestion(index);
                     });
                 } else {
                     setNextQuestion();
+                    setCurrentQuestion(index);
                 }
             });
         });
@@ -122,12 +124,21 @@ public class QuizActivity extends AppCompatActivity {
             if (timer != null)
                 timer.cancel();
             if (selectedTextView != null) {
+                setAttempted(index);
                 checkAnswer(selectedTextView);
             } else {
+                resetCurrentQuestion(index);
                 Results.add(new Result(question.getQuestion(), index + 1, false, question.getUId()));
             }
             index++;
             setNextQuestion();
+            setCurrentQuestion(index);
+        });
+
+        binding.quitBtn.setOnClickListener(v -> {
+            timer.cancel();
+            Intent intent = new Intent(QuizActivity.this, TopicsActivity.class);
+            startActivity(intent);
         });
     }
 
@@ -144,16 +155,21 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     void resetTimer() {
-        timer = new CountDownTimer(21000, 1000) {
+        timer = new CountDownTimer(20000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                binding.timer.setText(String.valueOf(millisUntilFinished / 1000));
+                long percent = millisUntilFinished/1000*5;
+
+                binding.timeView.setFgColorStart(0xFFCA1395);
+                binding.timeView.setFgColorEnd(0xFF630CAE);
+                binding.timeView.setPercent(100 - percent);
             }
 
             @Override
             public void onFinish() {
                 disableClick();
 
+                resetCurrentQuestion(index);
                 Map<String, Object> wrongAnswer = new HashMap<>();
                 wrongAnswer.put(question.getUId(), false);
                 userTopicReference.update(wrongAnswer);
@@ -167,6 +183,7 @@ public class QuizActivity extends AppCompatActivity {
                                 runOnUiThread(() -> {
                                     Results.add(new Result(question.getQuestion(), index + 1, false, question.getUId()));
                                     index++;
+                                    setCurrentQuestion(index);
                                     setNextQuestion();
                                 });
                             }
@@ -181,9 +198,11 @@ public class QuizActivity extends AppCompatActivity {
         if (timer != null) {
             timer.cancel();
         }
+        if (index == 9){
+        }
         if (index < questions.size()) {
             resetBackground();
-            binding.questionCounter.setText(String.format("%d/%d", (index + 1), questions.size()));
+            binding.questionCounter.setText(String.format("Question %d", (index + 1)));
             question = questions.get(index);
             binding.question.setText(question.getQuestion());
             binding.option1.setText(question.getOption1());
@@ -301,16 +320,134 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     void resetBackground() {
-        binding.option1.setBackground(ContextCompat.getDrawable(this, R.drawable.option_unselected));
-        binding.option2.setBackground(ContextCompat.getDrawable(this, R.drawable.option_unselected));
-        binding.option3.setBackground(ContextCompat.getDrawable(this, R.drawable.option_unselected));
-        binding.option4.setBackground(ContextCompat.getDrawable(this, R.drawable.option_unselected));
+        binding.option1.setBackground(ContextCompat.getDrawable(this, R.drawable.parent_view_background));
+        binding.option2.setBackground(ContextCompat.getDrawable(this, R.drawable.parent_view_background));
+        binding.option3.setBackground(ContextCompat.getDrawable(this, R.drawable.parent_view_background));
+        binding.option4.setBackground(ContextCompat.getDrawable(this, R.drawable.parent_view_background));
     }
 
     void setSelectedBackground(TextView selectedTextView) {
         resetBackground();
         selectedTextView.setBackground(ContextCompat.getDrawable(this, R.drawable.option_selected));
         this.selectedTextView = selectedTextView;
+    }
+
+    void setAttempted(int index) {
+        index+=1;
+        switch (index){
+            case 1:
+                binding.top1.setVisibility(View.GONE);
+                binding.tick1.setVisibility(View.VISIBLE);
+                break;
+            case 2:
+                binding.top2.setVisibility(View.GONE);
+                binding.tick2.setVisibility(View.VISIBLE);
+                break;
+            case 3:
+                binding.top3.setVisibility(View.GONE);
+                binding.tick3.setVisibility(View.VISIBLE);
+                break;
+            case 4:
+                binding.top4.setVisibility(View.GONE);
+                binding.tick4.setVisibility(View.VISIBLE);
+                break;
+            case 5:
+                binding.top5.setVisibility(View.GONE);
+                binding.tick5.setVisibility(View.VISIBLE);
+                break;
+            case 6:
+                binding.top6.setVisibility(View.GONE);
+                binding.tick6.setVisibility(View.VISIBLE);
+                break;
+            case 7:
+                binding.top7.setVisibility(View.GONE);
+                binding.tick7.setVisibility(View.VISIBLE);
+                break;
+            case 8:
+                binding.top8.setVisibility(View.GONE);
+                binding.tick8.setVisibility(View.VISIBLE);
+                break;
+            case 9:
+                binding.top9.setVisibility(View.GONE);
+                binding.tick9.setVisibility(View.VISIBLE);
+                break;
+            case 10:
+                binding.top10.setVisibility(View.GONE);
+                binding.tick10.setVisibility(View.VISIBLE);
+                break;
+        }
+    }
+
+    void setCurrentQuestion(int index) {
+        index+=1;
+        switch (index){
+            case 1:
+                binding.top1.setBackground(ContextCompat.getDrawable(this, R.drawable.circular_view_pink));
+                break;
+            case 2:
+                binding.top2.setBackground(ContextCompat.getDrawable(this, R.drawable.circular_view_pink));
+                break;
+            case 3:
+                binding.top3.setBackground(ContextCompat.getDrawable(this, R.drawable.circular_view_pink));
+                break;
+            case 4:
+                binding.top4.setBackground(ContextCompat.getDrawable(this, R.drawable.circular_view_pink));
+                break;
+            case 5:
+                binding.top5.setBackground(ContextCompat.getDrawable(this, R.drawable.circular_view_pink));
+                break;
+            case 6:
+                binding.top6.setBackground(ContextCompat.getDrawable(this, R.drawable.circular_view_pink));
+                break;
+            case 7:
+                binding.top7.setBackground(ContextCompat.getDrawable(this, R.drawable.circular_view_pink));
+                break;
+            case 8:
+                binding.top8.setBackground(ContextCompat.getDrawable(this, R.drawable.circular_view_pink));
+                break;
+            case 9:
+                binding.top9.setBackground(ContextCompat.getDrawable(this, R.drawable.circular_view_pink));
+                break;
+            case 10:
+                binding.top10.setBackground(ContextCompat.getDrawable(this, R.drawable.circular_view_pink));
+                break;
+        }
+    }
+
+    void resetCurrentQuestion(int index) {
+        index+=1;
+        switch (index){
+            case 1:
+                binding.top1.setBackground(ContextCompat.getDrawable(this, R.drawable.circular_view));
+                break;
+            case 2:
+                binding.top2.setBackground(ContextCompat.getDrawable(this, R.drawable.circular_view));
+                break;
+            case 3:
+                binding.top3.setBackground(ContextCompat.getDrawable(this, R.drawable.circular_view));
+                break;
+            case 4:
+                binding.top4.setBackground(ContextCompat.getDrawable(this, R.drawable.circular_view));
+                break;
+            case 5:
+                binding.top5.setBackground(ContextCompat.getDrawable(this, R.drawable.circular_view));
+                break;
+            case 6:
+                binding.top6.setBackground(ContextCompat.getDrawable(this, R.drawable.circular_view));
+                break;
+            case 7:
+                binding.top7.setBackground(ContextCompat.getDrawable(this, R.drawable.circular_view));
+                break;
+            case 8:
+                binding.top8.setBackground(ContextCompat.getDrawable(this, R.drawable.circular_view));
+                break;
+            case 9:
+                binding.top9.setBackground(ContextCompat.getDrawable(this, R.drawable.circular_view));
+                break;
+            case 10:
+                binding.top10.setBackground(ContextCompat.getDrawable(this, R.drawable.circular_view));
+                break;
+        }
     }
 
     //TODO use OnclickListener Instead of switch statement
@@ -324,19 +461,14 @@ public class QuizActivity extends AppCompatActivity {
                 TextView selected = (TextView) view;
                 setSelectedBackground(selected);
                 break;
-            case R.id.quitBtn:
-                timer.cancel();
-                Intent intent = new Intent(QuizActivity.this, TopicsActivity.class);
-                intent.putExtra("catId", catId);
-                startActivity(intent);
-                break;
         }
     }
-
 
     @Override
     public void onBackPressed() {
         timer.cancel();
+        Intent intent = new Intent(QuizActivity.this, TopicsActivity.class);
+        startActivity(intent);
         //TODO update this show that it will show a dialog for conformation exit
     }
 

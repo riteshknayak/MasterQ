@@ -23,4 +23,23 @@
     <string name="Right">Right</string>
     <string name="the_quick_brown_fox_jump_over_the_lazy_dog">The quick brown fox jump over the lazy dog</string>
     <string name="login">Login</string>
+    <string name="let_s_play">Lets play!</string>
+    <string name="loreum_ipsum">Lorem ipsum dolor sit amet, consectetur ` adipiscing elit. Morbi turpis purus, dap ibus eget nisi vitae, finibus mollis justo. Ut facilisis sem ut nibh pellentesque con vallis. Mauris eget tristique Read more</string>
+    <string name="_10">10</string>
+    <string name="_9">9</string>
+    <string name="_1n">1</string>
+    <string name="_2n">2</string>
+    <string name="_3n">3</string>
+    <string name="_4n">4</string>
+    <string name="_5n">5</string>
+    <string name="_6">6</string>
+    <string name="_7">7</string>
+    <string name="_8">8</string>
+    <string name="_20">20</string>
+    <string name="next">Next</string>
+    <string name="quit">Quit</string>
+    <string name="congratulation">Congratulation!</string>
+    <string name="r_e_s_u_l_t">R E S U L T</string>
+    <string name="s_c_o_r_e">S C O R E</string>
+    <string name="result">Result</string>
 </resources>

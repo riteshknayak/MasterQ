@@ -35,8 +35,8 @@ public class LeaderboardsAdapter extends RecyclerView.Adapter<LeaderboardsAdapte
     public void onBindViewHolder(@NonNull LeaderboardViewHolder holder, int position) {
         User user = users.get(position);
 
-        holder.binding.name.setText(user.getName());
-        holder.binding.score.setText(String.valueOf(user.getScore()));
+//        holder.binding.name.setText(user.getName());
+//        holder.binding.score.setText(String.valueOf(user.getScore()));
         holder.binding.index.setText(String.format("#%d", position+1));
 
 //        Glide.with(context)

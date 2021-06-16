@@ -4,142 +4,429 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
     tools:context=".QuizActivity">
 
-    <TextView
-        android:id="@+id/timer"
+    <LinearLayout
+        android:id="@+id/linearLayout7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:drawablePadding="10dp"
-        android:fontFamily="@font/nunito_black"
-        android:text="20"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:drawableLeftCompat="@drawable/ic_timer"
-        app:drawableTint="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/questionCounter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:drawableEnd="@drawable/ic_question"
-        android:drawablePadding="10dp"
-        android:fontFamily="@font/nunito_bold"
-        android:text="1/10"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:drawableTint="@color/black"
+        android:layout_marginTop="30dp"
+        android:gravity="center_horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/top1"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/circular_view"
+            android:fontFamily="@font/nunito_bold"
+            android:gravity="center"
+            android:text="@string/_1n"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/tick1"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/circular_view_pink"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_pink_tick" />
+
+        <TextView
+            android:id="@+id/top2"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/circular_view"
+            android:fontFamily="@font/nunito_bold"
+            android:gravity="center"
+            android:text="@string/_2n"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+
+        <ImageView
+            android:id="@+id/tick2"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/circular_view_pink"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_pink_tick" />
+
+        <TextView
+            android:id="@+id/top3"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/circular_view"
+            android:fontFamily="@font/nunito_bold"
+            android:gravity="center"
+            android:text="@string/_3n"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+
+        <ImageView
+            android:id="@+id/tick3"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/circular_view_pink"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_pink_tick" />
+
+
+        <TextView
+            android:id="@+id/top4"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/circular_view"
+            android:fontFamily="@font/nunito_bold"
+            android:gravity="center"
+            android:text="@string/_4n"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+
+        <ImageView
+            android:id="@+id/tick4"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/circular_view_pink"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_pink_tick" />
+
+        <TextView
+            android:id="@+id/top5"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/circular_view"
+            android:fontFamily="@font/nunito_bold"
+            android:gravity="center"
+            android:text="@string/_5n"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+
+        <ImageView
+            android:id="@+id/tick5"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/circular_view_pink"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_pink_tick" />
+
+        <TextView
+            android:id="@+id/top6"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/circular_view"
+            android:fontFamily="@font/nunito_bold"
+            android:gravity="center"
+            android:text="@string/_6"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+
+        <ImageView
+            android:id="@+id/tick6"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/circular_view_pink"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_pink_tick" />
+
+
+        <TextView
+            android:id="@+id/top7"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/circular_view"
+            android:fontFamily="@font/nunito_bold"
+            android:gravity="center"
+            android:text="@string/_7"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+
+        <ImageView
+            android:id="@+id/tick7"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/circular_view_pink"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_pink_tick" />
+
+        <TextView
+            android:id="@+id/top8"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/circular_view"
+            android:fontFamily="@font/nunito_bold"
+            android:gravity="center"
+            android:text="@string/_8"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+
+        <ImageView
+            android:id="@+id/tick8"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/circular_view_pink"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_pink_tick" />
+
+        <TextView
+            android:id="@+id/top9"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/circular_view"
+            android:fontFamily="@font/nunito_bold"
+            android:gravity="center"
+            android:text="@string/_9"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+
+        <ImageView
+            android:id="@+id/tick9"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/circular_view_pink"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_pink_tick" />
+
+
+        <TextView
+            android:id="@+id/top10"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:background="@drawable/circular_view"
+            android:fontFamily="@font/nunito_bold"
+            android:gravity="center"
+            android:text="@string/_10"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+
+        <ImageView
+            android:id="@+id/tick10"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/circular_view_pink"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_pink_tick" />
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/questionc"
+        android:layout_width="139dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
+
+        <!--127--><!--139-->
+        <!--104--><!--116-->
+
+
+        <TextView
+            android:id="@+id/questionCounter"
+            android:layout_width="116dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:fontFamily="@font/nunito_extrabold"
+            android:textColor="@color/pink"
+            android:textSize="20sp"
+            tools:text="Question 10" />
+
+
+        <TextView
+            android:layout_width="23dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:fontFamily="@font/nunito_bold"
+            android:text="/10"
+            android:textColor="@color/pink"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+
+
+    <com.timqi.sectorprogressview.ColorfulRingProgressView
+        android:id="@+id/time_view"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="14dp"
+        app:bgColor="@color/color_on_bg"
+        app:fgColorEnd="#630CAE"
+        app:fgColorStart="#CA1395"
+        app:layout_constraintBottom_toTopOf="@+id/question"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.755"
+        app:layout_constraintStart_toEndOf="@+id/questionc"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout7"
+        app:layout_constraintVertical_bias="0.1"
+        app:percent="75"
+        app:startAngle="0"
+        app:strokeWidth="10dp" />
 
     <TextView
         android:id="@+id/question"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
-        android:fontFamily="@font/nunito_black"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/nunito_bold"
         android:gravity="center"
-        android:text="Who invented android studio?"
-        android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/questionc"
+        tools:text="Who invented android studio?" />
 
     <TextView
         android:id="@+id/option_1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
         android:layout_marginTop="56dp"
-        android:background="@drawable/option_unselected"
+        android:background="@drawable/parent_view_background"
+        android:fontFamily="@font/nunito_bold"
+        android:gravity="center_vertical"
         android:onClick="onClick"
-        android:padding="15dp"
-        android:text="Option1"
-        android:textColor="@color/black"
+        android:paddingStart="30dp"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/question" />
+        app:layout_constraintTop_toBottomOf="@+id/question"
+        tools:text="Option1" />
 
     <TextView
         android:id="@+id/option_2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/option_unselected"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/parent_view_background"
+        android:fontFamily="@font/nunito_bold"
+        android:gravity="center_vertical"
         android:onClick="onClick"
-        android:padding="15dp"
-        android:text="option2"
-        android:textColor="@color/black"
+        android:paddingStart="30dp"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/option_1"
         app:layout_constraintStart_toStartOf="@+id/option_1"
-        app:layout_constraintTop_toBottomOf="@+id/option_1" />
+        app:layout_constraintTop_toBottomOf="@+id/option_1"
+        tools:text="option2" />
 
     <TextView
         android:id="@+id/option_3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/option_unselected"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/parent_view_background"
+        android:fontFamily="@font/nunito_bold"
+        android:gravity="center_vertical"
         android:onClick="onClick"
-        android:padding="15dp"
-        android:text="option3"
-        android:textColor="@color/black"
+        android:paddingStart="30dp"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/option_2"
         app:layout_constraintStart_toStartOf="@+id/option_2"
-        app:layout_constraintTop_toBottomOf="@+id/option_2" />
+        app:layout_constraintTop_toBottomOf="@+id/option_2"
+        tools:text="option3" />
 
     <TextView
         android:id="@+id/option_4"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/option_unselected"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/parent_view_background"
+        android:fontFamily="@font/nunito_bold"
+        android:gravity="center_vertical"
         android:onClick="onClick"
-        android:padding="15dp"
-        android:text="option4"
-        android:textColor="@color/black"
+        android:paddingStart="30dp"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/option_3"
         app:layout_constraintStart_toStartOf="@+id/option_3"
-        app:layout_constraintTop_toBottomOf="@+id/option_3" />
-
-    <Button
-        android:id="@+id/quitBtn"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="72dp"
-        android:background="@drawable/button_1"
-        android:onClick="onClick"
-        android:text="Quit"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.89"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/option_4" />
+        app:layout_constraintTop_toBottomOf="@+id/option_3"
+        tools:text="option4" />
 
     <Button
         android:id="@+id/NextBtn"
-        android:layout_width="170dp"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/button_1"
-        android:fontFamily="@font/nunito_bold"
-        android:text="Next Button"
-        android:textColor="@color/color_white"
+        android:background="@drawable/btn_background"
+        android:onClick="onClick"
+        android:text="@string/next"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.11"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@+id/quitBtn"
+        app:layout_constraintTop_toBottomOf="@+id/option_4" />
+
+    <Button
+        android:id="@+id/quitBtn"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
+        android:background="@drawable/btn_background_unfocused"
+        android:fontFamily="@font/nunito_bold"
+        android:text="@string/quit"
+        android:textColor="@color/color_white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/NextBtn"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/option_4" />
 </androidx.constraintlayout.widget.ConstraintLayout>

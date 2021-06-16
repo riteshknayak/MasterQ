@@ -42,15 +42,15 @@ public class SignupActivity extends AppCompatActivity {
         database = FirebaseFirestore.getInstance();
 
         //TODO app crashing when  clicking the signup button when edittext is empty. use try-catch to solve the error
-//        if (auth.getCurrentUser() != null) {
-//            String uid = auth.getCurrentUser().getUid();
-//            SharedPreferences shared = getSharedPreferences("app", Context.MODE_PRIVATE);
-//            SharedPreferences.Editor editor = shared.edit();
-//            editor.putString("UId", uid);
-//            editor.apply();
-//            startActivity(new Intent(SignupActivity.this, MainActivity.class));
-//            finish();
-//        }
+        if (auth.getCurrentUser() != null) {
+            String uid = auth.getCurrentUser().getUid();
+            SharedPreferences shared = getSharedPreferences("app", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = shared.edit();
+            editor.putString("UId", uid);
+            editor.apply();
+            startActivity(new Intent(SignupActivity.this, MainActivity.class));
+            finish();
+        }
 
 
         binding.signupBtn.setOnClickListener(v -> {

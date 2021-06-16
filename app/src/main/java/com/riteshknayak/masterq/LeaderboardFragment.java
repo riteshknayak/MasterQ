@@ -51,6 +51,7 @@ public class LeaderboardFragment extends Fragment {
         binding.leaderboardRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         database.collection("users")
+                .limit(100)
                 .orderBy("score", Query.Direction.DESCENDING).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {

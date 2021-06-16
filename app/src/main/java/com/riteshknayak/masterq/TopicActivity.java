@@ -6,10 +6,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.riteshknayak.masterq.databinding.ActivityTopicBinding;
-
 public class TopicActivity extends AppCompatActivity {
-    ActivityTopicBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +16,10 @@ public class TopicActivity extends AppCompatActivity {
 
     public void onClick(View view) {
         Intent intent = new Intent(this, QuizActivity.class);
+        startActivity(intent);
+    }
+    public void onBackPressed() {
+        Intent intent = new Intent(TopicActivity.this, TopicsActivity.class );
         startActivity(intent);
     }
 }

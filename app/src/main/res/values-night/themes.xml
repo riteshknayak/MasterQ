@@ -1,8 +1,7 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
-    <style name="Theme.MasterQ" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.MasterQ" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="colorPrimary">@color/pink</item>
-        <item name="colorAccent">@color/pink</item>
         <item name="android:windowBackground">@color/bg_color</item>
         <item name="android:navigationBarColor">@color/bg_color</item>
         <item name="android:textColorPrimary">@color/white</item>
