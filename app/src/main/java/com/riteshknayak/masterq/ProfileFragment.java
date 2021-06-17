@@ -1,5 +1,6 @@
 package com.riteshknayak.masterq;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,7 +53,10 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        //TODO add support to add profile photo https://github.com/ArthurHub/Android-Image-Cropper/wiki/Pick-image-for-cropping-from-Camera-or-Gallery
+        binding.addProfile.setOnClickListener(v -> {
+            Intent intent = new Intent(ProfileFragment.this.getActivity(), SettingActivity.class);
+            startActivity(intent);
+        });
         return binding.getRoot();
     }
 }
