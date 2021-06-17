@@ -3,7 +3,6 @@ package com.riteshknayak.masterq;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,16 +24,11 @@ public class SettingActivity extends AppCompatActivity {
 
         profileImage = findViewById(R.id.profile_image);
 
-        profileImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ImagePicker.with(SettingActivity.this)
-                        .cropSquare()    			//Crop image(Optional), Check Customization for more option
-                        .compress(1024)			//Final image size will be less than 1 MB(Optional)
-                        .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
-                        .start(200);
-            }
-        });
+        profileImage.setOnClickListener(v -> ImagePicker.with(SettingActivity.this)
+                .cropSquare()    			//Crop image(Optional), Check Customization for more option
+                .compress(1024)			//Final image size will be less than 1 MB(Optional)
+                .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
+                .start(200));
     }
 
     @Override

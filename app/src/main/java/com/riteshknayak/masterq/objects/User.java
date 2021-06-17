@@ -65,4 +65,12 @@ public class User {
     public void setScore(Integer score) {
         this.score = score;
     }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 }

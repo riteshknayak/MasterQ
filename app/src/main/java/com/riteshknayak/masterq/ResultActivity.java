@@ -3,8 +3,10 @@ package com.riteshknayak.masterq;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,9 +29,11 @@ public class ResultActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     FirebaseFirestore database;
     FirebaseAuth auth;
-    String UId;
-    String catId;
-    String topicId;
+    String UId, catId, topicId;
+    Integer score;
+    int correctAnswer;
+    TextView scoreView, resultView;
+    ConstraintLayout parent_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +73,14 @@ public class ResultActivity extends AppCompatActivity {
                     .document(String.valueOf(result.getQuestionIndex()).concat("- ").concat(result.getQuestion()))
                     .set(result);
         }
+
+        score = getIntent().getIntExtra("score",0);
+        scoreView = findViewById(R.id.score_r);
+        scoreView.setText(score.toString());
+
+        correctAnswer = getIntent().getIntExtra("correctAnswer",0);
+        resultView = findViewById(R.id.result_r);
+        resultView.setText(String.format("%d/10", correctAnswer));
     }
 
 

@@ -92,20 +92,10 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultView
 
     public static class ResultViewHolder extends RecyclerView.ViewHolder {
 
-        TextView questionIndex;
-        TextView question;
-        ConstraintLayout expandable;
-        ConstraintLayout parentView;
-        TextView option1;
-        TextView option2;
-        TextView option3;
-        TextView option4;
-        LinearLayout option1view;
-        LinearLayout option2view;
-        LinearLayout option3view;
-        LinearLayout option4view;
-        TextView selectedOption;
-
+        TextView questionIndex, selectedOption, question;
+        ConstraintLayout expandable, parentView;
+        TextView option1, option2, option3,option4;
+        LinearLayout option1view, option2view, option3view, option4view;
 
         public ResultViewHolder(@NonNull View itemView) {
             super(itemView);

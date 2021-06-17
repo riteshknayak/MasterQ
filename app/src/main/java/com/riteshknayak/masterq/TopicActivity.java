@@ -15,7 +15,7 @@ public class TopicActivity extends AppCompatActivity {
     }
 
     public void onClick(View view) {
-        Intent intent = new Intent(this, QuizActivity.class);
+        Intent intent = new Intent(TopicActivity.this, QuizActivity.class);
         startActivity(intent);
     }
     public void onBackPressed() {

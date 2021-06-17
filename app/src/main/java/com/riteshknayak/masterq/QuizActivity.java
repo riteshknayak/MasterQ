@@ -37,14 +37,14 @@ public class QuizActivity extends AppCompatActivity {
     FirebaseAuth auth;
     Question question;
     CountDownTimer timer;
-    String catId;
-    String topicId;
-    String UId;
+    String catId, topicId, UId;
     Integer mScore;
+    Integer addedScore = 0;
     CollectionReference topicReference;
     DocumentReference userTopicReference;
     int highestTopicQuestion; //TODO remove this in your modified app for developer
     TextView selectedTextView;
+    int correctAnswer = 0;
 
 
     //TODO ADD COMMENTS SHOW THAT OTHER DEVELOPERS CAN READ
@@ -227,6 +227,8 @@ public class QuizActivity extends AppCompatActivity {
                     }
                     Intent intent = new Intent(QuizActivity.this, ResultActivity.class);
                     intent.putExtra("Results", Results);
+                    intent.putExtra("score", addedScore);
+                    intent.putExtra("correctAnswer", correctAnswer);
                     startActivity(intent);
                 });
             }
@@ -236,6 +238,8 @@ public class QuizActivity extends AppCompatActivity {
             }
             Intent intent = new Intent(QuizActivity.this, ResultActivity.class);
             intent.putExtra("Results", Results);
+            intent.putExtra("score", addedScore);
+            intent.putExtra("correctAnswer", correctAnswer);
             startActivity(intent);
         }
     }
@@ -254,6 +258,7 @@ public class QuizActivity extends AppCompatActivity {
 
         if (selectedAnswer.equals(question.getAnswer())) {
             userTopicReference.update(rightAnswer);
+            addedScore = addedScore+10;
 
             Map<String, Object> score = new HashMap<>();
             score.put("score", mScore + 10);
@@ -264,6 +269,8 @@ public class QuizActivity extends AppCompatActivity {
             setScore();
 
             Results.add(new Result(question, selectedAnswer, true));
+
+            correctAnswer++;
 
         } else {
             userTopicReference.update(wrongAnswer);

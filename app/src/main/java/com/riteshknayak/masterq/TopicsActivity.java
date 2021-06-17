@@ -62,7 +62,7 @@ public class TopicsActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
     public void onBackPressed() {
-    Intent intent = new Intent(TopicsActivity.this, HomeFragment.class);
+    Intent intent = new Intent(TopicsActivity.this, MainActivity.class);
     startActivity(intent);
     //TODO update this show that it will show a dialog for conformation exit
     }
