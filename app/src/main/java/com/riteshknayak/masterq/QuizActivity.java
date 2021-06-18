@@ -43,7 +43,7 @@ public class QuizActivity extends AppCompatActivity {
     CollectionReference topicReference;
     DocumentReference userTopicReference;
     int highestTopicQuestion; //TODO remove this in your modified app for developer
-    TextView selectedTextView;
+    TextView selectedTextView, time;
     int correctAnswer = 0;
 
 
@@ -163,7 +163,10 @@ public class QuizActivity extends AppCompatActivity {
 
                 binding.timeView.setFgColorStart(0xFFCA1395);
                 binding.timeView.setFgColorEnd(0xFF630CAE);
-                binding.timeView.setPercent(100 - percent);
+                binding.timeView.setPercent(percent);
+
+                time = findViewById(R.id.time);
+                time.setText(String.valueOf(millisUntilFinished/1000));
             }
 
             @Override

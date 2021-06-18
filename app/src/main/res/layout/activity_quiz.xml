@@ -13,6 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
         android:gravity="center_horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -265,8 +266,8 @@
         android:id="@+id/questionc"
         android:layout_width="wrap_content"
         android:layout_height="28dp"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="130dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
 
@@ -276,7 +277,7 @@
 
         <TextView
             android:id="@+id/questionCounter"
-            android:layout_width="116dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
@@ -285,14 +286,13 @@
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Question 10" />
+            tools:text="Question 1" />
 
 
         <TextView
             android:layout_width="23dp"
             android:layout_height="wrap_content"
             android:layout_alignRight="@id/questionCounter"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:fontFamily="@font/nunito_bold"
             android:text="/10"
@@ -306,31 +306,43 @@
 
     <com.timqi.sectorprogressview.ColorfulRingProgressView
         android:id="@+id/time_view"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="14dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="20dp"
         app:bgColor="@color/color_on_bg"
         app:fgColorEnd="#630CAE"
         app:fgColorStart="#CA1395"
-        app:layout_constraintBottom_toTopOf="@+id/question"
+        app:layout_constraintBottom_toTopOf="@+id/questionc"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.755"
-        app:layout_constraintStart_toEndOf="@+id/questionc"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout7"
         app:layout_constraintVertical_bias="0.1"
-        app:percent="75"
+        app:percent="100"
         app:startAngle="0"
         app:strokeWidth="10dp" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nunito_bold"
+        android:text="10"
+        android:textSize="23sp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/time_view"
+        app:layout_constraintEnd_toEndOf="@+id/time_view"
+        app:layout_constraintStart_toStartOf="@+id/time_view"
+        app:layout_constraintTop_toTopOf="@+id/time_view" />
 
     <TextView
         android:id="@+id/question"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="5dp"
         android:fontFamily="@font/nunito_bold"
         android:gravity="center"
         android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/questionc"
@@ -339,8 +351,8 @@
     <TextView
         android:id="@+id/option_1"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="56dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/parent_view_background"
         android:fontFamily="@font/nunito_bold"
         android:gravity="center_vertical"
@@ -356,8 +368,8 @@
     <TextView
         android:id="@+id/option_2"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/parent_view_background"
         android:fontFamily="@font/nunito_bold"
         android:gravity="center_vertical"
@@ -373,8 +385,8 @@
     <TextView
         android:id="@+id/option_3"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/parent_view_background"
         android:fontFamily="@font/nunito_bold"
         android:gravity="center_vertical"
@@ -390,8 +402,8 @@
     <TextView
         android:id="@+id/option_4"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/parent_view_background"
         android:fontFamily="@font/nunito_bold"
         android:gravity="center_vertical"
@@ -406,12 +418,14 @@
 
     <Button
         android:id="@+id/NextBtn"
-        android:layout_width="160dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
         android:background="@drawable/btn_background"
         android:onClick="onClick"
         android:text="@string/next"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="30dp"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -422,12 +436,14 @@
 
     <Button
         android:id="@+id/quitBtn"
-        android:layout_width="160dp"
+        android:layout_width="0dp"
+        android:layout_marginEnd="10dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
         android:background="@drawable/btn_background_unfocused"
         android:fontFamily="@font/nunito_bold"
         android:text="@string/quit"
+        android:layout_marginBottom="30dp"
         android:textColor="@color/color_white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/NextBtn"
