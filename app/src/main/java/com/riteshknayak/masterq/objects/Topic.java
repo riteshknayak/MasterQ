@@ -1,20 +1,23 @@
 package com.riteshknayak.masterq.objects;
 
 public class Topic {
-    private String topicId, topicImage, topicName;
+    private String topicId, topicImage, topicName, topicMainImage, topicDescription ;
+    private int players, reviewNumber;
     private boolean visibility;
     private boolean free;
 
-    public Topic(String topicId, String topicImage, String topicName) {
+    public void Topic() {}
+
+    public Topic(String topicId, String topicImage, String topicName, String topicMainImage, String topicDescription, int players, int reviewNumber, boolean visibility, boolean free) {
         this.topicId = topicId;
         this.topicImage = topicImage;
         this.topicName = topicName;
-    }
-    public Topic(String topicId, String topicImage, String topicName, boolean visibility) {
-        this.topicId = topicId;
-        this.topicImage = topicImage;
-        this.topicName = topicName;
+        this.topicMainImage = topicMainImage;
+        this.topicDescription = topicDescription;
+        this.players = players;
+        this.reviewNumber = reviewNumber;
         this.visibility = visibility;
+        this.free = free;
     }
 
     public Topic(){};
@@ -58,5 +61,37 @@ public class Topic {
 
     public void setFree(boolean free) {
         this.free = free;
+    }
+
+    public String getTopicDescription() {
+        return topicDescription;
+    }
+
+    public void setTopicDescription(String topicDescription) {
+        this.topicDescription = topicDescription;
+    }
+
+    public int getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(int players) {
+        this.players = players;
+    }
+
+    public String getTopicMainImage() {
+        return topicMainImage;
+    }
+
+    public void setTopicMainImage(String topicMainImage) {
+        this.topicMainImage = topicMainImage;
+    }
+
+    public int getReviewNumber() {
+        return reviewNumber;
+    }
+
+    public void setReviewNumber(int reviewNumber) {
+        this.reviewNumber = reviewNumber;
     }
 }

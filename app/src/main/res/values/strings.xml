@@ -24,7 +24,7 @@
     <string name="the_quick_brown_fox_jump_over_the_lazy_dog">The quick brown fox jump over the lazy dog</string>
     <string name="login">Login</string>
     <string name="let_s_play">Lets play!</string>
-    <string name="loreum_ipsum">Lorem ipsum dolor sit amet, consectetur ` adipiscing elit. Morbi turpis purus, dap ibus eget nisi vitae, finibus mollis justo. Ut facilisis sem ut nibh pellentesque con vallis. Mauris eget tristique Read more</string>
+    <string name="loreum_ipsum">Lorem ipsum dolor sit amet, consectetur ` adipiscing elit. Mom ipsum dolort, consectetur ` adipiscing et, consectetur ` adipiscing e sit amet, consectetur ` adipiscing elit. Morbi turpis purrbi turpis purus, dap ibus eget nisi vitae, finibus mollis justo. Ut facilisis sem ut nibh pellentesque con vallis. Mauris eget tristique Read more</string>
     <string name="_10">10</string>
     <string name="_9">9</string>
     <string name="_1n">1</string>
@@ -44,4 +44,5 @@
     <string name="result">Result</string>
     <string name="d">D</string>
     <string name="b">B</string>
+    <string name="what_this_quiz_is_about">What this quiz is about?</string>
 </resources>

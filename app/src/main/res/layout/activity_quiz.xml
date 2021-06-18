@@ -261,9 +261,9 @@
 
     </LinearLayout>
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/questionc"
-        android:layout_width="139dp"
+        android:layout_width="wrap_content"
         android:layout_height="28dp"
         android:layout_marginStart="27dp"
         android:layout_marginTop="50dp"
@@ -283,20 +283,25 @@
             android:fontFamily="@font/nunito_extrabold"
             android:textColor="@color/pink"
             android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Question 10" />
 
 
         <TextView
             android:layout_width="23dp"
             android:layout_height="wrap_content"
+            android:layout_alignRight="@id/questionCounter"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:fontFamily="@font/nunito_bold"
             android:text="/10"
             android:textColor="@color/pink"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@+id/questionCounter"
+            app:layout_constraintStart_toEndOf="@+id/questionCounter" />
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <com.timqi.sectorprogressview.ColorfulRingProgressView
