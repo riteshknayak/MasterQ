@@ -101,18 +101,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/result_r" />
+
         <TextView
             android:id="@+id/resultview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
             android:fontFamily="@font/nunito_bold"
             android:text="@string/result"
             android:textColor="@color/white"
             android:textSize="50dp"
-            android:layout_marginTop="30dp"
             app:layout_constraintBottom_toTopOf="@+id/result_list"
-            app:layout_constraintEnd_toEndOf="@+id/score_r"
-            app:layout_constraintStart_toStartOf="@+id/result_r"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/result_btn" />
 
 

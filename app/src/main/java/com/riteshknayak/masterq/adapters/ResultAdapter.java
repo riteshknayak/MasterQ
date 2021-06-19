@@ -60,7 +60,11 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultView
         }
         else {
             holder.parentView.setBackground(ContextCompat.getDrawable(context, R.drawable.option_wrong));
-            if (result.getGivenAnswer().equals("no")){}else  {
+            if (result.getGivenAnswer().equals("no")){
+                holder.selectedOption.setText(R.string.No_option_selected);
+                holder.selectedOption.setTextColor(0xFFFF0000);
+                //Never add "no" as a option!
+            }else  {
                 if (result.getGivenAnswer().equals(result.getOption1())) {
                     holder.option1view.setBackground(ContextCompat.getDrawable(context, R.drawable.option_wrong));
                 }else if (result.getGivenAnswer().equals(result.getOption2())) {

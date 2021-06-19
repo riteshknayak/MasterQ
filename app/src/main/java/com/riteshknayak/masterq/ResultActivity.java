@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.ScrollView;
@@ -12,15 +11,12 @@ import android.widget.TextView;
 
 import androidx.annotation.AnimRes;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.mlsdev.animatedrv.AnimatedRecyclerView;
 import com.riteshknayak.masterq.adapters.ResultAdapter;
-import com.riteshknayak.masterq.databinding.ActivityResultBinding;
 import com.riteshknayak.masterq.objects.Result;
 
 import java.text.SimpleDateFormat;
@@ -32,15 +28,12 @@ import java.util.Locale;
 
 public class ResultActivity extends AppCompatActivity {
 
-    ActivityResultBinding binding;
-    RecyclerView recyclerView;
     FirebaseFirestore database;
     FirebaseAuth auth;
     String UId, catId, topicId;
     Integer score;
     int correctAnswer;
     TextView scoreView, resultView;
-    ConstraintLayout parent_view;
     ScrollView scrollView;
     private Boolean showedAnim = Boolean.FALSE;
 
@@ -65,22 +58,19 @@ public class ResultActivity extends AppCompatActivity {
         @AnimRes int layoutAnimation = R.anim.layout_animation_from_bottom;
         LayoutAnimationController animationController = AnimationUtils.loadLayoutAnimation(ResultActivity.this, layoutAnimation);
 
-        scrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                Rect scrollBounds = new Rect();
-                scrollView.getHitRect(scrollBounds);
-                if (mRecyclerView.getLocalVisibleRect(scrollBounds)) {
-                    if (!showedAnim){
-                        //mRecyclerView is Visible
-                        mRecyclerView.setLayoutAnimation(animationController);
-                        adapter.notifyDataSetChanged();
-                        mRecyclerView.scheduleLayoutAnimation();
-                        showedAnim = Boolean.TRUE;
-                    }
-                } else {
-                    // NONE of the mRecyclerView is within the visible window
+        scrollView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            Rect scrollBounds = new Rect();
+            scrollView.getHitRect(scrollBounds);
+            if (mRecyclerView.getLocalVisibleRect(scrollBounds)) {
+                if (!showedAnim){
+                    //mRecyclerView is Visible
+                    mRecyclerView.setLayoutAnimation(animationController);
+                    adapter.notifyDataSetChanged();
+                    mRecyclerView.scheduleLayoutAnimation();
+                    showedAnim = Boolean.TRUE;
                 }
+            } else {
+                // NONE of the mRecyclerView is within the visible window
             }
         });
 
@@ -113,13 +103,10 @@ public class ResultActivity extends AppCompatActivity {
         resultView.setText(String.format("%d/10", correctAnswer));
     }
 
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         Intent intent = new Intent(ResultActivity.this, TopicActivity.class);
         startActivity(intent);
-
     }
-
 }
