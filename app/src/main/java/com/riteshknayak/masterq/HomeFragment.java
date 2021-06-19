@@ -13,9 +13,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.riteshknayak.masterq.adapters.CategoryAdapter;
+import com.riteshknayak.masterq.adapters.ImagerSliderAdapter;
 import com.riteshknayak.masterq.databinding.FragmentHomeBinding;
 import com.riteshknayak.masterq.objects.Category;
+import com.riteshknayak.masterq.objects.SliderItem;
 import com.riteshknayak.masterq.objects.User;
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
+import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
 
@@ -53,8 +58,31 @@ public class HomeFragment extends Fragment {
         auth = FirebaseAuth.getInstance();
         UId = auth.getCurrentUser().getUid();
 
+        ImagerSliderAdapter sliderAdapter = new ImagerSliderAdapter(getContext());
+
+        database.collection("MasterQ")
+                .document("updates")
+                .collection("imageSlider")
+                .addSnapshotListener((value, error) -> {
+                    sliderAdapter.clearAllSlides();
+                    for (DocumentSnapshot snapshot : value.getDocuments()) {
+                        sliderAdapter.addItem(snapshot.toObject(SliderItem.class));
+                    }
+                    sliderAdapter.notifyDataSetChanged();
+                });
+
+        binding.imageSlider.setSliderAdapter(sliderAdapter);
+        binding.imageSlider.setIndicatorAnimation(IndicatorAnimationType.DROP); //set indicator animation by using IndicatorAnimationType. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
+        binding.imageSlider.setSliderTransformAnimation(SliderAnimations.CUBEINROTATIONTRANSFORMATION);
+        binding.imageSlider.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH);
+        binding.imageSlider.setIndicatorSelectedColor(0xFFCA1395);
+        binding.imageSlider.setIndicatorUnselectedColor(0xFFA9A9A9);
+        binding.imageSlider.setScrollTimeInSec(4); //set scroll delay in seconds :
+        binding.imageSlider.startAutoCycle();
+
+
         final ArrayList<Category> categories = new ArrayList<>();
-        final CategoryAdapter adapter = new CategoryAdapter(getContext(), categories);
+        final CategoryAdapter categoryAdapter = new CategoryAdapter(getContext(), categories);
 
         database.collection("categories")
                 .addSnapshotListener((value, error) -> {
@@ -66,8 +94,11 @@ public class HomeFragment extends Fragment {
                             categories.add(model);
                         }
                     }
-                    adapter.notifyDataSetChanged();
+                    categoryAdapter.notifyDataSetChanged();
                 });
+
+        binding.categoryList.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        binding.categoryList.setAdapter(categoryAdapter);
 
 
         database.collection("users")
@@ -78,10 +109,6 @@ public class HomeFragment extends Fragment {
             binding.name.setText(mUser.getName());
             binding.topScore.setText(String.valueOf(mUser.getScore()));
         });
-
-
-        binding.categoryList.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        binding.categoryList.setAdapter(adapter);
 
         // Inflate the layout for this fragment
         return binding.getRoot();

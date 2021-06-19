@@ -23,5 +23,6 @@
     <color name="color_on_bg">#1E1B49</color>
     <color name="two_color_on_bg">#353363</color>
     <color name="pink">#CA1395</color>
+    <color name="light_pink">#E16BBF</color>
 
 </resources>
