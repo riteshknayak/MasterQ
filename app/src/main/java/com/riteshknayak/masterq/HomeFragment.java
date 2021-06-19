@@ -4,7 +4,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 
+import androidx.annotation.AnimRes;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -12,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.mlsdev.animatedrv.AnimatedRecyclerView;
 import com.riteshknayak.masterq.adapters.CategoryAdapter;
 import com.riteshknayak.masterq.adapters.ImagerSliderAdapter;
 import com.riteshknayak.masterq.databinding.FragmentHomeBinding;
@@ -97,9 +101,14 @@ public class HomeFragment extends Fragment {
                     categoryAdapter.notifyDataSetChanged();
                 });
 
-        binding.categoryList.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        binding.categoryList.setAdapter(categoryAdapter);
-
+        AnimatedRecyclerView recyclerView = binding.categoryList;
+        recyclerView.setAdapter(categoryAdapter);
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        @AnimRes int layoutAnimation = R.anim.layout_animation_from_bottom;
+        LayoutAnimationController animationController = AnimationUtils.loadLayoutAnimation(getContext(), layoutAnimation);
+        recyclerView.setLayoutAnimation(animationController);
+        categoryAdapter.notifyDataSetChanged();
+        recyclerView.scheduleLayoutAnimation();
 
         database.collection("users")
                 .document(UId)

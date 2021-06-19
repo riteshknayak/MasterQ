@@ -89,14 +89,19 @@
 
     </androidx.cardview.widget.CardView>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <com.mlsdev.animatedrv.AnimatedRecyclerView
         android:id="@+id/categoryList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:animationDuration="600"
         android:layout_marginTop="15dp"
+        app:layoutAnimation="@anim/layout_animation_from_bottom"
+        app:layoutManagerOrientation="vertical"
+        app:layoutManagerReverse="false"
+        app:layoutManagerType="linear"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
-
+    />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

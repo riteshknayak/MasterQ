@@ -3,14 +3,17 @@ package com.riteshknayak.masterq;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.TextView;
 
+import androidx.annotation.AnimRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.mlsdev.animatedrv.AnimatedRecyclerView;
 import com.riteshknayak.masterq.adapters.TopicsAdapter;
 import com.riteshknayak.masterq.databinding.ActivityTopicsBinding;
 import com.riteshknayak.masterq.objects.Topic;
@@ -19,7 +22,6 @@ import java.util.ArrayList;
 
 public class TopicsActivity extends AppCompatActivity {
 
-    RecyclerView recyclerView;
     FirebaseFirestore database = FirebaseFirestore.getInstance();
     ActivityTopicsBinding binding;
     TextView catView;
@@ -34,7 +36,6 @@ public class TopicsActivity extends AppCompatActivity {
         String catId = getShared.getString("catId", "CmYfZdAGsDpA2Vupktb4");
         String catName = getShared.getString("catName", "Geography");
 
-        recyclerView = findViewById(R.id.topicList);
         final ArrayList<Topic> Topics = new ArrayList<>();
         final TopicsAdapter adapter = new TopicsAdapter(this, Topics);
 
@@ -58,8 +59,14 @@ public class TopicsActivity extends AppCompatActivity {
             adapter.notifyDataSetChanged();
         });
 
-        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
-        recyclerView.setAdapter(adapter);
+        AnimatedRecyclerView mRecyclerView =  findViewById(R.id.topicList);
+        mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setLayoutManager(new GridLayoutManager(TopicsActivity.this, 2));
+        @AnimRes int layoutAnimation = R.anim.layout_animation_from_bottom;
+        LayoutAnimationController animationController = AnimationUtils.loadLayoutAnimation(TopicsActivity.this, layoutAnimation);
+        mRecyclerView.setLayoutAnimation(animationController);
+        adapter.notifyDataSetChanged();
+        mRecyclerView.scheduleLayoutAnimation();
     }
     public void onBackPressed() {
     Intent intent = new Intent(TopicsActivity.this, MainActivity.class);

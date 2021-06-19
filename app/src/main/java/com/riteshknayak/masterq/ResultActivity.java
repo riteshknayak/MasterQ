@@ -2,9 +2,15 @@ package com.riteshknayak.masterq;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Rect;
 import android.os.Bundle;
+import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.AnimRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.mlsdev.animatedrv.AnimatedRecyclerView;
 import com.riteshknayak.masterq.adapters.ResultAdapter;
 import com.riteshknayak.masterq.databinding.ActivityResultBinding;
 import com.riteshknayak.masterq.objects.Result;
@@ -34,25 +41,48 @@ public class ResultActivity extends AppCompatActivity {
     int correctAnswer;
     TextView scoreView, resultView;
     ConstraintLayout parent_view;
+    ScrollView scrollView;
+    private Boolean showedAnim = Boolean.FALSE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
+        scrollView = findViewById(R.id.result_scroll);
 
         SharedPreferences getShared = getSharedPreferences("app", MODE_PRIVATE);
         catId = getShared.getString("catId", null);
         topicId = getShared.getString("topicId", null);
 
-        recyclerView = findViewById(R.id.result_list);
         ArrayList<Result> Results = new ArrayList<>();
         Results = (ArrayList<Result>) getIntent().getSerializableExtra("Results");
         ResultAdapter adapter = new ResultAdapter(this, Results);
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(adapter);
+        AnimatedRecyclerView mRecyclerView = findViewById(R.id.result_list);
+        mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
+        @AnimRes int layoutAnimation = R.anim.layout_animation_from_bottom;
+        LayoutAnimationController animationController = AnimationUtils.loadLayoutAnimation(ResultActivity.this, layoutAnimation);
+
+        scrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                Rect scrollBounds = new Rect();
+                scrollView.getHitRect(scrollBounds);
+                if (mRecyclerView.getLocalVisibleRect(scrollBounds)) {
+                    if (!showedAnim){
+                        //mRecyclerView is Visible
+                        mRecyclerView.setLayoutAnimation(animationController);
+                        adapter.notifyDataSetChanged();
+                        mRecyclerView.scheduleLayoutAnimation();
+                        showedAnim = Boolean.TRUE;
+                    }
+                } else {
+                    // NONE of the mRecyclerView is within the visible window
+                }
+            }
+        });
 
         Calendar rightNow = Calendar.getInstance();
         Date strDate = rightNow.getTime();
@@ -74,11 +104,11 @@ public class ResultActivity extends AppCompatActivity {
                     .set(result);
         }
 
-        score = getIntent().getIntExtra("score",0);
+        score = getIntent().getIntExtra("score", 0);
         scoreView = findViewById(R.id.score_r);
         scoreView.setText(score.toString());
 
-        correctAnswer = getIntent().getIntExtra("correctAnswer",0);
+        correctAnswer = getIntent().getIntExtra("correctAnswer", 0);
         resultView = findViewById(R.id.result_r);
         resultView.setText(String.format("%d/10", correctAnswer));
     }
@@ -91,4 +121,5 @@ public class ResultActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+
 }

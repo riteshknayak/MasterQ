@@ -115,11 +115,18 @@
             app:layout_constraintStart_toStartOf="@+id/result_r"
             app:layout_constraintTop_toBottomOf="@+id/result_btn" />
 
-        <androidx.recyclerview.widget.RecyclerView
+
+
+
+        <com.mlsdev.animatedrv.AnimatedRecyclerView
             android:id="@+id/result_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
+            app:animationDuration="600"
+            app:layoutManagerOrientation="vertical"
+            app:layoutManagerReverse="false"
+            app:layoutManagerType="linear"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/resultview" />
 
