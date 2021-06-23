@@ -7,18 +7,17 @@ public class User {
 
     private String name, email, pass, uid, publicNAme,imageUrl;
     private Integer score;
-//    private ArrayList<String> unlockedCategories = new ArrayList<>();
-    //completedTopics, startedCategories
-//    public  void  seDefault(){
-//        //TODO add function for free categories
-//        unlockedCategories.add("CmYfZdAGsDpA2Vupktb4");
-//        unlockedCategories.add("gzkAZfEGotIKDQxcXSFV");
-//        unlockedCategories.add("gzkAZfEGotIKDQxcXSFV");
-//    }
 
     public User() {
     }
 
+    public User(String email, String pass, String uid, String imageUrl, Integer score) {
+        this.email = email;
+        this.pass = pass;
+        this.uid = uid;
+        this.imageUrl = imageUrl;
+        this.score = score;
+    }
 
     public User(String name, String email, String pass) {
         this.name = name;

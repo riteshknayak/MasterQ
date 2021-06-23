@@ -21,13 +21,9 @@ import java.util.ArrayList;
 
 public class LeaderboardFragment extends Fragment {
 
-
-
     public LeaderboardFragment() {
         // Required empty public constructor
     }
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,7 +58,6 @@ public class LeaderboardFragment extends Fragment {
                 adapter.notifyDataSetChanged();
             }
         });
-
 
         return binding.getRoot();
     }

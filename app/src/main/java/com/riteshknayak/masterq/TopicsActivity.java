@@ -40,26 +40,26 @@ public class TopicsActivity extends AppCompatActivity {
         final TopicsAdapter adapter = new TopicsAdapter(this, Topics);
 
         catView = findViewById(R.id.categoryName);
-        if (catName != null){
+        if (catName != null) {
             catView.setText(catName);
         }
 
         database.collection("categories")
-        .document(catId)
-        .collection("Topics")
-        .addSnapshotListener((value, error) -> {
-            Topics.clear();
-            for (DocumentSnapshot snapshot : value.getDocuments()) {
-                Topic model = snapshot.toObject(Topic.class);
-                if(model.isVisibility()) {
-                    model.setTopicId(snapshot.getId());
-                    Topics.add(model);
-                }
-            }
-            adapter.notifyDataSetChanged();
-        });
+                .document(catId)
+                .collection("Topics")
+                .addSnapshotListener((value, error) -> {
+                    Topics.clear();
+                    for (DocumentSnapshot snapshot : value.getDocuments()) {
+                        Topic model = snapshot.toObject(Topic.class);
+                        if (model.isVisibility()) {
+                            model.setTopicId(snapshot.getId());
+                            Topics.add(model);
+                        }
+                    }
+                    adapter.notifyDataSetChanged();
+                });
 
-        AnimatedRecyclerView mRecyclerView =  findViewById(R.id.topicList);
+        AnimatedRecyclerView mRecyclerView = findViewById(R.id.topicList);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new GridLayoutManager(TopicsActivity.this, 2));
         @AnimRes int layoutAnimation = R.anim.layout_animation_from_bottom;
@@ -69,8 +69,8 @@ public class TopicsActivity extends AppCompatActivity {
         mRecyclerView.scheduleLayoutAnimation();
     }
     public void onBackPressed() {
-    Intent intent = new Intent(TopicsActivity.this, MainActivity.class);
-    startActivity(intent);
-    //TODO update this show that it will show a dialog for conformation exit
+        Intent intent = new Intent(TopicsActivity.this, MainActivity.class);
+        startActivity(intent);
+        //TODO update this show that it will show a dialog for conformation exit
     }
 }
