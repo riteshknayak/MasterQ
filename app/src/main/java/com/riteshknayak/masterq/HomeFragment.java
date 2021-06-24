@@ -115,8 +115,12 @@ public class HomeFragment extends Fragment {
                 .get().addOnSuccessListener(documentSnapshot -> {
             mUser = documentSnapshot.toObject(User.class);
             assert mUser != null;
-            binding.name.setText(mUser.getName());
-            binding.topScore.setText(String.valueOf(mUser.getScore()));
+            if (mUser.getName() != null){
+                binding.name.setText(mUser.getName());
+            }
+            if (mUser.getScore() != null){
+                binding.topScore.setText(String.valueOf(mUser.getScore()));
+            }
         });
 
         // Inflate the layout for this fragment

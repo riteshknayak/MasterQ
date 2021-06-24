@@ -8,11 +8,9 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.riteshknayak.masterq.adapters.LeaderboardsAdapter;
 import com.riteshknayak.masterq.databinding.FragmentLeaderboardBinding;
 import com.riteshknayak.masterq.objects.User;
@@ -48,16 +46,14 @@ public class LeaderboardFragment extends Fragment {
 
         database.collection("users")
                 .limit(100)
-                .orderBy("score", Query.Direction.DESCENDING).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                for(DocumentSnapshot snapshot : queryDocumentSnapshots) {
-                    User user = snapshot.toObject(User.class);
-                    users.add(user);
-                }
-                adapter.notifyDataSetChanged();
-            }
-        });
+                .orderBy("score", Query.Direction.DESCENDING).get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for(DocumentSnapshot snapshot : queryDocumentSnapshots) {
+                        User user = snapshot.toObject(User.class);
+                        users.add(user);
+                    }
+                    adapter.notifyDataSetChanged();
+                });
 
         return binding.getRoot();
     }

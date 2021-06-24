@@ -29,25 +29,30 @@ import java.util.Map;
 
 public class QuizActivity extends AppCompatActivity {
 
-    ActivityQuizBinding binding;
-    ArrayList<Question> questions = new ArrayList<>();
-    ArrayList<Result> Results = new ArrayList<>();
-    int index = 0;
-    FirebaseFirestore database;
-    FirebaseAuth auth;
-    Question question;
-    CountDownTimer timer;
-    String catId, topicId, UId;
-    Integer mScore;
-    Integer addedScore = 0;
-    CollectionReference topicReference;
-    DocumentReference userTopicReference;
-    int highestTopicQuestion; //TODO remove this in your modified app for developer
-    TextView selectedTextView, time;
-    int correctAnswer = 0;
+    //Tip: Go to any variable or object etc. and click Alt+F7 to known all the usage in
+    //Tip: Go to any variable or object etc. and Click on Ctrl+B to see where the variable or object etc. is declared
+
+    //Global Variables
+    ActivityQuizBinding binding;  //binding for Quiz Activity
+    ArrayList<Question> questions = new ArrayList<>();  //Arraylist of all the Questions for the current Quiz
+    ArrayList<Result> Results = new ArrayList<>();  //ArrayList of the Object Results that will be passed to ResultActivity
+    int index = 0;  //Current Question index in ArrayList<Question>
+    FirebaseFirestore database;  //data base Reference to Firestore
+    FirebaseAuth auth;  //Firebase authentication system
+    Question question;  //the current question live in QuizActivity
+    CountDownTimer timer;  //Countdown timer
+    String catId, topicId, UId;  //Strings of The Category ID, Topic Id and UserId in Firestore "users" collection Respectively
+    Integer mScore;  //Current score of the user not only the score gained in the quiz
+    Integer addedScore = 0;  //Score gained in the quiz
+    CollectionReference topicReference;  //Reference of the topic currently using to shorten code
+    DocumentReference userTopicReference;  //Reference of the topic data of the user
+    int highestTopicQuestion; //For developer to know the current highest question ever attempted to update the topic as soon it reaches near last question //TODO remove this in your modified app
+    TextView selectedTextView, time;  //Textview Currently being used and current time in timer of QuizActivity
+    int correctAnswer = 0;  //Total number of correct Answer in this quiz
 
 
     //TODO ADD COMMENTS SHOW THAT OTHER DEVELOPERS CAN READ
+    //Working on it🔼
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

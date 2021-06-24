@@ -30,36 +30,42 @@ class ProfileFragment : Fragment() {
     private var storageReference: StorageReference = FirebaseStorage.getInstance().reference
     private var image: StorageReference? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+
         binding = FragmentProfileBinding.inflate(inflater, container, false)
         database = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
         auth = FirebaseAuth.getInstance()
         uid = auth!!.currentUser!!.uid
+
         database!!.collection("users")
             .document(uid!!)
             .get().addOnSuccessListener { documentSnapshot: DocumentSnapshot ->
                 if (documentSnapshot.getString("name") != null) {
                     mName = documentSnapshot.getString("name")
+                    binding!!.name.text = mName
                 }
                 if (documentSnapshot["score"] != null) {
                     val s = documentSnapshot["score"] as Long
-                    mScore = s.toInt()
-                }
-                binding!!.name.text = mName
-                if (mScore != null) {
+                    val mScore = s.toInt()
                     binding!!.score.text = mScore.toString()
+                    database!!.collection("users")
+                        .whereGreaterThan("score",mScore)
+                        .get().addOnSuccessListener { Q ->
+                            val position : Int = Q.size()+1
+                            binding!!.leaderboardPosition.text = "#"+position.toString()
+                        }
                 }
             }
-//        database?.collection("users")
-//            ?.document(uid!!)
-//            ?.get()?.addOnSuccessListener {doc->
-//                user = doc.toObject(User.class)
-//            }
+
         database!!.collection("users")
             .document(uid!!)
             .get().addOnSuccessListener { doc ->
-                if (doc.getString("imageUrl") != null){
+                if (doc.getString("imageUrl") != null) {
                     context?.let {
                         Glide.with(it)
                             .load(doc.getString("imageUrl"))
@@ -68,8 +74,13 @@ class ProfileFragment : Fragment() {
 
                 }
             }
-
-
+        binding!!.profileImage.setOnClickListener {
+            ImagePicker.with(requireActivity())
+                .cropSquare() //Crop image(Optional), Check Customization for more option
+                .compress(1024) //Final image size will be less than 1 MB(Optional)
+                .maxResultSize(1080, 1080) //Final image resolution will be less than 1080 x 1080
+                .createIntent { intent -> startForProfileImageResult.launch(intent) }
+        }
 
         binding!!.addProfile.setOnClickListener {
             ImagePicker.with(requireActivity())
