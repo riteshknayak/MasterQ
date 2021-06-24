@@ -20,12 +20,9 @@ import java.util.ArrayList;
 
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
-//    FirebaseFirestore database = FirebaseFirestore.getInstance();
-
 
     Context context;
     ArrayList<Category> categoryModels;
-
 
     public CategoryAdapter(Context context, ArrayList<Category> categoryModels) {
         this.context = context;

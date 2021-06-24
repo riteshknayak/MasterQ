@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,7 +39,6 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.TopicViewH
     public void onBindViewHolder(@NonNull TopicViewHolder holder, int position) {
         final Topic model = topics.get(position);
 
-        holder.textView.setText(model.getTopicName());
         Glide.with(context)
                 .load(model.getTopicImage())
                 .into(holder.imageView);
@@ -64,12 +62,10 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.TopicViewH
 
     public static class TopicViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView textView;
 
         public TopicViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.topic_image);
-            textView = itemView.findViewById(R.id.topic_name);
         }
     }
 }
