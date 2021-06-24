@@ -131,9 +131,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/result_btn" />
 
-
-
-
         <com.mlsdev.animatedrv.AnimatedRecyclerView
             android:id="@+id/result_list"
             android:layout_width="match_parent"

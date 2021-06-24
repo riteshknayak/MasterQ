@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.riteshknayak.masterq.R;
 import com.riteshknayak.masterq.databinding.RowLeaderboardsBinding;
 import com.riteshknayak.masterq.objects.User;
@@ -35,13 +36,13 @@ public class LeaderboardsAdapter extends RecyclerView.Adapter<LeaderboardsAdapte
     public void onBindViewHolder(@NonNull LeaderboardViewHolder holder, int position) {
         User user = users.get(position);
 
-//        holder.binding.name.setText(user.getName());
-//        holder.binding.score.setText(String.valueOf(user.getScore()));
+        holder.binding.name.setText(user.getName());
+        holder.binding.score.setText(String.valueOf(user.getScore()));
         holder.binding.index.setText(String.format("#%d", position+1));
 
-//        Glide.with(context)
-//                .load(user.getProfile())
-//                .into(holder.binding.imageView7);
+        Glide.with(context)
+                .load(user.getImageUrl())
+                .into(holder.binding.imageView7);
     }
 
     @Override

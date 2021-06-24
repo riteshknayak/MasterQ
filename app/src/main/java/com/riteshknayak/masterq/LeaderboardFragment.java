@@ -5,9 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -18,6 +21,10 @@ import com.riteshknayak.masterq.objects.User;
 import java.util.ArrayList;
 
 public class LeaderboardFragment extends Fragment {
+
+    FirebaseFirestore database;
+    FirebaseAuth auth;
+    String uid;
 
     public LeaderboardFragment() {
         // Required empty public constructor
@@ -31,12 +38,14 @@ public class LeaderboardFragment extends Fragment {
     FragmentLeaderboardBinding binding;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentLeaderboardBinding.inflate(inflater, container, false);
 
-        FirebaseFirestore database = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
+        uid = auth.getUid();
+        database = FirebaseFirestore.getInstance();
 
         final ArrayList<User> users = new ArrayList<>();
         final LeaderboardsAdapter adapter = new LeaderboardsAdapter(getContext(), users);
@@ -45,8 +54,9 @@ public class LeaderboardFragment extends Fragment {
         binding.leaderboardRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         database.collection("users")
+                .orderBy("score", Query.Direction.DESCENDING)
                 .limit(100)
-                .orderBy("score", Query.Direction.DESCENDING).get()
+                .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     for(DocumentSnapshot snapshot : queryDocumentSnapshots) {
                         User user = snapshot.toObject(User.class);
@@ -55,6 +65,64 @@ public class LeaderboardFragment extends Fragment {
                     adapter.notifyDataSetChanged();
                 });
 
+        final ArrayList<User> leaders = new ArrayList<>();
+        database.collection("users")
+                .orderBy("score", Query.Direction.DESCENDING)
+                .limit(3)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for(DocumentSnapshot snapshot : queryDocumentSnapshots) {
+                        User user = snapshot.toObject(User.class);
+                        leaders.add(user);
+                    }
+                    if (leaders.size() > 0){
+                        Glide.with(getContext())
+                                .load(leaders.get(0).getImageUrl())
+                                .into(binding.leaderOne);
+                        binding.l1Name.setText(String.valueOf(leaders.get(0).getName()));
+                        binding.l1Score.setText(String.valueOf(leaders.get(0).getScore()));
+                    }
+                    if (leaders.size() > 1){
+                        Glide.with(getContext())
+                                .load(leaders.get(1).getImageUrl())
+                                .into(binding.leaderOne);
+                        binding.l1Name.setText(String.valueOf(leaders.get(1).getName()));
+                        binding.l1Score.setText(String.valueOf(leaders.get(1).getScore()));
+                    }
+                    if (leaders.size() > 2){
+                        Glide.with(getContext())
+                                .load(leaders.get(2).getImageUrl())
+                                .into(binding.leaderOne);
+                        binding.l1Name.setText(String.valueOf(leaders.get(2).getName()));
+                        binding.l1Score.setText(String.valueOf(leaders.get(2).getScore()));
+                    }
+                    adapter.notifyDataSetChanged();
+                });
+
+        database.collection("users")
+                .document(uid)
+            .get().addOnSuccessListener(documentSnapshot -> {
+                if (documentSnapshot.getString("name") != null) {
+                    String mName = documentSnapshot.getString("name");
+                    binding.name.setText(mName);
+                }
+                if (documentSnapshot.get("score") != null) {
+                    long s = (long) documentSnapshot.get("score");
+                    int mScore = (int)s;
+                    binding.score.setText(String.valueOf(mScore));
+                    database.collection("users")
+                            .whereGreaterThan("score",mScore)
+                            .get().addOnSuccessListener(  Q ->{
+                            int position = Q.size()+1;
+                        binding.index.setText("#".concat(String.valueOf(position)));
+                    });
+                }
+                if (documentSnapshot.getString("imageUrl") != null ){
+                    Glide.with(getContext())
+                            .load(documentSnapshot.getString("imageUrl"))
+                            .into(binding.lProfileImage);
+                }
+            });
         return binding.getRoot();
     }
 }

@@ -40,7 +40,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultView
     public void onBindViewHolder(@NonNull ResultViewHolder holder, int position) {
         final Result result = results.get(position);
 
-        holder.questionIndex.setText(String.valueOf(result.getQuestionIndex()));
+        holder.questionIndex.setText(String.valueOf(position+1));
         holder.question.setText(result.getQuestion());
         holder.parentView.setOnClickListener(v -> {
             if (holder.expandable.getVisibility() == View.GONE) {
