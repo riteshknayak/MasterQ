@@ -15,7 +15,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginTop="25dp"
-            android:src="@drawable/ic_user"
+            tools:src="@drawable/ic_user"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -99,7 +99,7 @@
                 android:fontFamily="@font/nunito_bold"
                 android:text="Statistics"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

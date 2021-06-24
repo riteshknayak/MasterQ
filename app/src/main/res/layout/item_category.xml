@@ -7,7 +7,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -22,30 +22,14 @@
         app:layout_constraintTop_toTopOf="parent"
         android:background="@color/white">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@color/white">
-
             <ImageView
                 android:id="@+id/image"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
                 android:layout_gravity="center"
                 app:srcCompat="@drawable/ic_home"
-                tools:ignore="ContentDescription" />
+                tools:ignore="ContentDescription"
+                android:background="@color/white"/>
 
-            <TextView
-                android:id="@+id/category"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/nunito_bold"
-                android:gravity="center"
-                android:text="Category"
-                android:textColor="@android:color/black"
-                android:textSize="18sp" />
-        </LinearLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

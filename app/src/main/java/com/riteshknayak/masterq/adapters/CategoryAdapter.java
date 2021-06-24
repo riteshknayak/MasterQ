@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,7 +43,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
         final Category model = categoryModels.get(position);
 
-        holder.textView.setText(model.getCategoryName());
         Glide.with(context)
                 .load(model.getCategoryImage())
                 .into(holder.imageView);
@@ -127,12 +125,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     public static class CategoryViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView textView;
 
         public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.image);
-            textView = itemView.findViewById(R.id.category);
         }
     }
 }

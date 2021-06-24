@@ -9,12 +9,13 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profileImage"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_margin="10dp"
         android:src="@mipmap/ic_profile_image_round"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/linearLayout" />
 
 
     <RelativeLayout
@@ -39,7 +40,7 @@
             android:layout_marginTop="7dp"
             android:fontFamily="@font/nunito_bold"
             android:textColor="@color/white"
-            android:textSize="25sp"
+            android:textSize="22sp"
             tools:text="Rahul Singh" />
 
         <TextView
@@ -51,8 +52,8 @@
             android:fontFamily="@font/nunito_bold"
             android:textColor="@color/white"
             android:layout_marginStart="12dp"
-            android:layout_marginBottom="7dp"
-            android:textSize="20sp"
+            android:layout_marginBottom="9dp"
+            android:textSize="17sp"
             tools:text="3252" />
 
 
@@ -67,12 +68,13 @@
         app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toTopOf="@+id/categoryList"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.0"
         tools:layout_editor_absoluteX="26dp">
 
         <com.smarteist.autoimageslider.SliderView
             android:id="@+id/imageSlider"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
+            android:layout_height="200dp"
             app:sliderAnimationDuration="600"
             app:sliderAutoCycleDirection="back_and_forth"
             app:sliderAutoCycleEnabled="true"
@@ -89,19 +91,32 @@
 
     </androidx.cardview.widget.CardView>
 
+    <TextView
+        android:id="@+id/cat_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nunito_bold"
+        android:text="Categories"
+        android:textColor="@color/white"
+        android:layout_marginTop="15dp"
+        android:textSize="23sp"
+        android:layout_marginStart="7dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
     <com.mlsdev.animatedrv.AnimatedRecyclerView
         android:id="@+id/categoryList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:animationDuration="600"
         android:layout_marginTop="15dp"
+        app:animationDuration="600"
         app:layoutAnimation="@anim/layout_animation_from_bottom"
         app:layoutManagerOrientation="vertical"
         app:layoutManagerReverse="false"
         app:layoutManagerType="linear"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        app:layout_constraintTop_toBottomOf="@+id/cat_view" />
     />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
