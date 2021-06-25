@@ -29,7 +29,7 @@
                 android:layout_gravity="center"
                 app:srcCompat="@drawable/ic_home"
                 tools:ignore="ContentDescription"
-                android:background="@color/white"/>
+                android:background="@drawable/ripple_with_white_bg"/>
 
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

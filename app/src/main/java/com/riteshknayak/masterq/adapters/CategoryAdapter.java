@@ -1,8 +1,10 @@
 package com.riteshknayak.masterq.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,21 +14,31 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.riteshknayak.masterq.R;
 import com.riteshknayak.masterq.TopicsActivity;
 import com.riteshknayak.masterq.objects.Category;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
 
     Context context;
     ArrayList<Category> categoryModels;
+    Activity activity;
+    FirebaseFirestore database = FirebaseFirestore.getInstance();
+    FirebaseAuth auth = FirebaseAuth.getInstance();
 
-    public CategoryAdapter(Context context, ArrayList<Category> categoryModels) {
+    public CategoryAdapter(Context context, ArrayList<Category> categoryModels, Activity activity) {
         this.context = context;
         this.categoryModels = categoryModels;
+        this.activity = activity;
     }
 
     @NonNull
@@ -55,63 +67,51 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             editor.putString("catName", model.getCategoryName());
             editor.apply();
 
-            //TODO  database work down below
-//            Map<String, Boolean> data = new HashMap<>();
-//            data.put("unlocked", true);
-//            database.collection("users")
-//                    .document(FirebaseAuth.getInstance().getUid())
-//                    .collection(model.getCategoryId())
-//                    .document("1")
-//                    .set(data);
-//            database.collection("users")
-//                    .document(FirebaseAuth.getInstance().getUid())
-//                    .collection(model.getCategoryId())
-//                    .document("2")
-//                    .set(data);
-//            database.collection("users")
-//                    .document(FirebaseAuth.getInstance().getUid())
-//                    .collection(model.getCategoryId())
-//                    .document("3")
-//                    .set(data);
-//            database.collection("users")
-//                    .document(FirebaseAuth.getInstance().getUid())
-//                    .collection(model.getCategoryId())
-//                    .document("4")
-//                    .set(data);
-//            database.collection("users")
-//                    .document(FirebaseAuth.getInstance().getUid())
-//                    .collection(model.getCategoryId())
-//                    .document("5")
-//                    .set(data);
-//            database.collection("users")
-//                    .document(FirebaseAuth.getInstance().getUid())
-//                    .collection(model.getCategoryId())
-//                    .document("6")
-//                    .set(data);
+        });
+        database.collection("users")
+                .document(auth.getUid())
+                .get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.getBoolean("CatShowPrompt") != null) {
+                Boolean showPrompt = documentSnapshot.getBoolean("CatShowPrompt");
+                if (showPrompt) {
+                    new MaterialTapTargetPrompt.Builder(activity)
+                            .setTarget(holder.itemView)
+                            .setBackgroundColour(0xFFCA1395)
+                            .setPrimaryText("List of categories")
+                            .setSecondaryText("New categories will be added soon")
+                            .setPromptStateChangeListener((prompt, state) -> {
+                                if (state == MaterialTapTargetPrompt.STATE_FOCAL_PRESSED) {
+                                    // User has pressed the prompt target
+                                }
+                                CountDownTimer timer = new CountDownTimer(4000, 1000) {
+                                    @Override
+                                    public void onTick(long millisUntilFinished) {
+                                    }
 
-            //below code to check if  category is unlocked
-//            final boolean[] val = new boolean[1];
-//            database.collection("users")
-//                    .document(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
-//                    .collection("userData")
-//                    .document("categories")
-//                    .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-//                @Override
-//                public void onSuccess(DocumentSnapshot documentSnapshot) {
-//                    val[0] = documentSnapshot.getBoolean(model.getCategoryId());
-//                }
-//            });
-//            if(val[0]){
-//                Intent intent = new Intent(context, QuizActivity.class);
-//                intent.putExtra("catId", model.getCategoryId());
-//                context.startActivity(intent);
-//                Map<String, Boolean> data = new HashMap<>();
-//                data.put(model.getCategoryId(), true);
-//            }else{
-//                Toast toast = Toast.makeText(context, "Access Denied", Toast.LENGTH_LONG);
-//                toast.show();
-//            }
-//            below code to add category data
+                                    @Override
+                                    public void onFinish() {
+                                        prompt.dismiss();
+                                        Map<String, Object> update = new HashMap<>();
+                                        update.put("CatShowPrompt", false);
+                                        update.put("SliderShowPrompt", true);
+                                        database.collection("users")
+                                                .document(auth.getUid())
+                                                .update(update);
+                                    }
+                                };
+                                timer.start();
+                            })
+                            .show();
+
+                    Map<String, Object> update = new HashMap<>();
+                    update.put("CatShowPrompt", false);
+                    update.put("SliderShowPrompt", true);
+                    database.collection("users")
+                            .document(auth.getUid())
+                            .update(update);
+
+                }
+            }
         });
     }
 

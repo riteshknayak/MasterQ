@@ -1,14 +1,18 @@
 package com.riteshknayak.masterq.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.riteshknayak.masterq.R;
 import com.riteshknayak.masterq.TopicActivity;
 import com.riteshknayak.masterq.TopicsActivity;
@@ -16,17 +20,27 @@ import com.riteshknayak.masterq.objects.SliderItem;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class ImagerSliderAdapter extends
-        SliderViewAdapter<ImagerSliderAdapter.SliderAdapterVH> {
+import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
+
+public class ImagerSliderAdapter extends SliderViewAdapter<ImagerSliderAdapter.SliderAdapterVH> {
 
     private Context context;
     private List<SliderItem> mSliderItems = new ArrayList<>();
+    Activity activity;
+    FirebaseFirestore database = FirebaseFirestore.getInstance();
+    FirebaseAuth auth = FirebaseAuth.getInstance();
 
-    public ImagerSliderAdapter(Context context) {
+
+    public ImagerSliderAdapter(Context context, Activity activity) {
         this.context = context;
+        this.activity = activity;
     }
+
+    Boolean i = Boolean.TRUE;
 
     //you can Completely customize you can add buttons text etc to the imageSlider
 
@@ -87,6 +101,47 @@ public class ImagerSliderAdapter extends
                 context.startActivity(intent);
             });
         }
+        database.collection("users")
+                .document(auth.getUid())
+                .get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.getBoolean("SliderShowPrompt") != null){
+                Boolean showPrompt = documentSnapshot.getBoolean("SliderShowPrompt");
+                if (showPrompt){
+            new MaterialTapTargetPrompt.Builder(activity)
+                    .setTarget(viewHolder.uselessView)
+                    .setBackgroundColour(0xFFCA1395)
+                    .setPrimaryText("Check out what's new here!")
+                    .setPromptStateChangeListener((prompt, state) -> {
+                        if (state == MaterialTapTargetPrompt.STATE_FOCAL_PRESSED)
+                        {
+                            // User has pressed the prompt target
+                        }
+                        CountDownTimer timer = new CountDownTimer(3000, 1000) {
+                            @Override
+                            public void onTick(long millisUntilFinished) {}
+
+                            @Override
+                            public void onFinish() {
+                                prompt.dismiss();
+                            }
+                        };
+                        timer.start();
+                    })
+                    .show();
+
+                    Map<String, Object> update = new HashMap<>();
+                    update.put("SliderShowPrompt", false );
+                    database.collection("users")
+                            .document(auth.getUid())
+                            .update(update);
+
+                }
+            }
+        });
+
+//        if (i){
+//            i = Boolean.FALSE;
+//        }
     }
 
     @Override
@@ -99,11 +154,14 @@ public class ImagerSliderAdapter extends
 
         View itemView;
         ImageView imageViewBackground;
+        View uselessView;
 
         public SliderAdapterVH(View itemView) {
             super(itemView);
             imageViewBackground = itemView.findViewById(R.id.slider_image);
+            uselessView = itemView.findViewById(R.id.uselessView);
             this.itemView = itemView;
+
         }
     }
 }

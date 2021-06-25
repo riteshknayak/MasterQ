@@ -1,13 +1,16 @@
 package com.riteshknayak.masterq;
 
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.os.Build;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.os.Bundle;
-
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.riteshknayak.masterq.databinding.ActivityMainBinding;
-
 
 
 public class MainActivity extends AppCompatActivity {
@@ -43,6 +46,23 @@ public class MainActivity extends AppCompatActivity {
             }
             return false;
         });
+
+        FirebaseMessaging.getInstance().subscribeToTopic("general")
+                .addOnCompleteListener(task -> {
+//                    String msg = "success";
+//                    if (!task.isSuccessful()) {
+//                        msg = "failed";
+//                    }
+//                    Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                });
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel =
+                    new NotificationChannel("notifications", "notifications", NotificationManager.IMPORTANCE_DEFAULT);
+
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
 
     }
 }

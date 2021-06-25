@@ -85,16 +85,16 @@ public class LeaderboardFragment extends Fragment {
                     if (leaders.size() > 1){
                         Glide.with(getContext())
                                 .load(leaders.get(1).getImageUrl())
-                                .into(binding.leaderOne);
-                        binding.l1Name.setText(String.valueOf(leaders.get(1).getName()));
-                        binding.l1Score.setText(String.valueOf(leaders.get(1).getScore()));
+                                .into(binding.leaderTwo);
+                        binding.l2Name.setText(String.valueOf(leaders.get(1).getName()));
+                        binding.l2Score.setText(String.valueOf(leaders.get(1).getScore()));
                     }
                     if (leaders.size() > 2){
                         Glide.with(getContext())
                                 .load(leaders.get(2).getImageUrl())
-                                .into(binding.leaderOne);
-                        binding.l1Name.setText(String.valueOf(leaders.get(2).getName()));
-                        binding.l1Score.setText(String.valueOf(leaders.get(2).getScore()));
+                                .into(binding.leaderThree);
+                        binding.l3Name.setText(String.valueOf(leaders.get(2).getName()));
+                        binding.l3Score.setText(String.valueOf(leaders.get(2).getScore()));
                     }
                     adapter.notifyDataSetChanged();
                 });

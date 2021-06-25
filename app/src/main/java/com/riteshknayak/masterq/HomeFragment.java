@@ -36,11 +36,6 @@ public class HomeFragment extends Fragment {
     FirebaseAuth auth;
     String UId;
     User mUser;
-    ArrayList<User> users = new ArrayList<>();
-
-    public FragmentHomeBinding getBinding() {
-        return binding;
-    }
 
     public HomeFragment() {
         // Required empty public constructor for Firebase
@@ -62,7 +57,7 @@ public class HomeFragment extends Fragment {
         auth = FirebaseAuth.getInstance();
         UId = auth.getCurrentUser().getUid();
 
-        ImagerSliderAdapter sliderAdapter = new ImagerSliderAdapter(getContext());
+        ImagerSliderAdapter sliderAdapter = new ImagerSliderAdapter(getContext(), getActivity());
 
         database.collection("MasterQ")
                 .document("updates")
@@ -81,12 +76,12 @@ public class HomeFragment extends Fragment {
         binding.imageSlider.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH);
         binding.imageSlider.setIndicatorSelectedColor(0xFFCA1395);
         binding.imageSlider.setIndicatorUnselectedColor(0xFFA9A9A9);
-        binding.imageSlider.setScrollTimeInSec(4); //set scroll delay in seconds :
+        binding.imageSlider.setScrollTimeInSec(3); //set scroll delay in seconds :
         binding.imageSlider.startAutoCycle();
 
 
         final ArrayList<Category> categories = new ArrayList<>();
-        final CategoryAdapter categoryAdapter = new CategoryAdapter(getContext(), categories);
+        final CategoryAdapter categoryAdapter = new CategoryAdapter(getContext(), categories, getActivity());
 
         database.collection("categories")
                 .addSnapshotListener((value, error) -> {
