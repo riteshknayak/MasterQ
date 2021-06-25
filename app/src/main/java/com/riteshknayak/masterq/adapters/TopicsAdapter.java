@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,6 +44,8 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.TopicViewH
                 .load(model.getTopicImage())
                 .into(holder.imageView);
 
+        holder.tv.setText(model.getTopicName());
+
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, TopicActivity.class);
             SharedPreferences shared = context.getSharedPreferences("app", Context.MODE_PRIVATE);
@@ -62,10 +65,11 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.TopicViewH
 
     public static class TopicViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-
+        TextView tv;
         public TopicViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.topic_image);
+            tv = itemView.findViewById(R.id.namet);
         }
     }
 }

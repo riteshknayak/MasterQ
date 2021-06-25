@@ -16,6 +16,8 @@
             android:layout_height="150dp"
             android:layout_marginTop="25dp"
             tools:src="@drawable/ic_user"
+            android:background="@drawable/circular_view_pink"
+            android:padding="2dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

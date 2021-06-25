@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -115,6 +116,11 @@ public class HomeFragment extends Fragment {
             }
             if (mUser.getScore() != null){
                 binding.topScore.setText(String.valueOf(mUser.getScore()));
+            }
+            if (mUser.getImageUrl() != null){
+                Glide.with(getContext())
+                        .load(mUser.getImageUrl())
+                        .into(binding.profileImage);
             }
         });
 

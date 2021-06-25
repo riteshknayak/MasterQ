@@ -9,10 +9,12 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profileImage"
+        android:background="@drawable/circular_view_pink"
+        android:padding="1dp"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_margin="10dp"
-        android:src="@mipmap/ic_profile_image_round"
+        tools:src="@mipmap/ic_profile_image_round"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linearLayout" />

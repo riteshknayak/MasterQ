@@ -112,7 +112,7 @@ class ProfileFragment : Fragment() {
 
                             database?.collection("users")
                                 ?.document(uid.toString())
-                                ?.set(imageUid)
+                                ?.update(imageUid)
                         }
                         Toast.makeText(context, "Image Is Uploaded.", Toast.LENGTH_SHORT)
                             .show()

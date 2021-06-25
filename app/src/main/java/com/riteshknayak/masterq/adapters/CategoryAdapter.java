@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -56,6 +57,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                 .load(model.getCategoryImage())
                 .into(holder.imageView);
 
+        holder.tv.setText(model.getCategoryName());
         holder.itemView.setOnClickListener(v -> {
 
             Intent intent = new Intent(context, TopicsActivity.class);
@@ -122,10 +124,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     public static class CategoryViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-
+        TextView tv;
         public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.image);
+            tv = itemView.findViewById(R.id.namec);
         }
     }
 }
