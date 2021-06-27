@@ -47,7 +47,7 @@ public class ResultActivity extends AppCompatActivity {
         catId = getShared.getString("catId", null);
         topicId = getShared.getString("topicId", null);
 
-        ArrayList<Result> Results = new ArrayList<>();
+        ArrayList<Result> Results;
         Results = (ArrayList<Result>) getIntent().getSerializableExtra("Results");
         ResultAdapter adapter = new ResultAdapter(this, Results);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -57,6 +57,8 @@ public class ResultActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(linearLayoutManager);
         @AnimRes int layoutAnimation = R.anim.layout_animation_from_bottom;
         LayoutAnimationController animationController = AnimationUtils.loadLayoutAnimation(ResultActivity.this, layoutAnimation);
+        mRecyclerView.setLayoutAnimation(animationController);
+
 
         scrollView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
             Rect scrollBounds = new Rect();
@@ -64,8 +66,6 @@ public class ResultActivity extends AppCompatActivity {
             if (mRecyclerView.getLocalVisibleRect(scrollBounds)) {
                 if (!showedAnim){
                     //mRecyclerView is Visible
-                    mRecyclerView.setLayoutAnimation(animationController);
-                    adapter.notifyDataSetChanged();
                     mRecyclerView.scheduleLayoutAnimation();
                     showedAnim = Boolean.TRUE;
                 }

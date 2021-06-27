@@ -26,6 +26,7 @@ public class Result implements Serializable {
         this.option3 = question.getOption3();
         this.option4 = question.getOption4();
         this.trueOption = question.getAnswer();
+        this.questionUid = question.getUId();
         this.givenAnswer = givenAnswer;
         this.questionIndex = question.getIndex();
         this.questionResult = questionResult;
