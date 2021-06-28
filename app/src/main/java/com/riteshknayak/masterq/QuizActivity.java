@@ -238,6 +238,7 @@ public class QuizActivity extends AppCompatActivity {
                     intent.putExtra("score", addedScore);
                     intent.putExtra("correctAnswer", correctAnswer);
                     startActivity(intent);
+                    finish();
                 });
             }
         } else {
@@ -249,6 +250,7 @@ public class QuizActivity extends AppCompatActivity {
             intent.putExtra("score", addedScore);
             intent.putExtra("correctAnswer", correctAnswer);
             startActivity(intent);
+            finish();
         }
     }
 

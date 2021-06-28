@@ -104,19 +104,19 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultView
         public ResultViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            questionIndex = itemView.findViewById(R.id.question_index);
-            question = itemView.findViewById(R.id.question);
+            questionIndex = itemView.findViewById(R.id.question_index1);
+            question = itemView.findViewById(R.id.question1);
             expandable = itemView.findViewById(R.id.expandable);
             parentView = itemView.findViewById(R.id.parent_view);
-            option1 = itemView.findViewById(R.id.option1);
-            option2 = itemView.findViewById(R.id.option2);
-            option3 = itemView.findViewById(R.id.option3);
-            option4 = itemView.findViewById(R.id.option4);
-            selectedOption = itemView.findViewById(R.id.selected_option);
-            option1view = itemView.findViewById(R.id.option_1_view);
-            option2view = itemView.findViewById(R.id.option_2_view);
-            option3view = itemView.findViewById(R.id.option_3_view);
-            option4view = itemView.findViewById(R.id.option_4_view);
+            option1 = itemView.findViewById(R.id.option1_q1);
+            option2 = itemView.findViewById(R.id.option2_q1);
+            option3 = itemView.findViewById(R.id.option3_q1);
+            option4 = itemView.findViewById(R.id.option4_q1);
+            selectedOption = itemView.findViewById(R.id.selected_option1);
+            option1view = itemView.findViewById(R.id.option_1_view_q1);
+            option2view = itemView.findViewById(R.id.option_2_view_q1);
+            option3view = itemView.findViewById(R.id.option_3_view_q1);
+            option4view = itemView.findViewById(R.id.option_4_view_q1);
         }
     }
 

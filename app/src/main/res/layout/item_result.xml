@@ -14,7 +14,7 @@
     android:paddingBottom="10dp">
 
     <TextView
-        android:id="@+id/question_index"
+        android:id="@+id/question_index1"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginStart="15dp"
@@ -28,36 +28,36 @@
         tools:text="1" />
 
     <TextView
-        android:id="@+id/selected_option"
+        android:id="@+id/selected_option1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_toEndOf="@id/question_index"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@id/question_index1"
         android:fontFamily="@font/nunito_bold"
         android:textColor="@color/white"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/question_index"
-        app:layout_constraintStart_toEndOf="@+id/question_index"
-        app:layout_constraintTop_toTopOf="@+id/question_index"
+        app:layout_constraintBottom_toBottomOf="@+id/question_index1"
+        app:layout_constraintStart_toEndOf="@+id/question_index1"
+        app:layout_constraintTop_toTopOf="@+id/question_index1"
         android:text="option 1" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/expandable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/selected_option"
+        android:layout_alignBottom="@id/selected_option1"
         android:layout_alignParentStart="true"
         android:layout_marginTop="0dp"
         android:paddingStart="15dp"
-        android:visibility="gone"
+        android:visibility="visible"
         android:paddingTop="20dp"
         android:paddingEnd="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selected_option">
+        app:layout_constraintTop_toBottomOf="@+id/selected_option1">
 
         <TextView
-            android:id="@+id/question"
+            android:id="@+id/question1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -72,7 +72,7 @@
             tools:text="where is the jnasofdgdfn jhsfv l; sfvjjsfvnzxfcv?" />
 
         <LinearLayout
-            android:id="@+id/option_1_view"
+            android:id="@+id/option_1_view_q1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
@@ -80,7 +80,7 @@
             android:orientation="horizontal"
             android:padding="8dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/question">
+            app:layout_constraintTop_toBottomOf="@+id/question1">
 
             <TextView
                 android:layout_width="35dp"
@@ -94,7 +94,7 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/option1"
+                android:id="@+id/option1_q1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -107,7 +107,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/option_2_view"
+            android:id="@+id/option_2_view_q1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_color_background"
@@ -116,7 +116,7 @@
             android:layout_marginTop="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/option_1_view">
+            app:layout_constraintTop_toBottomOf="@+id/option_1_view_q1">
 
             <TextView
                 android:layout_width="35dp"
@@ -130,7 +130,7 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/option2"
+                android:id="@+id/option2_q1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -143,14 +143,14 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/option_3_view"
+            android:id="@+id/option_3_view_q1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_color_background"
             android:orientation="horizontal"
             android:padding="8dp"
             android:layout_marginTop="15dp"
-            app:layout_constraintTop_toBottomOf="@id/option_2_view"
+            app:layout_constraintTop_toBottomOf="@id/option_2_view_q1"
             tools:layout_editor_absoluteX="15dp">
 
             <TextView
@@ -165,7 +165,7 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/option3"
+                android:id="@+id/option3_q1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -178,7 +178,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/option_4_view"
+            android:id="@+id/option_4_view_q1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -186,7 +186,7 @@
             android:padding="8dp"
             android:background="@drawable/bg_color_background"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/option_3_view">
+            app:layout_constraintTop_toBottomOf="@+id/option_3_view_q1">
 
             <TextView
                 android:layout_width="35dp"
@@ -200,7 +200,7 @@
                 android:fontFamily="@font/nunito_bold" />
 
             <TextView
-                android:id="@+id/option4"
+                android:id="@+id/option4_q1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="This is option 4"

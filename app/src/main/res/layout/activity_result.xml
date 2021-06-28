@@ -5,22 +5,23 @@
     android:id="@+id/result_scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbars="none">
+    android:scrollbars="none"
+    tools:context=".ResultActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/resultmain"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:context=".ResultActivity">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
             android:fontFamily="@font/nunito_bold"
             android:text="Scroll to see result"
             android:textColor="@color/pink"
             android:textSize="15sp"
-            android:layout_marginBottom="3dp"
             app:layout_constraintBottom_toTopOf="@+id/result_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -83,25 +84,25 @@
             android:id="@+id/result_r"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="6/10"
+            android:fontFamily="@font/nunito_bold"
             android:textColor="@color/white"
             android:textSize="50sp"
-            android:fontFamily="@font/nunito_bold"
             app:layout_constraintEnd_toEndOf="@+id/textView8"
             app:layout_constraintStart_toStartOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+            app:layout_constraintTop_toBottomOf="@+id/textView8"
+            tools:text="6/10" />
 
         <TextView
             android:id="@+id/score_r"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/nunito_bold"
+            android:text="76"
             android:textColor="@color/white"
             android:textSize="50sp"
             app:layout_constraintEnd_toEndOf="@+id/textView10"
             app:layout_constraintStart_toStartOf="@+id/textView10"
-            app:layout_constraintTop_toBottomOf="@+id/textView10"
-            android:text="76" />
+            app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
         <Button
             android:id="@+id/result_btn"
@@ -126,22 +127,2170 @@
             android:text="@string/result"
             android:textColor="@color/white"
             android:textSize="50dp"
-            app:layout_constraintBottom_toTopOf="@+id/result_list"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/result_btn" />
 
-        <com.mlsdev.animatedrv.AnimatedRecyclerView
-            android:id="@+id/result_list"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/results_view"
+            android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            app:animationDuration="600"
-            app:layoutManagerOrientation="vertical"
-            app:layoutManagerReverse="false"
-            app:layoutManagerType="linear"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/resultview" />
+            app:layout_constraintTop_toBottomOf="@+id/resultview">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/parent_view1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/parent_view_background"
+                android:orientation="vertical"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="15dp">
+
+                <TextView
+                    android:id="@+id/question_index1"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="15dp"
+                    android:background="@drawable/bg_color_circular_view"
+                    android:fontFamily="@font/nunito_bold"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="1" />
+
+                <TextView
+                    android:id="@+id/selected_option1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@id/question_index1"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="option 1"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/question_index1"
+                    app:layout_constraintStart_toEndOf="@+id/question_index1"
+                    app:layout_constraintTop_toTopOf="@+id/question_index1" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/expandable1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/selected_option1"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="0dp"
+                    android:paddingStart="15dp"
+                    android:paddingTop="20dp"
+                    android:paddingEnd="15dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/selected_option1">
+
+                    <TextView
+                        android:id="@+id/question1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:fontFamily="@font/nunito_bold"
+                        android:gravity="left"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="where is the jnasofdgdfn jhsfv l; sf    vjjsfvnzxfcv?" />
+
+                    <LinearLayout
+                        android:id="@+id/option_1_view_q1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/question1">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="A"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option1_q1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            tools:text="This is option 1" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_2_view_q1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/option_1_view_q1">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="@string/b"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option2_q1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            tools:text="This is option 2" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_3_view_q1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintTop_toBottomOf="@id/option_2_view_q1"
+                        tools:layout_editor_absoluteX="15dp">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="C"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option3_q1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:text="This is option 3"
+                            android:textColor="@color/white"
+                            android:textSize="15sp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_4_view_q1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/option_3_view_q1">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="@string/d"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option4_q1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:text="This is option 4"
+                            android:textColor="@color/white"
+                            android:textSize="15sp" />
+
+
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/parent_view2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/parent_view_background"
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/parent_view1">
+
+                <TextView
+                    android:id="@+id/question_index2"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="15dp"
+                    android:background="@drawable/bg_color_circular_view"
+                    android:fontFamily="@font/nunito_bold"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="1" />
+
+                <TextView
+                    android:id="@+id/selected_option2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@id/question_index2"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="option 1"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/question_index2"
+                    app:layout_constraintStart_toEndOf="@+id/question_index2"
+                    app:layout_constraintTop_toTopOf="@+id/question_index2" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/expandable2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/selected_option2"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="0dp"
+                    android:paddingStart="15dp"
+                    android:paddingTop="20dp"
+                    android:paddingEnd="15dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/selected_option2">
+
+                    <TextView
+                        android:id="@+id/question2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:fontFamily="@font/nunito_bold"
+                        android:gravity="left"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="where is the jnasofdgdfn jhsfv l; sf    vjjsfvnzxfcv?" />
+
+                    <LinearLayout
+                        android:id="@+id/option_1_view_q2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/question2">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="A"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option1_q2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            tools:text="This is option 1" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_2_view_q2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/option_1_view_q2">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="@string/b"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option2_q2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            tools:text="This is option 2" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_3_view_q2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintTop_toBottomOf="@id/option_2_view_q2"
+                        tools:layout_editor_absoluteX="15dp">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="C"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option3_q2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:text="This is option 3"
+                            android:textColor="@color/white"
+                            android:textSize="15sp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_4_view_q2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/option_3_view_q2">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="@string/d"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option4_q2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:text="This is option 4"
+                            android:textColor="@color/white"
+                            android:textSize="15sp" />
+
+
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/parent_view3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/parent_view_background"
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/parent_view2">
+
+                <TextView
+                    android:id="@+id/question_index3"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="15dp"
+                    android:background="@drawable/bg_color_circular_view"
+                    android:fontFamily="@font/nunito_bold"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="1" />
+
+                <TextView
+                    android:id="@+id/selected_option3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@id/question_index3"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="option 1"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/question_index3"
+                    app:layout_constraintStart_toEndOf="@+id/question_index3"
+                    app:layout_constraintTop_toTopOf="@+id/question_index3" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/expandable3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/selected_option3"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="0dp"
+                    android:paddingStart="15dp"
+                    android:paddingTop="20dp"
+                    android:paddingEnd="15dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/selected_option3">
+
+                    <TextView
+                        android:id="@+id/question3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:fontFamily="@font/nunito_bold"
+                        android:gravity="left"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="where is the jnasofdgdfn jhsfv l; sf    vjjsfvnzxfcv?" />
+
+                    <LinearLayout
+                        android:id="@+id/option_1_view_q3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/question3">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="A"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option1_q3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            tools:text="This is option 1" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_2_view_q3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/option_1_view_q3">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="@string/b"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option2_q3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            tools:text="This is option 2" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_3_view_q3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintTop_toBottomOf="@id/option_2_view_q3"
+                        tools:layout_editor_absoluteX="15dp">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="C"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option3_q3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:text="This is option 3"
+                            android:textColor="@color/white"
+                            android:textSize="15sp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_4_view_q3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/option_3_view_q3">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="@string/d"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option4_q3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:text="This is option 4"
+                            android:textColor="@color/white"
+                            android:textSize="15sp" />
+
+
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/parent_view4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/parent_view_background"
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/parent_view3">
+
+                <TextView
+                    android:id="@+id/question_index4"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="15dp"
+                    android:background="@drawable/bg_color_circular_view"
+                    android:fontFamily="@font/nunito_bold"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="1" />
+
+                <TextView
+                    android:id="@+id/selected_option4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@id/question_index4"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="option 1"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/question_index4"
+                    app:layout_constraintStart_toEndOf="@+id/question_index4"
+                    app:layout_constraintTop_toTopOf="@+id/question_index4" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/expandable4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/selected_option4"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="0dp"
+                    android:paddingStart="15dp"
+                    android:paddingTop="20dp"
+                    android:paddingEnd="15dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/selected_option4">
+
+                    <TextView
+                        android:id="@+id/question4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:fontFamily="@font/nunito_bold"
+                        android:gravity="left"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="where is the jnasofdgdfn jhsfv l; sf    vjjsfvnzxfcv?" />
+
+                    <LinearLayout
+                        android:id="@+id/option_1_view_q4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/question4">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="A"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option1_q4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            tools:text="This is option 1" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_2_view_q4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/option_1_view_q4">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="@string/b"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option2_q4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            tools:text="This is option 2" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_3_view_q4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintTop_toBottomOf="@id/option_2_view_q4"
+                        tools:layout_editor_absoluteX="15dp">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="C"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option3_q4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:text="This is option 3"
+                            android:textColor="@color/white"
+                            android:textSize="15sp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_4_view_q4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/option_3_view_q4">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="@string/d"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option4_q4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:text="This is option 4"
+                            android:textColor="@color/white"
+                            android:textSize="15sp" />
+
+
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/parent_view5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/parent_view_background"
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/parent_view4">
+
+                <TextView
+                    android:id="@+id/question_index5"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="15dp"
+                    android:background="@drawable/bg_color_circular_view"
+                    android:fontFamily="@font/nunito_bold"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="1" />
+
+                <TextView
+                    android:id="@+id/selected_option5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@id/question_index5"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="option 1"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/question_index5"
+                    app:layout_constraintStart_toEndOf="@+id/question_index5"
+                    app:layout_constraintTop_toTopOf="@+id/question_index5" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/expandable5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/selected_option5"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="0dp"
+                    android:paddingStart="15dp"
+                    android:paddingTop="20dp"
+                    android:paddingEnd="15dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/selected_option5">
+
+                    <TextView
+                        android:id="@+id/question5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:fontFamily="@font/nunito_bold"
+                        android:gravity="left"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="where is the jnasofdgdfn jhsfv l; sf    vjjsfvnzxfcv?" />
+
+                    <LinearLayout
+                        android:id="@+id/option_1_view_q5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/question5">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="A"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option1_q5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            tools:text="This is option 1" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_2_view_q5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/option_1_view_q5">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="@string/b"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option2_q5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            tools:text="This is option 2" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_3_view_q5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintTop_toBottomOf="@id/option_2_view_q5"
+                        tools:layout_editor_absoluteX="15dp">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="C"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option3_q5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:text="This is option 3"
+                            android:textColor="@color/white"
+                            android:textSize="15sp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_4_view_q5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/option_3_view_q5">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="@string/d"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option4_q5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:text="This is option 4"
+                            android:textColor="@color/white"
+                            android:textSize="15sp" />
+
+
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/parent_view6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/parent_view_background"
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/parent_view5">
+
+                <TextView
+                    android:id="@+id/question_index6"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="15dp"
+                    android:background="@drawable/bg_color_circular_view"
+                    android:fontFamily="@font/nunito_bold"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="1" />
+
+                <TextView
+                    android:id="@+id/selected_option6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@id/question_index6"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="option 1"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/question_index6"
+                    app:layout_constraintStart_toEndOf="@+id/question_index6"
+                    app:layout_constraintTop_toTopOf="@+id/question_index6" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/expandable6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/selected_option6"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="0dp"
+                    android:paddingStart="15dp"
+                    android:paddingTop="20dp"
+                    android:paddingEnd="15dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/selected_option6">
+
+                    <TextView
+                        android:id="@+id/question6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:fontFamily="@font/nunito_bold"
+                        android:gravity="left"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="where is the jnasofdgdfn jhsfv l; sf    vjjsfvnzxfcv?" />
+
+                    <LinearLayout
+                        android:id="@+id/option_1_view_q6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/question6">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="A"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option1_q6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            tools:text="This is option 1" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_2_view_q6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/option_1_view_q6">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="@string/b"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option2_q6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            tools:text="This is option 2" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_3_view_q6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintTop_toBottomOf="@id/option_2_view_q6"
+                        tools:layout_editor_absoluteX="15dp">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="C"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option3_q6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:text="This is option 3"
+                            android:textColor="@color/white"
+                            android:textSize="15sp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_4_view_q6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/option_3_view_q6">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="@string/d"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option4_q6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:text="This is option 4"
+                            android:textColor="@color/white"
+                            android:textSize="15sp" />
+
+
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/parent_view7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/parent_view_background"
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/parent_view6">
+
+                <TextView
+                    android:id="@+id/question_index7"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="15dp"
+                    android:background="@drawable/bg_color_circular_view"
+                    android:fontFamily="@font/nunito_bold"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="1" />
+
+                <TextView
+                    android:id="@+id/selected_option7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@id/question_index7"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="option 1"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/question_index7"
+                    app:layout_constraintStart_toEndOf="@+id/question_index7"
+                    app:layout_constraintTop_toTopOf="@+id/question_index7" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/expandable7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/selected_option7"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="0dp"
+                    android:paddingStart="15dp"
+                    android:paddingTop="20dp"
+                    android:paddingEnd="15dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/selected_option7">
+
+                    <TextView
+                        android:id="@+id/question7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:fontFamily="@font/nunito_bold"
+                        android:gravity="left"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="where is the jnasofdgdfn jhsfv l; sf    vjjsfvnzxfcv?" />
+
+                    <LinearLayout
+                        android:id="@+id/option_1_view_q7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/question7">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="A"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option1_q7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            tools:text="This is option 1" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_2_view_q7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/option_1_view_q7">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="@string/b"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option2_q7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            tools:text="This is option 2" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_3_view_q7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintTop_toBottomOf="@id/option_2_view_q7"
+                        tools:layout_editor_absoluteX="15dp">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="C"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option3_q7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:text="This is option 3"
+                            android:textColor="@color/white"
+                            android:textSize="15sp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_4_view_q7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/option_3_view_q7">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="@string/d"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option4_q7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:text="This is option 4"
+                            android:textColor="@color/white"
+                            android:textSize="15sp" />
+
+
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/parent_view8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/parent_view_background"
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/parent_view7">
+
+                <TextView
+                    android:id="@+id/question_index8"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="15dp"
+                    android:background="@drawable/bg_color_circular_view"
+                    android:fontFamily="@font/nunito_bold"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="1" />
+
+                <TextView
+                    android:id="@+id/selected_option8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@id/question_index8"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="option 1"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/question_index8"
+                    app:layout_constraintStart_toEndOf="@+id/question_index8"
+                    app:layout_constraintTop_toTopOf="@+id/question_index8" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/expandable8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/selected_option8"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="0dp"
+                    android:paddingStart="15dp"
+                    android:paddingTop="20dp"
+                    android:paddingEnd="15dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/selected_option8">
+
+                    <TextView
+                        android:id="@+id/question8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:fontFamily="@font/nunito_bold"
+                        android:gravity="left"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="where is the jnasofdgdfn jhsfv l; sf    vjjsfvnzxfcv?" />
+
+                    <LinearLayout
+                        android:id="@+id/option_1_view_q8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/question8">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="A"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option1_q8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            tools:text="This is option 1" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_2_view_q8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/option_1_view_q8">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="@string/b"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option2_q8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            tools:text="This is option 2" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_3_view_q8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintTop_toBottomOf="@id/option_2_view_q8"
+                        tools:layout_editor_absoluteX="15dp">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="C"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option3_q8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:text="This is option 3"
+                            android:textColor="@color/white"
+                            android:textSize="15sp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_4_view_q8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/option_3_view_q8">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="@string/d"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option4_q8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:text="This is option 4"
+                            android:textColor="@color/white"
+                            android:textSize="15sp" />
+
+
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/parent_view9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/parent_view_background"
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/parent_view8">
+
+                <TextView
+                    android:id="@+id/question_index9"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="15dp"
+                    android:background="@drawable/bg_color_circular_view"
+                    android:fontFamily="@font/nunito_bold"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="1" />
+
+                <TextView
+                    android:id="@+id/selected_option9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@id/question_index9"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="option 1"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/question_index9"
+                    app:layout_constraintStart_toEndOf="@+id/question_index9"
+                    app:layout_constraintTop_toTopOf="@+id/question_index9" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/expandable9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/selected_option9"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="0dp"
+                    android:paddingStart="15dp"
+                    android:paddingTop="20dp"
+                    android:paddingEnd="15dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/selected_option9">
+
+                    <TextView
+                        android:id="@+id/question9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:fontFamily="@font/nunito_bold"
+                        android:gravity="left"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="where is the jnasofdgdfn jhsfv l; sf    vjjsfvnzxfcv?" />
+
+                    <LinearLayout
+                        android:id="@+id/option_1_view_q9"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/question9">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="A"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option1_q9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            tools:text="This is option 1" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_2_view_q9"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/option_1_view_q9">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="@string/b"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option2_q9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            tools:text="This is option 2" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_3_view_q9"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintTop_toBottomOf="@id/option_2_view_q9"
+                        tools:layout_editor_absoluteX="15dp">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="C"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option3_q9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:text="This is option 3"
+                            android:textColor="@color/white"
+                            android:textSize="15sp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_4_view_q9"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/option_3_view_q9">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="@string/d"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option4_q9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:text="This is option 4"
+                            android:textColor="@color/white"
+                            android:textSize="15sp" />
+
+
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/parent_view10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/parent_view_background"
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/parent_view9">
+
+                <TextView
+                    android:id="@+id/question_index10"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="15dp"
+                    android:background="@drawable/bg_color_circular_view"
+                    android:fontFamily="@font/nunito_bold"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="1" />
+
+                <TextView
+                    android:id="@+id/selected_option10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@id/question_index10"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="option 1"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/question_index10"
+                    app:layout_constraintStart_toEndOf="@+id/question_index10"
+                    app:layout_constraintTop_toTopOf="@+id/question_index10" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/expandable10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/selected_option10"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="0dp"
+                    android:paddingStart="15dp"
+                    android:paddingTop="20dp"
+                    android:paddingEnd="15dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/selected_option10">
+
+                    <TextView
+                        android:id="@+id/question10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:fontFamily="@font/nunito_bold"
+                        android:gravity="left"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="where is the jnasofdgdfn jhsfv l; sf    vjjsfvnzxfcv?" />
+
+                    <LinearLayout
+                        android:id="@+id/option_1_view_q10"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/question10">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="A"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option1_q10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            tools:text="This is option 1" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_2_view_q10"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/option_1_view_q10">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="@string/b"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option2_q10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            tools:text="This is option 2" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_3_view_q10"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintTop_toBottomOf="@id/option_2_view_q10"
+                        tools:layout_editor_absoluteX="15dp">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="C"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option3_q10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:text="This is option 3"
+                            android:textColor="@color/white"
+                            android:textSize="15sp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_4_view_q10"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/bg_color_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/option_3_view_q10">
+
+                        <TextView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/circular_view"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:text="@string/d"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/option4_q10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:text="This is option 4"
+                            android:textColor="@color/white"
+                            android:textSize="15sp" />
+
+
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
