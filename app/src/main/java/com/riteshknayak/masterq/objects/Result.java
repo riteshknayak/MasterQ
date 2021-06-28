@@ -7,18 +7,8 @@ public class Result implements Serializable {
     private int questionIndex;
     private Boolean questionResult;
 
+    public Result() {}
 
-    public Result(String question, String option1, String option2, String option3, String option4, String trueOption, String givenAnswer, int questionIndex, Boolean questionResult) {
-        this.question = question;
-        this.option1 = option1;
-        this.option2 = option2;
-        this.option3 = option3;
-        this.option4 = option4;
-        this.trueOption = trueOption;
-        this.givenAnswer = givenAnswer;
-        this.questionIndex = questionIndex;
-        this.questionResult = questionResult;
-    }
     public Result( Question question, String givenAnswer, Boolean questionResult) {
         this.question = question.getQuestion();
         this.option1 = question.getOption1();
@@ -32,12 +22,6 @@ public class Result implements Serializable {
         this.questionResult = questionResult;
     }
 
-    public Result(String question, int questionIndex, Boolean questionResult, String questionUid) {
-        this.question = question;
-        this.questionUid = questionUid;
-        this.questionIndex = questionIndex;
-        this.questionResult = questionResult;
-    }
 
     public String getQuestion() {
         return question;
@@ -109,9 +93,6 @@ public class Result implements Serializable {
 
     public void setQuestionResult(Boolean questionResult) {
         this.questionResult = questionResult;
-    }
-
-    public Result() {
     }
 
     public String getQuestionUid() {

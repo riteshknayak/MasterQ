@@ -133,19 +133,19 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/results_view"
-            android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
             app:layout_constraintTop_toBottomOf="@+id/resultview">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/parent_view1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/parent_view_background"
-                android:orientation="vertical"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
+                android:background="@drawable/parent_view_background"
+                android:orientation="vertical"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 app:layout_constraintTop_toTopOf="parent"
@@ -2288,9 +2288,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

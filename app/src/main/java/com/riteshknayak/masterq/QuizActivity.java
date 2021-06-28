@@ -19,6 +19,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.SetOptions;
 import com.riteshknayak.masterq.databinding.ActivityQuizBinding;
 import com.riteshknayak.masterq.objects.Question;
 import com.riteshknayak.masterq.objects.Result;
@@ -267,28 +268,23 @@ public class QuizActivity extends AppCompatActivity {
         setLastQuestion.put("LastQuestion", question.getIndex());
 
         if (selectedAnswer.equals(question.getAnswer())) {
-            userTopicReference.update(rightAnswer);
+            userTopicReference.set(rightAnswer ,SetOptions.merge()); //.update method will fail when document does not exist
             addedScore = addedScore+10;
-
             Map<String, Object> score = new HashMap<>();
             score.put("score", mScore + 10);
-
             database.collection("users")
                     .document(UId)
                     .update(score);
             setScore();
-
             Results.add(new Result(question, selectedAnswer, true));
-
             correctAnswer++;
 
         } else {
-            userTopicReference.update(wrongAnswer);
-
+            userTopicReference.set(wrongAnswer ,SetOptions.merge()); //.update method will fail when document does not exist
             Results.add(new Result(question, selectedAnswer, false));
         }
 
-        userTopicReference.update(setLastQuestion);
+        userTopicReference.set(setLastQuestion ,SetOptions.merge()); //.update method will fail when document does not exist
 
         selectedTextView = null;
 
