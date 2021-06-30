@@ -37,7 +37,7 @@ public class TopicsActivity extends AppCompatActivity {
         String catName = getShared.getString("catName", "Geography");
 
         final ArrayList<Topic> Topics = new ArrayList<>();
-        final TopicsAdapter adapter = new TopicsAdapter(this, Topics);
+        final TopicsAdapter adapter = new TopicsAdapter(this, Topics,this);
 
         catView = findViewById(R.id.categoryName);
         if (catName != null) {

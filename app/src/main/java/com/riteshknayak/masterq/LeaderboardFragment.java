@@ -1,6 +1,11 @@
 package com.riteshknayak.masterq;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +22,10 @@ import com.google.firebase.firestore.Query;
 import com.riteshknayak.masterq.adapters.LeaderboardsAdapter;
 import com.riteshknayak.masterq.databinding.FragmentLeaderboardBinding;
 import com.riteshknayak.masterq.objects.User;
+import com.thecode.aestheticdialogs.AestheticDialog;
+import com.thecode.aestheticdialogs.DialogAnimation;
+import com.thecode.aestheticdialogs.DialogStyle;
+import com.thecode.aestheticdialogs.DialogType;
 
 import java.util.ArrayList;
 
@@ -33,6 +42,7 @@ public class LeaderboardFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        checkIfOnline();
     }
 
     FragmentLeaderboardBinding binding;
@@ -135,5 +145,33 @@ public class LeaderboardFragment extends Fragment {
                 }
             });
         return binding.getRoot();
+    }
+
+    void checkIfOnline() {
+        if (!isConnected() && isAdded()) {
+            new AestheticDialog.Builder(getActivity(), DialogStyle.CONNECTIFY, DialogType.ERROR)
+                    .setTitle("NO CONNECTION FOUND!")
+                    .setMessage("Check your Internet connection")
+                    .setCancelable(true)
+                    .setDarkMode(true)
+                    .setGravity(Gravity.TOP)
+                    .setAnimation(DialogAnimation.SWIPE_RIGHT)
+                    .show();
+        }
+    }
+
+    public boolean isConnected() {
+        boolean connected;
+        if (isAdded()) {
+            try {
+                ConnectivityManager cm = (ConnectivityManager) requireActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo nInfo = cm.getActiveNetworkInfo();
+                connected = nInfo != null && nInfo.isAvailable() && nInfo.isConnected();
+                return connected;
+            } catch (Exception e) {
+                Log.e("Connectivity Exception", e.getMessage());
+            }
+        }
+        return false;
     }
 }

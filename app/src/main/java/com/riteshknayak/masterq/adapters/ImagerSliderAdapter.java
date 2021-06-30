@@ -4,7 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.CountDownTimer;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +22,10 @@ import com.riteshknayak.masterq.TopicActivity;
 import com.riteshknayak.masterq.TopicsActivity;
 import com.riteshknayak.masterq.objects.SliderItem;
 import com.smarteist.autoimageslider.SliderViewAdapter;
+import com.thecode.aestheticdialogs.AestheticDialog;
+import com.thecode.aestheticdialogs.DialogAnimation;
+import com.thecode.aestheticdialogs.DialogStyle;
+import com.thecode.aestheticdialogs.DialogType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -91,14 +99,16 @@ public class ImagerSliderAdapter extends SliderViewAdapter<ImagerSliderAdapter.S
             });
         }else if (sliderItem.getOnClickLocation().equals("topic")){
             viewHolder.itemView.setOnClickListener(v -> {
-                SharedPreferences shared = context.getSharedPreferences("app", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = shared.edit();
-                editor.putString("catId", sliderItem.getCatLocation());
-                editor.putString("catName", sliderItem.getCatLocation());
-                editor.putString("topicId", sliderItem.getTopicLocation());
-                editor.apply();
-                Intent intent = new Intent(context, TopicActivity.class);
-                context.startActivity(intent);
+                if (checkIfOnline()){
+                    SharedPreferences shared = context.getSharedPreferences("app", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = shared.edit();
+                    editor.putString("catId", sliderItem.getCatLocation());
+                    editor.putString("catName", sliderItem.getCatLocation());
+                    editor.putString("topicId", sliderItem.getTopicLocation());
+                    editor.apply();
+                    Intent intent = new Intent(context, TopicActivity.class);
+                    context.startActivity(intent);
+                }
             });
         }
         database.collection("users")
@@ -164,5 +174,34 @@ public class ImagerSliderAdapter extends SliderViewAdapter<ImagerSliderAdapter.S
 
         }
     }
+
+    Boolean checkIfOnline() {
+        if (!isConnected()) {
+            new AestheticDialog.Builder(activity, DialogStyle.CONNECTIFY, DialogType.ERROR)
+                    .setTitle("NO CONNECTION FOUND!")
+                    .setMessage("Check your Internet connection")
+                    .setCancelable(true)
+                    .setDarkMode(true)
+                    .setGravity(Gravity.TOP)
+                    .setAnimation(DialogAnimation.SWIPE_RIGHT)
+                    .show();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isConnected() {
+        boolean connected;
+        try {
+            ConnectivityManager cm = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo nInfo = cm.getActiveNetworkInfo();
+            connected = nInfo != null && nInfo.isAvailable() && nInfo.isConnected();
+            return connected;
+        } catch (Exception e) {
+            Log.e("Connectivity Exception", e.getMessage());
+        }
+        return false;
+    }
+
 }
 

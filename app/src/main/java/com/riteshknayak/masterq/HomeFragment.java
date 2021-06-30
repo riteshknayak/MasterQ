@@ -1,6 +1,11 @@
 package com.riteshknayak.masterq;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +31,10 @@ import com.riteshknayak.masterq.objects.User;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
+import com.thecode.aestheticdialogs.AestheticDialog;
+import com.thecode.aestheticdialogs.DialogAnimation;
+import com.thecode.aestheticdialogs.DialogStyle;
+import com.thecode.aestheticdialogs.DialogType;
 
 import java.util.ArrayList;
 
@@ -43,8 +52,9 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public void onCreate (Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        checkIfOnline();
     }
 
     @Override
@@ -110,14 +120,14 @@ public class HomeFragment extends Fragment {
                 .get().addOnSuccessListener(documentSnapshot -> {
             mUser = documentSnapshot.toObject(User.class);
             assert mUser != null;
-            if (mUser.getName() != null){
+            if (mUser.getName() != null) {
                 binding.name.setText(mUser.getName());
             }
-            if (mUser.getScore() != null){
+            if (mUser.getScore() != null) {
                 binding.topScore.setText(String.valueOf(mUser.getScore()));
             }
-            if (mUser.getImageUrl() != null){
-                if (isAdded()){
+            if (mUser.getImageUrl() != null) {
+                if (isAdded()) {
                     Glide.with(requireContext())
                             .load(mUser.getImageUrl())
                             .into(binding.profileImage);
@@ -129,6 +139,35 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         return binding.getRoot();
     }
+
+    void checkIfOnline() {
+        if (!isConnected() && isAdded()) {
+            new AestheticDialog.Builder(getActivity(), DialogStyle.CONNECTIFY, DialogType.ERROR)
+                    .setTitle("NO CONNECTION FOUND!")
+                    .setMessage("Check your Internet connection")
+                    .setCancelable(true)
+                    .setDarkMode(true)
+                    .setGravity(Gravity.TOP)
+                    .setAnimation(DialogAnimation.SWIPE_RIGHT)
+                    .show();
+        }
+    }
+
+    public boolean isConnected() {
+        boolean connected;
+        if (isAdded()) {
+            try {
+                ConnectivityManager cm = (ConnectivityManager) requireActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo nInfo = cm.getActiveNetworkInfo();
+                connected = nInfo != null && nInfo.isAvailable() && nInfo.isConnected();
+                return connected;
+            } catch (Exception e) {
+                Log.e("Connectivity Exception", e.getMessage());
+            }
+        }
+        return false;
+    }
+
     //TODO add data about user when the user was created
     //TODO null score in leaderboard
     //TODO store retrieved data in sharedpreferences and update when new data comes so that the second time the data will load immediate

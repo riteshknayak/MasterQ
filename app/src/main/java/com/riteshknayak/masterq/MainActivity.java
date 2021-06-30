@@ -17,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,14 +46,7 @@ public class MainActivity extends AppCompatActivity {
             return false;
         });
 
-        FirebaseMessaging.getInstance().subscribeToTopic("general")
-                .addOnCompleteListener(task -> {
-//                    String msg = "success";
-//                    if (!task.isSuccessful()) {
-//                        msg = "failed";
-//                    }
-//                    Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
-                });
+        FirebaseMessaging.getInstance().subscribeToTopic("general");
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel =
