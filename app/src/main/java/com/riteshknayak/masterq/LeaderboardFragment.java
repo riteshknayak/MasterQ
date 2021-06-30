@@ -76,23 +76,30 @@ public class LeaderboardFragment extends Fragment {
                         leaders.add(user);
                     }
                     if (leaders.size() > 0){
-                        Glide.with(getContext())
-                                .load(leaders.get(0).getImageUrl())
-                                .into(binding.leaderOne);
+                        if (isAdded()){
+                            Glide.with(requireContext())
+                                    .load(leaders.get(0).getImageUrl())
+                                    .into(binding.leaderOne);
+                        }
                         binding.l1Name.setText(String.valueOf(leaders.get(0).getName()));
                         binding.l1Score.setText(String.valueOf(leaders.get(0).getScore()));
                     }
                     if (leaders.size() > 1){
-                        Glide.with(getContext())
-                                .load(leaders.get(1).getImageUrl())
-                                .into(binding.leaderTwo);
+                        if (isAdded()){
+                            Glide.with(requireContext())
+                                    .load(leaders.get(1).getImageUrl())
+                                    .into(binding.leaderTwo);
+                        }
                         binding.l2Name.setText(String.valueOf(leaders.get(1).getName()));
                         binding.l2Score.setText(String.valueOf(leaders.get(1).getScore()));
                     }
                     if (leaders.size() > 2){
-                        Glide.with(getContext())
-                                .load(leaders.get(2).getImageUrl())
-                                .into(binding.leaderThree);
+                        if (isAdded()){
+                            Glide.with(requireContext())
+                                    .load(leaders.get(2).getImageUrl())
+                                    .into(binding.leaderThree);
+
+                        }
                         binding.l3Name.setText(String.valueOf(leaders.get(2).getName()));
                         binding.l3Score.setText(String.valueOf(leaders.get(2).getScore()));
                     }
@@ -116,11 +123,15 @@ public class LeaderboardFragment extends Fragment {
                             int position = Q.size()+1;
                         binding.index.setText("#".concat(String.valueOf(position)));
                     });
+
                 }
                 if (documentSnapshot.getString("imageUrl") != null ){
-                    Glide.with(getContext())
-                            .load(documentSnapshot.getString("imageUrl"))
-                            .into(binding.lProfileImage);
+                    if (isAdded()){
+                        Glide.with(requireContext())
+                                .load(documentSnapshot.getString("imageUrl"))
+                                .into(binding.lProfileImage);
+
+                    }
                 }
             });
         return binding.getRoot();

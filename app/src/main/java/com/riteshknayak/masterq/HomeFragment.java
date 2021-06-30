@@ -45,7 +45,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -118,9 +117,12 @@ public class HomeFragment extends Fragment {
                 binding.topScore.setText(String.valueOf(mUser.getScore()));
             }
             if (mUser.getImageUrl() != null){
-                Glide.with(getContext())
-                        .load(mUser.getImageUrl())
-                        .into(binding.profileImage);
+                if (isAdded()){
+                    Glide.with(requireContext())
+                            .load(mUser.getImageUrl())
+                            .into(binding.profileImage);
+
+                }
             }
         });
 
