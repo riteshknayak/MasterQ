@@ -8,7 +8,7 @@
     android:layout_gravity="center|center_vertical"
     tools:context=".MainActivity">
 
-    <FrameLayout
+    <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -16,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-    </FrameLayout>
+    </androidx.viewpager2.widget.ViewPager2>
 
     <me.ibrahimsn.lib.SmoothBottomBar
         android:id="@+id/bottomBar"

@@ -8,14 +8,17 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.riteshknayak.masterq.adapters.ViewPagerAdapter;
 import com.riteshknayak.masterq.databinding.ActivityMainBinding;
 
 
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
+    ViewPager2 viewPager2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,23 +26,42 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.content, new HomeFragment());
-        transaction.commit();
+        viewPager2 = binding.content;
+        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+
+                switch (position) {
+                    case 0:
+                        binding.bottomBar.setItemActiveIndex(0);
+                        break;
+                    case 1:
+                        binding.bottomBar.setItemActiveIndex(1);
+                        break;
+                    case 2:
+                        binding.bottomBar.setItemActiveIndex(2);
+                        break;
+                }
+            }
+        });
+
+        ViewPagerAdapter adapter = new ViewPagerAdapter(this);
+        viewPager2.setAdapter(adapter);
 
         binding.bottomBar.setOnItemSelectedListener(i -> {
             FragmentTransaction transaction1 = getSupportFragmentManager().beginTransaction();
             switch (i) {
                 case 0:
-                    transaction1.replace(R.id.content, new HomeFragment());
+                    viewPager2.setCurrentItem(0, true);  // false value will prevent effects while bottom menu is pressed;
                     transaction1.commit();
                     break;
                 case 1:
-                    transaction1.replace(R.id.content, new LeaderboardFragment());
+                    viewPager2.setCurrentItem(1, true);  // false value will prevent effects while bottom menu is pressed
                     transaction1.commit();
                     break;
                 case 2:
-                    transaction1.replace(R.id.content, new ProfileFragment());
+                    viewPager2.setCurrentItem(2, true);  // false value will prevent effects while bottom menu is pressed
                     transaction1.commit();
                     break;
             }
@@ -55,6 +77,5 @@ public class MainActivity extends AppCompatActivity {
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
         }
-
     }
 }

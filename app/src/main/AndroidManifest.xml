@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MasterQ"
         tools:ignore="AllowBackup">
-        <activity android:name=".SettingActivity"/>
+        <activity android:name=".SettingActivity" />
         <activity android:name=".TestActivity" />
         <activity android:name=".ResultActivity" />
         <activity android:name=".TopicActivity" />
