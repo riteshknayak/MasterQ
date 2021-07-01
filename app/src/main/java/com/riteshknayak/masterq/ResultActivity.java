@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -28,8 +29,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
+import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
 public class ResultActivity extends AppCompatActivity {
 
@@ -43,6 +47,7 @@ public class ResultActivity extends AppCompatActivity {
     ScrollView scrollView;
     ConstraintLayout resultmain;
     private Boolean showedAnim = Boolean.FALSE;
+    boolean showedPrompt = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +63,30 @@ public class ResultActivity extends AppCompatActivity {
         ArrayList<Result> results;
         results = (ArrayList<Result>) getIntent().getSerializableExtra("Results");
 
+        auth = FirebaseAuth.getInstance();
         resultmain = findViewById(R.id.resultmain);
         ConstraintLayout resultsView = findViewById(R.id.results_view);
         TextView resultTextView = findViewById(R.id.resultview);
+
+        database = FirebaseFirestore.getInstance();
+        if (!showedPrompt) {
+            database.collection("users")
+                    .document(auth.getUid())
+                    .get().addOnSuccessListener(documentSnapshot -> {
+                if (documentSnapshot.getBoolean("newUser") != null) {
+                    Boolean showPrompt = documentSnapshot.getBoolean("newUser");
+                    if (showPrompt) {
+                        new MaterialTapTargetPrompt.Builder(this)
+                                .setTarget(binding.resultPrompt)
+                                .setBackgroundColour(0xFFCA1395)
+                                .setPrimaryText("Scroll to see the results")
+                                .setSecondaryText("Click on each results to get More info")
+                                .show();
+                    }
+                }
+            });
+        }
+
 
         resultSetText(findViewById(R.id.question_index1), findViewById(R.id.selected_option1), findViewById(R.id.question1), findViewById(R.id.option1_q1), findViewById(R.id.option2_q1), findViewById(R.id.option3_q1), findViewById(R.id.option4_q1), results.get(0), "1");
         setBackground(results.get(0), findViewById(R.id.parent_view1), findViewById(R.id.selected_option1), findViewById(R.id.option_1_view_q1), findViewById(R.id.option_2_view_q1), findViewById(R.id.option_3_view_q1), findViewById(R.id.option_4_view_q1));
@@ -120,6 +146,51 @@ public class ResultActivity extends AppCompatActivity {
                     resultsView.scheduleLayoutAnimation();
                     resultsView.startLayoutAnimation();
                     showedAnim = Boolean.TRUE;
+                    database = FirebaseFirestore.getInstance();
+                    if (!showedPrompt) {
+                        database.collection("users")
+                                .document(auth.getUid())
+                                .get().addOnSuccessListener(documentSnapshot -> {
+                            if (documentSnapshot.getBoolean("newUser") != null) {
+                                Boolean showPrompt = documentSnapshot.getBoolean("newUser");
+                                if (showPrompt) {
+                                    CountDownTimer timer = new CountDownTimer(800,1000) {
+                                        @Override
+                                        public void onTick(long millisUntilFinished) {}
+
+                                        @Override
+                                        public void onFinish() {
+                                            new MaterialTapTargetPrompt.Builder(ResultActivity.this)
+                                                    .setTarget(findViewById(R.id.cornerView))
+                                                    .setBackgroundColour(0xFFCA1395)
+                                                    .setPrimaryText("Click on each Result to know more about the result")
+                                                    .setSecondaryText(" ")
+                                                    .setPromptStateChangeListener((prompt, state) -> {
+                                                        if (state == MaterialTapTargetPrompt.STATE_FOCAL_PRESSED ||
+                                                                state == MaterialTapTargetPrompt.STATE_NON_FOCAL_PRESSED ||
+                                                                state == MaterialTapTargetPrompt.STATE_BACK_BUTTON_PRESSED ||
+                                                                state == MaterialTapTargetPrompt.STATE_DISMISSED ||
+                                                                state == MaterialTapTargetPrompt.STATE_FINISHED) {
+                                                            expand(findViewById(R.id.expandable4));
+                                                        }
+                                                    }).show();
+                                            showedPrompt = true;
+
+                                            Map<String, Object> update = new HashMap<>();
+                                            update.put("newUser", false);
+                                            database.collection("users")
+                                                    .document(auth.getUid())
+                                                    .update(update);
+
+                                        }
+                                    };
+
+                                    timer.start();
+                                }
+                            }
+                        });
+                    }
+
                 }
             } else {
                 // NONE of the mRecyclerView is within the visible window
@@ -127,9 +198,7 @@ public class ResultActivity extends AppCompatActivity {
         });
 
 
-        auth = FirebaseAuth.getInstance();
         UId = auth.getCurrentUser().getUid();
-        database = FirebaseFirestore.getInstance();
 
         for (int index = 0; index < results.size(); index++) {
             Result result = results.get(index);

@@ -28,6 +28,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
+
 public class QuizActivity extends AppCompatActivity {
 
     //Tip: Go to any variable or object etc. and click Alt+F7 to known all the usage in
@@ -50,7 +52,7 @@ public class QuizActivity extends AppCompatActivity {
     int highestTopicQuestion; //For developer to know the current highest question ever attempted to update the topic as soon it reaches near last question //TODO remove this in your modified app
     TextView selectedTextView, time;  //Textview Currently being used and current time in timer of QuizActivity
     int correctAnswer = 0;  //Total number of correct Answer in this quiz
-
+    boolean showedPrompt = false;
 
     //TODO ADD COMMENTS SHOW THAT OTHER DEVELOPERS CAN READ
     //Working on it🔼
@@ -252,6 +254,25 @@ public class QuizActivity extends AppCompatActivity {
             intent.putExtra("correctAnswer", correctAnswer);
             startActivity(intent);
             finish();
+        }
+
+        if (!showedPrompt) {
+            database.collection("users")
+                    .document(auth.getUid())
+                    .get().addOnSuccessListener(documentSnapshot -> {
+                if (documentSnapshot.getBoolean("newUser") != null) {
+                    Boolean showPrompt = documentSnapshot.getBoolean("newUser");
+                    if (showPrompt) {
+                        new MaterialTapTargetPrompt.Builder(this)
+                                .setTarget(binding.quizPrompt)
+                                .setBackgroundColour(0xFFCA1395)
+                                .setPrimaryText("Answers will be Shown at the end!")
+                                .setSecondaryText("Stick to the end of the quiz")
+                                .show();
+                        showedPrompt = true;
+                    }
+                }
+            });
         }
     }
 
