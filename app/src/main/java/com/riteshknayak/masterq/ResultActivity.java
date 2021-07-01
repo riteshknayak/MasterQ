@@ -21,6 +21,7 @@ import androidx.core.content.ContextCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.riteshknayak.masterq.databinding.ActivityResultBinding;
 import com.riteshknayak.masterq.objects.Result;
 
 import java.text.SimpleDateFormat;
@@ -32,6 +33,7 @@ import java.util.Locale;
 
 public class ResultActivity extends AppCompatActivity {
 
+    ActivityResultBinding binding;
     FirebaseFirestore database;
     FirebaseAuth auth;
     String UId, catId, topicId;
@@ -45,6 +47,7 @@ public class ResultActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding = ActivityResultBinding.inflate(getLayoutInflater());
         setContentView(R.layout.activity_result);
         scrollView = findViewById(R.id.result_scroll);
 
@@ -73,31 +76,31 @@ public class ResultActivity extends AppCompatActivity {
 
         resultSetText(findViewById(R.id.question_index4), findViewById(R.id.selected_option4), findViewById(R.id.question4), findViewById(R.id.option1_q4), findViewById(R.id.option2_q4), findViewById(R.id.option3_q4), findViewById(R.id.option4_q4), results.get(3), "4");
         setBackground(results.get(3), findViewById(R.id.parent_view4), findViewById(R.id.selected_option4), findViewById(R.id.option_1_view_q4), findViewById(R.id.option_2_view_q4), findViewById(R.id.option_3_view_q4), findViewById(R.id.option_4_view_q4));
-        setClickListener( findViewById(R.id.parent_view4), findViewById(R.id.expandable4));
+        setClickListener(findViewById(R.id.parent_view4), findViewById(R.id.expandable4));
 
         resultSetText(findViewById(R.id.question_index5), findViewById(R.id.selected_option5), findViewById(R.id.question5), findViewById(R.id.option1_q5), findViewById(R.id.option2_q5), findViewById(R.id.option3_q5), findViewById(R.id.option4_q5), results.get(4), "5");
         setBackground(results.get(4), findViewById(R.id.parent_view5), findViewById(R.id.selected_option5), findViewById(R.id.option_1_view_q5), findViewById(R.id.option_2_view_q5), findViewById(R.id.option_3_view_q5), findViewById(R.id.option_4_view_q5));
-        setClickListener( findViewById(R.id.parent_view5), findViewById(R.id.expandable5));
-        
+        setClickListener(findViewById(R.id.parent_view5), findViewById(R.id.expandable5));
+
         resultSetText(findViewById(R.id.question_index6), findViewById(R.id.selected_option6), findViewById(R.id.question6), findViewById(R.id.option1_q6), findViewById(R.id.option2_q6), findViewById(R.id.option3_q6), findViewById(R.id.option4_q6), results.get(5), "6");
         setBackground(results.get(5), findViewById(R.id.parent_view6), findViewById(R.id.selected_option6), findViewById(R.id.option_1_view_q6), findViewById(R.id.option_2_view_q6), findViewById(R.id.option_3_view_q6), findViewById(R.id.option_4_view_q6));
-        setClickListener( findViewById(R.id.parent_view6), findViewById(R.id.expandable6));
-        
+        setClickListener(findViewById(R.id.parent_view6), findViewById(R.id.expandable6));
+
         resultSetText(findViewById(R.id.question_index7), findViewById(R.id.selected_option7), findViewById(R.id.question7), findViewById(R.id.option1_q7), findViewById(R.id.option2_q7), findViewById(R.id.option3_q7), findViewById(R.id.option4_q7), results.get(6), "7");
         setBackground(results.get(6), findViewById(R.id.parent_view7), findViewById(R.id.selected_option7), findViewById(R.id.option_1_view_q7), findViewById(R.id.option_2_view_q7), findViewById(R.id.option_3_view_q7), findViewById(R.id.option_4_view_q7));
-        setClickListener( findViewById(R.id.parent_view7), findViewById(R.id.expandable7));
+        setClickListener(findViewById(R.id.parent_view7), findViewById(R.id.expandable7));
 
         resultSetText(findViewById(R.id.question_index8), findViewById(R.id.selected_option8), findViewById(R.id.question8), findViewById(R.id.option1_q8), findViewById(R.id.option2_q8), findViewById(R.id.option3_q8), findViewById(R.id.option4_q8), results.get(7), "8");
         setBackground(results.get(7), findViewById(R.id.parent_view8), findViewById(R.id.selected_option8), findViewById(R.id.option_1_view_q8), findViewById(R.id.option_2_view_q8), findViewById(R.id.option_3_view_q8), findViewById(R.id.option_4_view_q8));
-        setClickListener( findViewById(R.id.parent_view8), findViewById(R.id.expandable8));
+        setClickListener(findViewById(R.id.parent_view8), findViewById(R.id.expandable8));
 
         resultSetText(findViewById(R.id.question_index9), findViewById(R.id.selected_option9), findViewById(R.id.question9), findViewById(R.id.option1_q9), findViewById(R.id.option2_q9), findViewById(R.id.option3_q9), findViewById(R.id.option4_q9), results.get(8), "9");
         setBackground(results.get(8), findViewById(R.id.parent_view9), findViewById(R.id.selected_option9), findViewById(R.id.option_1_view_q9), findViewById(R.id.option_2_view_q9), findViewById(R.id.option_3_view_q9), findViewById(R.id.option_4_view_q9));
-        setClickListener( findViewById(R.id.parent_view9), findViewById(R.id.expandable9));
+        setClickListener(findViewById(R.id.parent_view9), findViewById(R.id.expandable9));
 
         resultSetText(findViewById(R.id.question_index10), findViewById(R.id.selected_option10), findViewById(R.id.question10), findViewById(R.id.option1_q10), findViewById(R.id.option2_q10), findViewById(R.id.option3_q10), findViewById(R.id.option4_q10), results.get(9), "10");
         setBackground(results.get(9), findViewById(R.id.parent_view10), findViewById(R.id.selected_option10), findViewById(R.id.option_1_view_q10), findViewById(R.id.option_2_view_q10), findViewById(R.id.option_3_view_q10), findViewById(R.id.option_4_view_q10));
-        setClickListener( findViewById(R.id.parent_view10), findViewById(R.id.expandable10));
+        setClickListener(findViewById(R.id.parent_view10), findViewById(R.id.expandable10));
 
         Calendar rightNow = Calendar.getInstance();
         Date strDate = rightNow.getTime();
@@ -112,7 +115,7 @@ public class ResultActivity extends AppCompatActivity {
             Rect scrollBounds = new Rect();
             scrollView.getHitRect(scrollBounds);
             if (resultTextView.getLocalVisibleRect(scrollBounds)) {
-                if (!showedAnim){
+                if (!showedAnim) {
                     //mRecyclerView is Visible
                     resultsView.scheduleLayoutAnimation();
                     resultsView.startLayoutAnimation();
@@ -282,5 +285,15 @@ public class ResultActivity extends AppCompatActivity {
             }
 
         });
+    }
+
+    public void share(View v){
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        String shareBody = "i got ".concat(String.valueOf(correctAnswer)).concat(" out of 10 in MasterQ app");
+        //TODO Also Include App link in share body
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Quiz Result");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(sharingIntent, "Share via"));
     }
 }
