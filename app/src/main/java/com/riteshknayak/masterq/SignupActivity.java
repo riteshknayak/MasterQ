@@ -66,8 +66,10 @@ public class SignupActivity extends AppCompatActivity {
                 pass = binding.passwordBox.getText().toString();
                 name = binding.nameBox.getText().toString();
 
-                final User user = new User(name, email, pass);
-//                user.seDefault();
+                User user = new User(name, email, pass);
+                user.setImageUrl("https://firebasestorage.googleapis.com/v0/b/masterq-a6c5d.appspot.com/o/outline_account_circle_black_48dp.png?alt=media&token=1f4ddf26-184c-4b70-807c-7364ba6ff4d7");
+                user.setScore(0);
+                user.setNewUser(true);
 
                 auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(task -> {
 
