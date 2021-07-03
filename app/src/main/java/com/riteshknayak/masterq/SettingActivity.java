@@ -20,6 +20,9 @@ public class SettingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.Theme_MasterQ);
+
+
         setContentView(R.layout.activity_setting);
 
         profileImage = findViewById(R.id.profile_image);

@@ -1,16 +1,21 @@
 package com.riteshknayak.masterq;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Rect;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.view.animation.Transformation;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -22,6 +27,8 @@ import androidx.core.content.ContextCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
+import com.hsalf.smileyrating.SmileyRating;
 import com.riteshknayak.masterq.databinding.ActivityResultBinding;
 import com.riteshknayak.masterq.objects.Result;
 
@@ -48,10 +55,15 @@ public class ResultActivity extends AppCompatActivity {
     ConstraintLayout resultmain;
     private Boolean showedAnim = Boolean.FALSE;
     boolean showedPrompt = false;
+    CountDownTimer promptTimer;
+    CountDownTimer rateUsTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.Theme_MasterQ);
+
+
         binding = ActivityResultBinding.inflate(getLayoutInflater());
         setContentView(R.layout.activity_result);
         scrollView = findViewById(R.id.result_scroll);
@@ -87,6 +99,99 @@ public class ResultActivity extends AppCompatActivity {
             });
         }
 
+
+        promptTimer = new CountDownTimer(800, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+            }
+
+            @Override
+            public void onFinish() {
+                new MaterialTapTargetPrompt.Builder(ResultActivity.this)
+                        .setTarget(findViewById(R.id.cornerView))
+                        .setBackgroundColour(0xFFCA1395)
+                        .setPrimaryText("Click on each Result to know more about the result")
+                        .setSecondaryText(" ")
+                        .setPromptStateChangeListener((prompt, state) -> {
+                            if (state == MaterialTapTargetPrompt.STATE_FOCAL_PRESSED ||
+                                    state == MaterialTapTargetPrompt.STATE_NON_FOCAL_PRESSED ||
+                                    state == MaterialTapTargetPrompt.STATE_BACK_BUTTON_PRESSED ||
+                                    state == MaterialTapTargetPrompt.STATE_DISMISSED ||
+                                    state == MaterialTapTargetPrompt.STATE_FINISHED) {
+                                expand(findViewById(R.id.expandable4));
+                                rateUsTimer.start();
+                            }
+                        }).show();
+
+                showedPrompt = true;
+            }
+        };
+
+        rateUsTimer = new CountDownTimer(2000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+            }
+
+            @Override
+            public void onFinish() {
+                Map<String, Object> falseNewUser = new HashMap<>();
+                falseNewUser.put("newUser", false);
+                database.collection("users")
+                        .document(auth.getUid())
+                        .update(falseNewUser);
+
+                Dialog dialog = new Dialog(ResultActivity.this);
+                dialog.setContentView(R.layout.diolog_rate_us);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                SmileyRating sr = dialog.findViewById(R.id.smile_rating);
+                Button rateOnPlaystore = dialog.findViewById(R.id.rateOnStore);
+                Button remindLater = dialog.findViewById(R.id.remindLater);
+                sr.setSmileySelectedListener(type -> {
+                    // You can compare it with rating Type
+                    if (SmileyRating.Type.GREAT == type) {
+                        Log.i(null, "Wow, the user gave high rating");
+                    }
+                    // You can get the user rating too
+                    // rating will between 1 to 5
+                    int rating = type.getRating();
+
+                    Map<String, Integer> givenRating = new HashMap<>();
+                    givenRating.put(auth.getUid(), rating);
+                    database.collection("MasterQ")
+                            .document("Rating")
+                            .set(givenRating, SetOptions.merge());
+
+                    Map<String, Integer> userRating = new HashMap<>();
+                    userRating.put("Rating", rating);
+                    database.collection("users")
+                            .document(auth.getUid())
+                            .set(userRating, SetOptions.merge());
+
+                });
+                rateOnPlaystore.setOnClickListener(v -> {
+                    //TODO Intent To Play Store
+                    dialog.dismiss();
+                    Map<String, Object> remindToRateFalse = new HashMap<>();
+                    remindToRateFalse.put("remindToRate", false);
+                    database.collection("users")
+                            .document(auth.getUid())
+                            .update(remindToRateFalse);
+
+                });
+                Map<String, Object> remindToRate = new HashMap<>();
+                remindToRate.put("remindToRate", true);
+                remindLater.setOnClickListener(v -> {
+                    database.collection("users")
+                            .document(auth.getUid())
+                            .update(remindToRate);
+
+                    dialog.dismiss();
+                });
+
+                dialog.setCancelable(false);
+                dialog.show();
+            }
+        };
 
         resultSetText(findViewById(R.id.question_index1), findViewById(R.id.selected_option1), findViewById(R.id.question1), findViewById(R.id.option1_q1), findViewById(R.id.option2_q1), findViewById(R.id.option3_q1), findViewById(R.id.option4_q1), results.get(0), "1");
         setBackground(results.get(0), findViewById(R.id.parent_view1), findViewById(R.id.selected_option1), findViewById(R.id.option_1_view_q1), findViewById(R.id.option_2_view_q1), findViewById(R.id.option_3_view_q1), findViewById(R.id.option_4_view_q1));
@@ -154,46 +259,23 @@ public class ResultActivity extends AppCompatActivity {
                             if (documentSnapshot.getBoolean("newUser") != null) {
                                 Boolean showPrompt = documentSnapshot.getBoolean("newUser");
                                 if (showPrompt) {
-                                    CountDownTimer timer = new CountDownTimer(800,1000) {
-                                        @Override
-                                        public void onTick(long millisUntilFinished) {}
-
-                                        @Override
-                                        public void onFinish() {
-                                            new MaterialTapTargetPrompt.Builder(ResultActivity.this)
-                                                    .setTarget(findViewById(R.id.cornerView))
-                                                    .setBackgroundColour(0xFFCA1395)
-                                                    .setPrimaryText("Click on each Result to know more about the result")
-                                                    .setSecondaryText(" ")
-                                                    .setPromptStateChangeListener((prompt, state) -> {
-                                                        if (state == MaterialTapTargetPrompt.STATE_FOCAL_PRESSED ||
-                                                                state == MaterialTapTargetPrompt.STATE_NON_FOCAL_PRESSED ||
-                                                                state == MaterialTapTargetPrompt.STATE_BACK_BUTTON_PRESSED ||
-                                                                state == MaterialTapTargetPrompt.STATE_DISMISSED ||
-                                                                state == MaterialTapTargetPrompt.STATE_FINISHED) {
-                                                            expand(findViewById(R.id.expandable4));
-                                                        }
-                                                    }).show();
-                                            showedPrompt = true;
-
-                                            Map<String, Object> update = new HashMap<>();
-                                            update.put("newUser", false);
-                                            database.collection("users")
-                                                    .document(auth.getUid())
-                                                    .update(update);
-
+                                    promptTimer.start();
+                                } else {
+                                    database.collection("users")
+                                            .document(auth.getUid())
+                                            .get().addOnSuccessListener(documentSnapshot1 -> {
+                                        if (documentSnapshot.getBoolean("remindToRate") != null) {
+                                            if (documentSnapshot.getBoolean("remindToRate")) {
+                                                rateUsTimer.start();
+                                            }
                                         }
-                                    };
-
-                                    timer.start();
+                                    });
                                 }
                             }
                         });
                     }
 
                 }
-            } else {
-                // NONE of the mRecyclerView is within the visible window
             }
         });
 
@@ -356,7 +438,7 @@ public class ResultActivity extends AppCompatActivity {
         });
     }
 
-    public void share(View v){
+    public void share(View v) {
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
         String shareBody = "i got ".concat(String.valueOf(correctAnswer)).concat(" out of 10 in MasterQ app");

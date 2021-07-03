@@ -46,4 +46,8 @@
     <string name="b">B</string>
     <string name="what_this_quiz_is_about">What this quiz is about?</string>
     <string name="No_option_selected">No option selected</string>
+    <string name="what_do_you_feel_about_using_our_app">What do you feel
+        using our app?</string>
+    <string name="rate_us_on_playstore">Rate us on Playstore</string>
+    <string name="remind_me_later">Remind me Later</string>
 </resources>

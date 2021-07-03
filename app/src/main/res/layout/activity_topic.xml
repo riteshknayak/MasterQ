@@ -82,21 +82,17 @@
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:background="@drawable/ten_dp_parent_bg"
-            android:fontFamily="@font/nunito_bold"
-            android:gravity="center_horizontal"
+            android:fontFamily="@font/nunito_extrabold"
+            android:gravity="center"
             tools:text="132 Reviews"
             android:textColor="@color/pink"
             android:layout_marginEnd="15dp"
-
             android:layout_marginStart="15dp"
-            android:textSize="12sp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
+            android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/players"
             app:layout_constraintStart_toEndOf="@+id/questions_number"
-            app:layout_constraintTop_toTopOf="parent"
-            app:drawableBottomCompat="@drawable/ic_four_star" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
             android:id="@+id/players"
@@ -163,12 +159,13 @@
 
         <Button
             android:id="@+id/back_button"
-            android:layout_width="160dp"
+            android:layout_width="150dp"
             android:layout_height="54dp"
             android:layout_marginEnd="30dp"
             android:background="@drawable/btn_background_unfocused"
             android:fontFamily="@font/nunito_bold"
             android:text="Back"
+            android:textColor="@color/white"
             android:textAllCaps="false"
             android:layout_marginStart="12dp"
             android:textSize="18sp" />
@@ -176,12 +173,13 @@
 
         <Button
             android:id="@+id/start_quiz"
-            android:layout_width="160dp"
+            android:layout_width="150dp"
             android:layout_height="54dp"
             android:layout_marginEnd="12dp"
             android:background="@drawable/btn_background"
             android:fontFamily="@font/nunito_bold"
             android:text="Start Quiz"
+            android:textColor="@color/white"
             android:textAllCaps="false"
             android:textSize="18sp" />
     </LinearLayout>

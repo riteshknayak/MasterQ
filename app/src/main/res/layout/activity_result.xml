@@ -112,6 +112,7 @@
             android:background="@drawable/btn_background"
             android:fontFamily="@font/nunito_bold"
             android:text="share"
+            android:textColor="@color/white"
             android:onClick="share"
             android:textAllCaps="false"
             android:textSize="20sp"
