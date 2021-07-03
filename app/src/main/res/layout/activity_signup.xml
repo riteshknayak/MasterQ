@@ -12,7 +12,7 @@
         android:id="@+id/linearLayout3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/bg_color"
+        android:background="@drawable/parent_view_background"
         android:elevation="0dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
@@ -21,6 +21,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.496">
 
         <TextView
@@ -44,8 +45,8 @@
             android:autofillHints="Name"
             android:background="@drawable/edittext_background"
             android:drawableStart="@drawable/ic_user"
-            android:drawableTint="@color/dark_grey"
             android:drawablePadding="6dp"
+            android:drawableTint="@color/dark_grey"
             android:elevation="5dp"
             android:fontFamily="@font/nunito_bold"
             android:hint="@string/name"
@@ -99,12 +100,12 @@
             android:id="@+id/signupBtn"
             android:layout_width="280dp"
             android:layout_height="60dp"
+            android:layout_marginBottom="0dp"
             android:background="@drawable/btn_background"
             android:text="@string/signup"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="20sp"
-            android:layout_marginBottom="0dp"/>
+            android:textSize="20sp" />
 
 
         <android.widget.Button
@@ -112,12 +113,12 @@
             android:layout_width="280dp"
             android:layout_height="60dp"
             android:layout_margin="10dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/btn_background_unfocused"
             android:text="@string/common_signin_button_text"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="20sp"
-            android:layout_marginBottom="20dp"/>
+            android:textSize="20sp" />
 
 
     </LinearLayout>
