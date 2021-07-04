@@ -157,7 +157,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <Button
+        <android.widget.Button
             android:id="@+id/back_button"
             android:layout_width="150dp"
             android:layout_height="54dp"
@@ -171,7 +171,7 @@
             android:textSize="18sp" />
 
 
-        <Button
+        <android.widget.Button
             android:id="@+id/start_quiz"
             android:layout_width="150dp"
             android:layout_height="54dp"

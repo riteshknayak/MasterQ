@@ -423,7 +423,7 @@
         android:layout_marginBottom="40dp"
         tools:text="option4" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/NextBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -440,7 +440,7 @@
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toEndOf="@+id/quitBtn" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/quitBtn"
         android:layout_width="0dp"
         android:layout_marginEnd="10dp"
