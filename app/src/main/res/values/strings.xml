@@ -50,4 +50,6 @@
         using our app?</string>
     <string name="rate_us_on_playstore">Rate us on Playstore</string>
     <string name="remind_me_later">Remind me Later</string>
+    <string name="new_topic_will_be_added_next_weak">New topic will be added next weak</string>
+    <string name="categories">Categories</string>
 </resources>

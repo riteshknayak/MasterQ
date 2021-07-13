@@ -134,6 +134,8 @@ public class LeaderboardFragment extends Fragment {
                         binding.index.setText("#".concat(String.valueOf(position)));
                     });
 
+                }else{
+                    binding.score.setText("0");
                 }
                 if (documentSnapshot.getString("imageUrl") != null ){
                     if (isAdded()){
