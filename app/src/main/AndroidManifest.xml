@@ -8,7 +8,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:required="false" />
+        android:required="false"
+        android:maxSdkVersion="32" />
 
     <application
         android:icon="@mipmap/ic_launcher"
@@ -23,7 +24,8 @@
         <activity android:name=".TopicActivity" />
         <activity android:name=".TopicsActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".SignupActivity">
+        <activity android:name=".SignupActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
